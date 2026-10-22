@@ -1412,6 +1412,8 @@
   .offer-card.v2-has-ico .tag { display: none; }
   .offer-card.v2-has-ico .v2-ico { width: 96px; height: 96px; margin-bottom: 22px; }
   .offer-card.v2-has-ico h3 { font-size: clamp(20px, 1.6vw, 24px); }
+  .v2-tez { margin: 28px 0 0; font-size: clamp(17px, 1.2vw, 19px); font-weight: 600; color: var(--ink); }
+  .v2-tez::before { content: "✦"; margin-right: 10px; color: var(--accent); }
 
   /* tip: a light card with the three recommendations side by side */
   #prinos .tip-head { margin: 64px 0 6px; padding: 0; border: 0; font-size: clamp(24px, 1.8vw, 30px); font-weight: 600; letter-spacing: -0.03em; }
@@ -1831,7 +1833,6 @@
     <div class="v2-plan box"><h3>Krabicová SaaS služba</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Design</b>šablona s vaším logem a barvami</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Akce v okénkách</b>jen typy akcí, které služba umí</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Adresa</b>často adresa poskytovatele</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Analytika</b>vlastní statistiky služby</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Kontakty</b>u poskytovatele</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Originalita</b>stejný kalendář má i konkurence</span></li></ul></div>
     <div class="v2-plan us"><span class="v2-plan-tag">Doporučujeme</span><h3>Kalendář od PragueBest</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Design</b>přesně podle vašeho návrhu</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Akce v okénkách</b>jakákoli akce, kterou potřebujete prodat</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Adresa</b>vaše subdoména</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Analytika</b>ve vašem nástroji pro měření</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Kontakty</b>vaše, po kampani je smažeme</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>Originalita</b>originál, který má jen váš web</span></li></ul><a class="v2-btn primary" href="#kontakt">Chci kalendář na míru</a></div>
   </div>
-  <p>Stejně postavíme i&nbsp;soutěže, kvízy nebo samostatné stránky ke&nbsp;kampaním.</p>
 </section>
 
 <section id="okenko" data-review-id="section-okenko">
@@ -1892,6 +1893,7 @@
       <p>Máte vlastní koncepty nebo aplikace napsané s AI a chcete mít jistotu, že fungují správně a jsou bezpečné, než je pošlete do produkce? Prověříme kód, architekturu i zabezpečení.</p>
     </div>
   </div>
+  <p class="v2-tez">Stejně postavíme i&nbsp;soutěže, kvízy nebo samostatné stránky ke&nbsp;kampaním.</p>
 </section>
 
 <section id="kontakt" data-review-id="section-kontakt">
