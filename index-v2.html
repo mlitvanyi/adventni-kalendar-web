@@ -2599,6 +2599,7 @@
       kd.setAttribute('data-typy', '1');
     }
   }
+  var vzPoprve = false;
   function nastavTema(t) {
     tema = t; var T = TEMATA[t], k, zdroj = T.odkryto || ODKRYTO;
     odkryto = {}; for (k in zdroj) odkryto[k] = zdroj[k];
@@ -2617,9 +2618,10 @@
       document.getElementById('vz-cap-t').textContent = vyb.getAttribute('aria-label');
       document.getElementById('vz-cap-m').textContent = vyb.getAttribute('data-meta');
       var st = document.getElementById('vz-cap-s'); st.textContent = vyb.getAttribute('data-stitek'); st.hidden = !st.textContent;
-      // keep the chosen thumbnail visible in the scrollable strip without scrolling the page
+      // centre the chosen thumbnail in its carousel, so a click on either half slides the next looks into view
       var pas = vyb.closest('.vz-thumbs'), pr = pas.getBoundingClientRect(), vr = vyb.getBoundingClientRect();
-      if (vr.left < pr.left || vr.right > pr.right) pas.scrollLeft += vr.left - pr.left - (pr.width - vr.width) / 2;
+      var klidVz = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      pas.scrollTo({ left: pas.scrollLeft + vr.left + vr.width / 2 - pr.left - pr.width / 2, behavior: klidVz || !vzPoprve ? 'auto' : 'smooth' });
     }
     zavriKartu();
     adminBarvy(t);
@@ -2665,6 +2667,11 @@
       });
     });
     // re-check once the layout settles (fonts, the v2 panel) and whenever the group changes size
+    row.addEventListener('click', function (e) {
+      if (e.target.closest('.vz-th')) return;
+      var r = row.getBoundingClientRect(), klid = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      row.scrollBy({ left: (e.clientX > r.left + r.width / 2 ? 1 : -1) * row.clientWidth * 0.8, behavior: klid ? 'auto' : 'smooth' });
+    });
     row.addEventListener('scroll', stav, { passive: true }); addEventListener('resize', stav); addEventListener('load', stav); stav();
     if (window.ResizeObserver) new ResizeObserver(stav).observe(row);
   });
@@ -2714,7 +2721,7 @@
   setInterval(odpocet, 1000); odpocet();
 
   var q = (location.search.match(/[?&]vzhled=([a-z]+)/) || [])[1];
-  nastavTema(TEMATA[q] ? q : 'fotoskoda');
+  nastavTema(TEMATA[q] ? q : 'fotoskoda'); vzPoprve = true;
 })();
 
 (function () {
