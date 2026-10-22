@@ -824,12 +824,23 @@
 
   /* přepínač Počítač / Mobil: telefon jako rámeček, rozložení jako na mobilu */
   .demo-frame { transition: max-width .25s ease; }
+  /* desktop mockup: black monitor bezel with an address bar and a reload button, like the phone frame */
+  .dm-bar { display: none; }
   @media (min-width: 900px) {
-    .demo-frame:not(.is-mobile) { position: relative; padding: 38px 10px 10px; border-radius: 18px; background: #e7e7ea; box-shadow: 0 24px 60px rgba(0,0,0,.14), inset 0 0 0 1px rgba(0,0,0,.06); }
-    .demo-frame:not(.is-mobile)::before { content: ""; position: absolute; left: 18px; top: 14px; width: 50px; height: 11px; background: radial-gradient(circle at 5.5px 50%, #ff6159 5px, transparent 5.5px), radial-gradient(circle at 25px 50%, #ffbd2e 5px, transparent 5.5px), radial-gradient(circle at 44.5px 50%, #28c941 5px, transparent 5.5px); }
-    .demo-frame:not(.is-mobile)::after { content: "advent.vasweb.cz"; position: absolute; left: 50%; top: 9px; translate: -50% 0; width: min(46%, 360px); height: 21px; border-radius: 7px; background: #fff; color: #6b6b73; font-size: 11.5px; font-weight: 600; line-height: 21px; text-align: center; letter-spacing: .01em; }
+    .demo-frame:not(.is-mobile) { position: relative; margin-bottom: 64px; padding: 12px 12px 16px; border-radius: 22px; background: #111; box-shadow: 0 30px 70px rgba(0,0,0,.3), inset 0 0 0 2px #2a2a2a; }
+    .demo-frame:not(.is-mobile)::after { content: ""; position: absolute; left: 50%; top: 100%; width: 180px; height: 50px; translate: -50% 0; background: linear-gradient(#1d1d20, #0d0d0f); clip-path: polygon(34% 0, 66% 0, 72% 78%, 100% 84%, 100% 100%, 0 100%, 0 84%, 28% 78%); }
+    .demo-frame:not(.is-mobile) .dm-bar { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; padding: 0 4px; }
     .demo-frame:not(.is-mobile) .demo { border-radius: 10px; box-shadow: none; }
   }
+  .dm-reload { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border: 0; border-radius: 50%; background: #26262a; color: #e6e6ea; cursor: pointer; transition: background .15s ease; }
+  .dm-reload:hover { background: #38383d; }
+  .dm-reload svg { width: 15px; height: 15px; }
+  .dm-reload.spin svg { animation: dmSpin .6s ease; }
+  @keyframes dmSpin { to { transform: rotate(360deg); } }
+  .dm-url { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; height: 30px; border-radius: 15px; background: #26262a; color: #c9c9cf; font-size: 12.5px; font-weight: 600; letter-spacing: .01em; }
+  .dm-url svg { width: 12px; height: 12px; opacity: .7; }
+  .dm-tag { flex: none; padding: 0 10px; height: 30px; display: grid; place-items: center; border-radius: 15px; background: #26262a; color: #8d8d95; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  @media (prefers-reduced-motion: reduce) { .dm-reload.spin svg { animation: none; } }
   .demo-frame.is-mobile { max-width: 412px; margin: 0 auto; padding: 12px; border-radius: 44px; background: #111; box-shadow: 0 30px 70px rgba(0,0,0,.35), inset 0 0 0 2px #2a2a2a; position: relative; }
   .demo-frame.is-mobile::before { content: ""; position: absolute; left: 50%; top: 20px; width: 96px; height: 22px; border-radius: 12px; background: #111; transform: translateX(-50%); z-index: 5; }
   .demo-frame.is-mobile .demo { border-radius: 34px; padding: 44px 14px 22px; }
@@ -1367,6 +1378,7 @@
   </div>
 
   <div class="demo-frame" id="demo-frame" data-review-id="demo-ram">
+  <div class="dm-bar"><button type="button" class="dm-reload" id="dm-reload" aria-label="Načíst kalendář znovu" title="Načíst kalendář znovu" data-review-id="demo-reload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></button><span class="dm-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>advent.vasweb.cz</span><span class="dm-tag" aria-hidden="true">Ukázka</span></div>
   <div class="demo" id="demo" data-theme="fotoskoda" data-review-id="demo-kalendar">
     <svg class="deco" id="demo-deco" aria-hidden="true"></svg>
     <div class="d-wrap">
@@ -2227,6 +2239,11 @@
     else if (a === 'znovu') { delete odkryto[dnes]; zavriKartu(); vykresli(); zprava('Okénko je zase zavřené. Zkuste to znovu.'); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') zavriKartu(); });
+  var reload = document.getElementById('dm-reload');
+  if (reload) reload.addEventListener('click', function () {
+    reload.classList.remove('spin'); void reload.offsetWidth; reload.classList.add('spin');
+    nastavTema(tema); zprava('Kalendář je zase na začátku. Zkuste otevřít dnešní okénko.');
+  });
 
   function nastavTema(t) {
     tema = t; var T = TEMATA[t], k, zdroj = T.odkryto || ODKRYTO;
