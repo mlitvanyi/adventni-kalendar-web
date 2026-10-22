@@ -25,6 +25,12 @@ Poznámka od Michala, 22. 10. 2026. Robí sa oddelene od nových vzhľadov kalen
   - Písmo Satoshi (self-hosted, `public/fonts/satoshi/`), Inter ako záloha.
 - Givingli je tomuto dizajn systému veľmi podobné, takže smer sedí.
 
+## Vianočný duch zostáva
+- Stránka má aj po úprave pôsobiť vianočne a adventne, nie ako neutrálna produktová stránka.
+- Ponechať padajúce prvky na pozadí (dnešný sneh, iskry) a spraviť ich prepracovanejšie. Napríklad viac vrstiev s rôznou rýchlosťou a veľkosťou, jemná paralaxa, aby to bolo bohatšie a krajšie.
+- Vianočné akcenty (cezmína, stromček, darčeky, zlaté iskry) zachovať aj v novom layoute v štýle Givingli.
+- Rešpektovať `prefers-reduced-motion`.
+
 ## Čo platí ďalej
 - Obsah a význam textov ostávajú. Meníme formu, poradie a vizuál, nie posolstvo.
 - Zmeny landing page sa držia oddelene od vzhľadov kalendára, aby bolo vidno, čo sa zmenilo.
