@@ -216,6 +216,8 @@
   .vz-cap-s { padding: 3px 9px; border-radius: 100px; background: #f1f1f3; color: var(--ink); font-size: 11px; font-weight: 700; }
   .vz-cap-s.new { background: var(--accent); color: #fff; }
   .vz-cap-s[hidden] { display: none; }
+  .vz-admin { display: none; font-size: 13px; font-weight: 700; }
+  @media (max-width: 899px) { .vz-admin { display: inline; } }
   @media (max-width: 860px) {
     .vz-strip { overflow-x: auto; margin: 0 -16px; padding: 0 16px 12px; scrollbar-width: thin; }
   }
@@ -832,6 +834,12 @@
   @keyframes dmSpin { to { transform: rotate(360deg); } }
   .dm-url { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; height: 30px; border-radius: 15px; background: #26262a; color: #c9c9cf; font-size: 12.5px; font-weight: 600; letter-spacing: .01em; }
   .dm-url svg { width: 12px; height: 12px; opacity: .7; }
+  .dm-admin { flex: none; display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 13px; border: 0; border-radius: 15px; background: #fff; color: #111; font-size: 12.5px; font-weight: 700; text-decoration: none; transition: background .15s ease; }
+  .dm-admin:hover { background: #e9e9ee; border: 0; }
+  .dm-admin svg { width: 14px; height: 14px; }
+  .kd-frame.flash { animation: kdFlash 1.6s ease both; }
+  @keyframes kdFlash { 0%, 100% { box-shadow: 0 30px 70px rgba(0,0,0,.3), inset 0 0 0 2px #2a2a2a; } 30% { box-shadow: 0 0 0 6px var(--kd-flash, #e30613), 0 30px 70px rgba(0,0,0,.3); } }
+  @media (prefers-reduced-motion: reduce) { .kd-frame.flash { animation: none; } }
   .dm-tag { flex: none; padding: 0 10px; height: 30px; display: grid; place-items: center; border-radius: 15px; background: #26262a; color: #8d8d95; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
   @media (prefers-reduced-motion: reduce) { .dm-reload.spin svg { animation: none; } }
   .demo-frame.is-mobile { max-width: 412px; margin: 0 auto; padding: 12px; border-radius: 44px; background: #111; box-shadow: 0 30px 70px rgba(0,0,0,.35), inset 0 0 0 2px #2a2a2a; position: relative; }
@@ -958,7 +966,6 @@
     --c-gifts: #db2777; --c-people: #0d9488; --c-campaigns: #d97706; --c-texts: #0284c7;
     box-shadow: 0 30px 70px rgba(20,20,60,.14); }
   /* admin preview: smaller monitor than the calendar, colours follow the chosen calendar look */
-  .kd-frame { max-width: 1040px; margin-left: auto; margin-right: auto; }
   @media (min-width: 900px) {
     .demo-frame.kd-frame { padding: 10px 10px 12px; border-radius: 20px; margin-bottom: 56px; }
     .demo-frame.kd-frame::after { width: 150px; height: 42px; }
@@ -977,13 +984,13 @@
   .kd-camp .lbl { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.65); margin-bottom: 3px; }
   .kd-camp .nm { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13.5px; }
   .kd-camp .nm .ico { margin-left: auto; color: rgba(255,255,255,.7); width: 14px; height: 14px; }
-  .kd-camp .tag { margin-top: 8px; background: rgba(52,211,153,.32); color: #fff; box-shadow: none; }
+  .kd .kd-camp .tag { margin-top: 8px; background: rgba(255,255,255,.92); color: #11804f; box-shadow: none; }
   .kd-nav { flex: 1; padding: 8px 12px; display: flex; flex-direction: column; gap: 3px; }
   .kd-nav .grp { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.55); padding: 12px 12px 4px; }
   .kd-nav button { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 12px; font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,.86); background: none; border: 0; text-align: left; cursor: pointer; transition: background .12s; }
   .kd-nav button .ico { width: 17px; height: 17px; stroke-width: 1.9; }
   .kd-nav button:hover { background: rgba(255,255,255,.12); color: #fff; }
-  .kd-nav button[aria-current="page"] { background: rgba(255,255,255,.22); color: #fff; font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+  .kd-nav button[aria-current="page"] { background: #fff; color: var(--pb); font-weight: 700; box-shadow: 0 6px 16px rgba(0,0,0,.16); }
   .kd-nav button[aria-disabled="true"] { cursor: default; }
   .kd-nav button[aria-disabled="true"]:hover { background: none; color: rgba(255,255,255,.86); }
   .kd-foot { padding: 12px 16px 16px; border-top: 1px solid rgba(255,255,255,.14); display: flex; align-items: center; gap: 10px; }
@@ -1009,22 +1016,35 @@
   .kd-card .mut { color: var(--k-ink-3); font-size: 13px; margin: 0; }
   .kd-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
   .kd-stat { background: var(--k-card); border: 1px solid var(--k-line); border-radius: 16px; padding: 16px 18px; position: relative; overflow: hidden; }
-  .kd-stat::before { content: ""; position: absolute; right: 14px; top: 14px; width: 34px; height: 34px; border-radius: 10px; background: color-mix(in srgb, var(--c, var(--pb)) 18%, transparent); }
-  .kd-stat::after { content: ""; position: absolute; right: 25px; top: 25px; width: 12px; height: 12px; border-radius: 50%; border: 2.5px solid var(--c, var(--pb)); }
+  .kd-stat .ic { position: absolute; right: 14px; top: 14px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: color-mix(in srgb, var(--c, var(--pb)) 14%, transparent); color: var(--c, var(--pb)); }
+  .kd-stat .ic .ico { width: 17px; height: 17px; }
+  .kd-stat .tr { display: block; margin-top: 6px; font-size: 11.5px; color: var(--k-ink-3); }
   .kd-stat .l { font-size: 12.5px; font-weight: 500; color: var(--k-ink-3); }
   .kd-stat b { display: block; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; margin-top: 8px; color: var(--k-ink); font-variant-numeric: tabular-nums; }
   .kd-hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 18px; align-items: start; }
-  .kd-mini { padding-top: 40px !important; border-radius: 12px; overflow: hidden; border: 1px solid var(--k-line); background: #14243f; padding: 12px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; align-content: end; position: relative; }
-  .kd-mini::before { content: "Adventní kalendář"; position: absolute; left: 12px; top: 10px; font-family: Georgia, serif; font-weight: 700; color: #fff; font-size: 17px; }
-  .kd-mini i { aspect-ratio: 1; border-radius: 5px; background: #22396a; }
-  .kd-mini i.t { background: #F7C948; }
-  .kd-mini i.o { background: rgba(255,255,255,.12); }
+  .kd-mini { position: relative; overflow: hidden; aspect-ratio: 4 / 5; max-height: 240px; justify-self: end; border-radius: 12px; border: 1px solid var(--k-line); background: var(--k-raised); box-shadow: 0 10px 24px rgba(20,20,40,.14); }
+  .kd-mini img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .kd-mini-l { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 9px; background: linear-gradient(transparent, rgba(0,0,0,.72)); color: #fff; line-height: 1.2; }
+  .kd-mini-l b { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+  .kd-mini-l span { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 700; }
   .kd-steps { display: grid; gap: 10px; }
   .kd-step { display: grid; grid-template-columns: 38px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; background: var(--k-card); border: 1px solid var(--k-line); border-radius: 16px; }
   .kd-step .n { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; background: color-mix(in srgb, var(--k-success) 20%, transparent); color: var(--k-success); }
   .kd-step.todo .n { background: var(--pb-soft); color: var(--pb); }
   .kd-step b { display: block; font-size: 14px; color: var(--k-ink); font-weight: 600; }
   .kd-step .mut { color: var(--k-ink-3); font-size: 12.5px; }
+  .kd-prog { margin-top: 16px; }
+  .kd-prog-h { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--k-ink-3); margin-bottom: 6px; }
+  .kd-prog-h b { color: var(--k-ink); font-weight: 600; }
+  .kd-bar { height: 8px; border-radius: 99px; background: var(--k-raised); overflow: hidden; }
+  .kd-bar i { display: block; height: 100%; border-radius: 99px; background: var(--pb); }
+  .kd-tools { display: flex; align-items: center; gap: 8px; }
+  .kd-ib { position: relative; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--k-line); background: var(--k-card); color: var(--k-ink-2); }
+  .kd-ib.dot::after { content: ""; position: absolute; right: 7px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--pb); box-shadow: 0 0 0 2px var(--k-card); }
+  .kd-av { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--pb); color: #fff; font-size: 12px; font-weight: 700; }
+  .kd-typ { display: inline-flex; align-items: center; gap: 8px; }
+  .kd-typ .ti { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: var(--pb-soft); color: var(--pb); }
+  .kd-typ .ti svg { width: 13px; height: 13px; }
   .kd-sub { font-size: 15px; font-weight: 600; margin: 18px 0 10px; color: var(--k-ink); }
   .kd table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; min-width: 620px; }
   .kd thead th { padding: 11px 14px; font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--k-ink-3); border-bottom: 1px solid var(--k-line); white-space: nowrap; background: none; }
@@ -1058,6 +1078,8 @@
     .kd-nav button { white-space: nowrap; }
     .kd-hero { grid-template-columns: 1fr; }
     .kd-stats { grid-template-columns: 1fr 1fr; }
+    .kd-mini { justify-self: start; max-height: 200px; }
+    .kd-tools .kd-ib:not(.dot) { display: none; }
     .kd-step { grid-template-columns: 38px 1fr; }
     .kd-step .kd-btn { grid-column: 2; justify-self: start; }
   }
@@ -1434,6 +1456,10 @@
   .v2-browser-bar i { width: 11px; height: 11px; border-radius: 50%; background: #c4c9d4; }
   .v2-browser-bar span { flex: 1; max-width: 420px; margin-left: 14px; padding: 6px 14px; border-radius: 100px; background: #fff; color: #525866; font-size: 12.5px; font-weight: 600; }
   .v2-browser .kd { border-radius: 10px; }
+  /* the jump flash must end on the light browser shadow, not the original monitor outline */
+  .v2-browser.kd-frame.flash { animation-name: v2KdFlash; }
+  @keyframes v2KdFlash { 0%, 100% { box-shadow: var(--v2-shadow-xl), inset 0 0 0 1px rgba(10,10,10,.06); } 30% { box-shadow: 0 0 0 6px var(--kd-flash, #e30613), var(--v2-shadow-xl); } }
+  .v2-browser-bar .dm-admin { margin-left: auto; box-shadow: inset 0 0 0 1px rgba(10,10,10,.08); }
 
   /* comparison: two plan cards, ours bigger, darker and lifted */
   .v2-cmp { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 22px; align-items: center; margin: 8px 0 28px; }
@@ -1657,7 +1683,7 @@
         </div></div>
       </div>
     </div>
-    <div class="vz-cap" id="vz-cap" aria-live="polite"><strong id="vz-cap-t">Dům s okny</strong><span class="vz-cap-m" id="vz-cap-m">Fototechnika · 24 dní</span><span class="vz-cap-s" id="vz-cap-s">Skutečná kampaň</span>
+    <div class="vz-cap" id="vz-cap" aria-live="polite"><strong id="vz-cap-t">Dům s okny</strong><span class="vz-cap-m" id="vz-cap-m">Fototechnika · 24 dní</span><span class="vz-cap-s" id="vz-cap-s">Skutečná kampaň</span><a class="vz-admin" href="#administrace">Administrace →</a>
     <div class="grp device">
       <div class="seg" role="group" aria-label="Zobrazení">
         <button type="button" data-device="desktop" aria-pressed="true" data-review-id="demo-zobrazeni-pocitac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Počítač</button>
@@ -1668,7 +1694,7 @@
   </div>
 
   <div class="demo-frame" id="demo-frame" data-review-id="demo-ram">
-  <div class="dm-bar"><button type="button" class="dm-reload" id="dm-reload" aria-label="Načíst kalendář znovu" title="Načíst kalendář znovu" data-review-id="demo-reload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></button><span class="dm-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>advent.vasweb.cz</span><span class="dm-tag" aria-hidden="true">Ukázka</span></div>
+  <div class="dm-bar"><button type="button" class="dm-reload" id="dm-reload" aria-label="Načíst kalendář znovu" title="Načíst kalendář znovu" data-review-id="demo-reload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></button><span class="dm-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>advent.vasweb.cz</span><span class="dm-tag" aria-hidden="true">Ukázka</span><a class="dm-admin" href="#administrace" data-review-id="demo-do-administrace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>Administrace</a></div>
   <div class="demo" id="demo" data-theme="fotoskoda" data-review-id="demo-kalendar">
     <svg class="deco" id="demo-deco" aria-hidden="true"></svg>
     <div class="d-wrap">
@@ -1712,7 +1738,7 @@
   <h2>Administrace, <span class="accent">kterou zvládne každý</span></h2>
   <p class="lead">Funkce a&nbsp;vzhled ladíme na&nbsp;webu pro zákazníky. Administrace zůstává jednoduchá: dárky a&nbsp;texty máte pod kontrolou sami, bez programování.</p>
   <div class="v2-browser kd-frame" data-review-id="admin-ram">
-  <div class="v2-browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>advent.vasweb.cz/admin</span></div>
+  <div class="v2-browser-bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><span aria-hidden="true">advent.vasweb.cz/admin</span><a class="dm-admin" href="#ukazka" data-review-id="admin-zpet-kalendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/></svg>Kalendář</a></div>
   <div class="kd" id="kd" data-theme="light" data-review-id="admin-ukazka">
     <aside class="kd-side">
       <div class="kd-brand"><span class="mark"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></span><span class="txt"><b>Kalendář dárků</b>Vaše značka</span></div>
@@ -1733,6 +1759,7 @@
     <div class="kd-main">
       <div class="kd-top">
         <span class="kd-crumbs">Advent 2026<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg><b id="kd-crumb">Přehled</b></span>
+        <span class="kd-tools" aria-hidden="true"><span class="kd-ib"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><span class="kd-ib"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="kd-ib dot"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><span class="kd-av">VZ</span></span>
       </div>
 
       <div class="kd-page">
@@ -1744,12 +1771,13 @@
                 <h5>Kampaň běží</h5>
                 <p class="mut">Každý den se odkryje jeden dárek. Nic dalšího hlídat nemusíte.</p>
                 <div class="kd-stats">
-                  <div class="kd-stat" style="--c: var(--c-gifts)"><span class="l">Odkrytí dnes</span><b>312</b></div>
-                  <div class="kd-stat" style="--c: var(--c-people)"><span class="l">Účastníci</span><b>2&nbsp;846</b></div>
-                  <div class="kd-stat" style="--c: var(--c-campaigns)"><span class="l">Dárky</span><b>24/24</b></div>
+                  <div class="kd-stat" style="--c: var(--c-gifts)"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="l">Odkrytí dnes</span><b>312</b><span class="tr">+18 % proti včerejšku</span></div>
+                  <div class="kd-stat" style="--c: var(--c-people)"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="l">Účastníci</span><b>2&nbsp;846</b><span class="tr">64 % se souhlasem</span></div>
+                  <div class="kd-stat" style="--c: var(--c-campaigns)"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></span><span class="l">Dárky</span><b>24/24</b><span class="tr">vše připraveno</span></div>
                 </div>
+                <div class="kd-prog"><div class="kd-prog-h"><span>Průběh kampaně</span><b>den 7 z&nbsp;24</b></div><div class="kd-bar"><i style="width:29%"></i></div></div>
               </div>
-              <div class="kd-mini" aria-hidden="true"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="t"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="kd-mini" aria-hidden="true"><img src="img/nahledy/fotoskoda.webp" alt="" width="240" height="300"><span class="kd-mini-l"><b>Náhled kampaně</b><span>Vánoce v našem domě</span></span></div>
             </div>
           </div>
           <div class="kd-sub">Co udělat, aby kalendář běžel</div>
@@ -2162,7 +2190,8 @@
       '<radialGradient id="sp-glow"><stop offset="0" stop-color="#ffd59a" stop-opacity=".95"/><stop offset=".45" stop-color="#ffc56e" stop-opacity=".45"/><stop offset="1" stop-color="#ffc56e" stop-opacity="0"/></radialGradient>' +
       '<radialGradient id="sp-moon" cx=".4" cy=".38"><stop offset="0" stop-color="#fffbea"/><stop offset="1" stop-color="#f3dc9a"/></radialGradient>' +
       '<linearGradient id="sp-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1033" stop-opacity=".75"/><stop offset="1" stop-color="#3d3a8c" stop-opacity=".15"/></linearGradient>' +
-      '<filter id="sp-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>' +
+      '<radialGradient id="sp-soft-w"><stop offset="0" stop-color="#fdf0c4" stop-opacity="1"/><stop offset="1" stop-color="#fdf0c4" stop-opacity="0"/></radialGradient>' +
+      '<radialGradient id="sp-cl"><stop offset="0" stop-color="#c9cfe8" stop-opacity="1"/><stop offset=".6" stop-color="#c9cfe8" stop-opacity=".5"/><stop offset="1" stop-color="#c9cfe8" stop-opacity="0"/></radialGradient>' +
       '<filter id="sp-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>' +
       '<clipPath id="sp-okno"><rect x="520" y="0" width="752" height="634"/></clipPath>';
     // spotlight on today's object: the rest of the room dims
@@ -2173,11 +2202,11 @@
     s += '<g clip-path="url(#sp-okno)"><rect x="520" y="0" width="752" height="634" fill="url(#sp-sky)"/>';
     var r = rnd(17), i;
     for (i = 0; i < 40; i++) s += '<circle class="sp-star" cx="' + (530 + r() * 732).toFixed(0) + '" cy="' + (10 + r() * 470).toFixed(0) + '" r="' + (1.8 + r() * 3.4).toFixed(1) + '" fill="#fff" style="animation-delay:' + (r() * 3).toFixed(2) + 's;animation-duration:' + (2 + r() * 2.5).toFixed(2) + 's"/>';
-    s += '<circle class="sp-halo" cx="' + cx + '" cy="' + cy + '" r="' + (R * 2.3) + '" fill="#fdf0c4" opacity="' + (0.12 + 0.3 * p).toFixed(2) + '" filter="url(#sp-blur)"/>';
+    s += '<circle class="sp-halo" cx="' + cx + '" cy="' + cy + '" r="' + (R * 2.3) + '" fill="url(#sp-soft-w)" opacity="' + (0.25 + 0.5 * p).toFixed(2) + '"/>';
     s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + R + '" fill="#fff" opacity=".1"/>' + lit;
     if (p > 0.4) s += '<g fill="#d9bf78" opacity="' + ((p - 0.4) * 0.9).toFixed(2) + '"><circle cx="' + (cx + 28) + '" cy="' + (cy - 22) + '" r="16"/><circle cx="' + (cx + 42) + '" cy="' + (cy + 34) + '" r="10"/><circle cx="' + (cx - 30) + '" cy="' + (cy + 20) + '" r="12"/></g>';
-    s += '<g class="sp-cloud" fill="#c9cfe8" opacity=".55" filter="url(#sp-blur)"><ellipse cx="560" cy="330" rx="150" ry="34"/><ellipse cx="620" cy="304" rx="90" ry="34"/></g>';
-    s += '<g class="sp-cloud sp-cloud2" fill="#c9cfe8" opacity=".4" filter="url(#sp-blur)"><ellipse cx="560" cy="150" rx="120" ry="26"/><ellipse cx="610" cy="130" rx="70" ry="26"/></g>';
+    s += '<g class="sp-cloud" fill="url(#sp-cl)" opacity=".55"><ellipse cx="560" cy="330" rx="190" ry="52"/><ellipse cx="620" cy="300" rx="120" ry="50"/></g>';
+    s += '<g class="sp-cloud sp-cloud2" fill="url(#sp-cl)" opacity=".4"><ellipse cx="560" cy="150" rx="150" ry="40"/><ellipse cx="610" cy="128" rx="95" ry="38"/></g>';
     s += '<path class="sp-meteor" d="M760 80l-150 70" stroke="#fff" stroke-width="5" stroke-linecap="round"/>';
     s += '<g fill="#0e1430" opacity=".9"><path d="M520 634V598c120-26 260-30 380-18s240 8 372-14v68z"/></g>';
     s += '</g>';
@@ -2242,7 +2271,9 @@
   var OKNA_CH = { 1: [594, 1826, 347, 246], 2: [134, 1378, 918, 302], 3: [806, 1154, 314, 123], 4: [930, 918, 235, 112], 5: [538, 638, 246, 224], 6: [918, 314, 560, 426], 7: [627, 213, 134, 190], 8: [941, 18, 90, 150] };
   // the sandy footpath in the painting, bottom to top (image px); stops snap to its nearest point
   var CH_TRASA = [[980, 2240], [1050, 2156], [1106, 2086], [1092, 2030], [1036, 1974], [1022, 1904], [1064, 1848], [1162, 1792], [1176, 1750], [1106, 1708], [1008, 1680], [924, 1638], [910, 1596], [952, 1561], [1050, 1533], [1176, 1498], [1246, 1463], [1267, 1407], [1232, 1358], [1134, 1316], [1008, 1288], [868, 1260], [770, 1232], [707, 1183], [694, 1120], [896, 1093], [1098, 1053], [1154, 1026], [938, 966], [868, 938], [854, 896], [896, 868], [1008, 840], [1092, 826], [1106, 798], [1064, 770], [952, 742], [868, 714], [819, 672], [826, 644], [868, 602], [910, 574], [938, 539], [868, 518], [847, 490], [854, 462], [896, 420], [980, 378], [1078, 350], [1099, 322], [1036, 301], [924, 287], [882, 266], [910, 245], [980, 210], [994, 182]];
-  var chFrakce = null, chOd = null;
+  // where each stop sits along the drawn curve (0 = start, 1 = lookout tower); measured once from the path,
+  // hardcoded because sampling the curve at runtime froze the page for seconds
+  var chFrakce = [0, 0.0858, 0.2125, 0.3858, 0.595, 0.7808, 0.9108, 0.9675, 1], chOd = null;
   DARKY.chalupa = seznam([['sleva', 'Sleva 10 % na víkendový pobyt'], ['darek', 'Snídaně na chalupě zdarma'], ['akce', 'Last minute víkendy v akci'], ['sleva', 'Sleva 15 % na outdoorovou výbavu'], ['prodejna', 'Kola k zapůjčení zdarma'], ['darek', 'Pozdní odjezd v neděli zdarma'], ['doprava', 'Doprava výbavy na chatu zdarma'], ['sleva', 'Víkend pro dva za polovic']], 8, 'CH');
   TEMATA.chalupa = { dni: 8, dnes: 5, tydny: true, layout: 'scene', top: '', eyebrow: 'Chaty a chalupy · letní sezóna', t: 'Víkendy na chalupě', l: 'Osm víkendů, osm zastávek na jedné trase. Každý pátek se otevře další zastávka a' + NB + 's' + NB + 'ní dárek k' + NB + 'pobytu nebo k' + NB + 'výbavě. Kdo dojde až na' + NB + 'rozhlednu, má víkend pro dva za' + NB + 'polovic.', btn: 'Otevřít víkendovou zastávku', den: 'víkend', tip: 'Klikněte na' + NB + 'zastávku, která svítí, a' + NB + 'turista dojde o' + NB + 'kus dál.', finale: 'Ukázat 8. víkend: rozhledna', odkryto: { 1: true, 2: true, 4: true },
     umi: ['Otevřít jde jen <strong>tento víkend</strong>. Propásnutá zastávka zůstane šedá, trasa ale pokračuje.', 'Kalendář <strong>po týdnech</strong>: zastávka se otevře každý pátek. Délka podle sezóny.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba na' + NB + 'místě, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] };
@@ -2270,16 +2301,7 @@
   function chalupaTrasa() {
     var route = stage.querySelector('#ch-route');
     if (!route) return;
-    var L = route.getTotalLength(), k, i;
-    if (!chFrakce) {
-      // where along the drawn curve each stop lies (closest sampled point to its path anchor)
-      chFrakce = [0];
-      for (k = 1; k <= 8; k++) {
-        var o = OKNA_CH[k], cil = [o[0] + o[2] / 2, o[1] + o[3] / 2], best = 0, bd = 1e12;
-        for (i = 0; i <= 600; i++) { var pt = route.getPointAtLength(L * i / 600), dd = (pt.x - cil[0]) * (pt.x - cil[0]) + (pt.y - cil[1]) * (pt.y - cil[1]); if (dd < bd) { bd = dd; best = i / 600; } }
-        chFrakce.push(best);
-      }
-    }
+    var L = route.getTotalLength();
     var ted = odkryto[dnes] ? dnes : dnes - 1, cil2 = finale ? 8 : ted, start = chOd === null ? cil2 : chOd;
     var a = chFrakce[start], b = chFrakce[cil2], walks = stage.querySelectorAll('.ch-walk'), anim = stage.querySelector('.ch-hiker animateMotion');
     var klid = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2523,6 +2545,14 @@
     else if (a === 'znovu') { delete odkryto[dnes]; zavriKartu(); vykresli(); zprava('Okénko je zase zavřené. Zkuste to znovu.'); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') zavriKartu(); });
+  Array.prototype.forEach.call(document.querySelectorAll('a.dm-admin[href="#administrace"], .vz-admin'), function (a) {
+    a.addEventListener('click', function () {
+      var f = document.querySelector('.kd-frame'); if (!f) return;
+      f.style.setProperty('--kd-flash', ADMIN_BARVY[tema] || '#e30613');
+      f.classList.remove('flash'); void f.offsetWidth;
+      setTimeout(function () { f.classList.add('flash'); }, 450);
+    });
+  });
   var reload = document.getElementById('dm-reload');
   if (reload) reload.addEventListener('click', function () {
     reload.classList.remove('spin'); void reload.offsetWidth; reload.classList.add('spin');
@@ -2530,7 +2560,7 @@
   });
 
   // the admin preview borrows the chosen calendar's brand colour and font
-  var ADMIN_BARVY = { fotoskoda: '#0d1f52', snehulak: '#0f3d2e', hracky: '#2b1a5e', jidlo: '#7a1a22', moda: '#8f1027', harfa: '#2f8f80', velikonoce: '#2e8b3a', raketa: '#004996', spani: '#0e8348', pas: '#e30613', chalupa: '#6e8c00', vzorky: '#111111', obalky: '#b3262c' };
+  var ADMIN_BARVY = { fotoskoda: '#0d1f52', snehulak: '#0f3d2e', hracky: '#2b1a5e', jidlo: '#7a1a22', moda: '#8f1027', harfa: '#2f8f80', velikonoce: '#2e8b3a', raketa: '#004996', spani: '#0e8348', pas: '#e30613', chalupa: '#5c7600', vzorky: '#111111', obalky: '#b3262c' };
   function adminBarvy(t) {
     var kd = document.getElementById('kd'), c = ADMIN_BARVY[t];
     if (!kd || !c) return;
@@ -2542,6 +2572,17 @@
     kd.style.setProperty('--tag-pb-bg', 'color-mix(in srgb, ' + c + ' 12%, #fff)');
     kd.style.setProperty('--tag-pb-fg', 'color-mix(in srgb, ' + c + ' 85%, #000)');
     kd.style.setProperty('--k-font', getComputedStyle(demo).getPropertyValue('--d-font') || 'inherit');
+    var mini = kd.querySelector('.kd-mini');
+    if (mini) { mini.querySelector('img').src = 'img/nahledy/' + t + '.webp'; mini.querySelector('.kd-mini-l span').textContent = TEMATA[t].t; }
+    if (!kd.getAttribute('data-typy')) {
+      // gift type cells get the same icons as the calendar windows
+      var TYPY = { 'Sleva': 'sleva', 'Doprava zdarma': 'doprava', 'Dárek k objednávce': 'darek', 'Služba na prodejně': 'prodejna', 'Plošná akce': 'akce' };
+      Array.prototype.forEach.call(kd.querySelectorAll('.kd-view[data-v="darky"] tbody tr'), function (tr) {
+        var td = tr.children[2], txt = td ? td.textContent.replace(/ /g, ' ').trim() : '', k = TYPY[txt];
+        if (k) td.innerHTML = '<span class="kd-typ"><span class="ti">' + ICO[k] + '</span>' + td.innerHTML.trim() + '</span>';
+      });
+      kd.setAttribute('data-typy', '1');
+    }
   }
   function nastavTema(t) {
     tema = t; var T = TEMATA[t], k, zdroj = T.odkryto || ODKRYTO;
