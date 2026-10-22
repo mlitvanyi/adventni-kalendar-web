@@ -181,36 +181,37 @@
   .demo-bar .grp.device .seg button { background: #f4f4f5; border-color: transparent; }
   .demo-bar .grp.device .seg button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); }
 
-  /* výběr vzhledu: pás náhledů jako v galerii, popis vybraného pod ním */
-  .demo-bar { align-items: flex-end; justify-content: space-between; }
-  .vz { min-width: 0; flex: 1 1 auto; }
-  .vz-strip { display: flex; align-items: flex-end; gap: 14px; min-width: 0; }
+  /* výběr vzhledu: jeden panel s náhledy, přepínačem zobrazení a názvem vybraného */
+  .demo-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 0 24px; margin: 0 0 22px; padding: 14px 16px 0; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+  .vz { min-width: 0; }
+  .vz-strip { display: flex; align-items: flex-start; gap: 18px; min-width: 0; padding-bottom: 14px; }
   .vz-set { flex: none; }
-  .vz-k { display: block; margin: 0 0 6px 2px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+  .vz-k { display: block; margin: 0 0 8px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
   .vz-thumbs { display: flex; gap: 6px; }
-  .vz-sep { align-self: stretch; width: 1px; margin: 18px 0 2px; background: var(--line); }
-  .vz-th { position: relative; flex: none; width: 60px; height: 75px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: #ececef; cursor: pointer; opacity: .55; box-shadow: 0 0 0 1px rgba(0,0,0,.08); transition: opacity .15s ease, transform .15s ease, box-shadow .15s ease; }
+  .vz-sep { align-self: stretch; flex: none; width: 1px; background: var(--line); }
+  .vz-th { position: relative; flex: none; width: 56px; height: 70px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: #ececef; cursor: pointer; opacity: .6; box-shadow: 0 0 0 1px rgba(0,0,0,.08); transition: opacity .15s ease, box-shadow .15s ease; }
   .vz-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .vz-th:hover { opacity: 1; transform: translateY(-2px); }
+  .vz-th:hover { opacity: 1; }
   .vz-th:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; opacity: 1; }
-  .vz-th[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent), 0 6px 14px rgba(0,0,0,.18); }
+  .vz-th[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent); }
   /* internal marker for new proposals: remove before publishing */
   .vz-new { position: absolute; right: 4px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px #fff; }
-  .vz-cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 12px; min-height: 26px; }
-  .vz-cap-k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
-  .vz-cap strong { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); }
-  .vz-cap-m { font-size: 14px; color: var(--ink-3); }
-  .vz-cap-s { align-self: center; padding: 3px 9px; border-radius: 100px; background: #14141a; color: #fff; font-size: 11px; font-weight: 700; }
-  .vz-cap-s.new { background: var(--accent); }
+  .demo-bar .grp.device { display: block; padding: 0; border: 0; }
+  .demo-bar .grp.device .seg { display: flex; gap: 2px; padding: 3px; border-radius: 100px; background: #f1f1f3; }
+  .demo-bar .grp.device .seg button { border: 0; background: transparent; padding: 6px 12px; }
+  .demo-bar .grp.device .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+  .vz-cap { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 11px 0 12px; border-top: 1px solid var(--line); }
+  .vz-cap strong { font-size: 16px; font-weight: 800; color: var(--ink); }
+  .vz-cap-m { font-size: 13.5px; color: var(--ink-3); }
+  .vz-cap-s { padding: 3px 9px; border-radius: 100px; background: #f1f1f3; color: var(--ink); font-size: 11px; font-weight: 700; }
+  .vz-cap-s.new { background: var(--accent); color: #fff; }
   .vz-cap-s[hidden] { display: none; }
-  .demo-bar .grp.device { flex: none; margin-bottom: 2px; }
   @media (max-width: 860px) {
-    .demo-bar { flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
-    .vz { width: 100%; }
-    .vz-strip { overflow-x: auto; margin: 0 -16px; padding: 4px 16px 8px; scrollbar-width: thin; }
-    .demo-bar .grp.device { align-self: flex-start; }
+    .demo-bar { grid-template-columns: minmax(0, 1fr); }
+    .vz-strip { overflow-x: auto; margin: 0 -16px; padding: 0 16px 12px; scrollbar-width: thin; }
+    .demo-bar .grp.device { justify-self: start; padding-bottom: 12px; }
   }
-  @media (prefers-reduced-motion: reduce) { .vz-th { transition: none; } .vz-th:hover { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .vz-th { transition: none; } }
   .demo-bar input[type=range] { accent-color: var(--accent); width: 170px; }
   .demo-bar output { font-weight: 800; font-size: 15px; min-width: 28px; display: inline-block; }
   .demo-note { font-size: 13px; color: var(--ink-3); margin: 10px 0 0; }
@@ -312,9 +313,9 @@
   @media (prefers-reduced-motion: reduce) { .demo .d-card, .demo .dc-fx, .demo .shake, .demo .door.just, .demo .win.just { animation: none !important; } .demo .dc-fx { display: none; } }
 
   /* téma: Odpočet ke startu (stavebnice, kreslené v kódu) */
-  .demo[data-theme="raketa"] { --d-bg: #eef3fb; --d-ink: #0b1f44; --d-ink-2: #4a5f86; --d-today: #ffcc00; --d-today-ink: #0b1f44; --d-btn: #e3242b; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #d3deef; }
+  .demo[data-theme="raketa"] { --d-bg: #d4edfc; --d-ink: #0b093b; --d-ink-2: #3d4a7a; --d-today: #ffcd00; --d-today-ink: #0b093b; --d-btn: #52c018; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #b9dcf3; }
   .demo[data-theme="raketa"] .d-title { font-weight: 900; letter-spacing: -0.035em; }
-  .demo .scene.raketa { aspect-ratio: 4 / 5; max-width: 480px; display: flex; flex-direction: column; background: #f8fbff; border: 1px solid #d3deef; box-shadow: 0 16px 40px rgba(11,31,68,.16); }
+  .demo .scene.raketa { aspect-ratio: 4 / 5; max-width: 480px; display: flex; flex-direction: column; background: #f3faff; border: 1px solid #b9dcf3; box-shadow: 0 16px 40px rgba(11,31,68,.16); }
   .demo .scene.raketa .rk { display: block; width: 100%; flex: 1 1 auto; min-height: 0; }
   .demo .rk .rk-l { transform-box: view-box; }
   .demo .rk .rk-l.today { animation: rkHint 1.6s ease-in-out infinite; }
@@ -335,17 +336,17 @@
   .demo .rk.launch .rk-done { animation: rkDone .6s 2.6s ease both; }
   @keyframes rkDone { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   .demo .rk-dily { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 8px; padding: 4px 16px 14px; }
-  .demo .dil { position: relative; aspect-ratio: 2 / 1.15; border: 0; border-radius: 4px; padding: 0; font: inherit; font-weight: 900; font-size: clamp(13px, 1.6vw, 17px); color: #fff; background: var(--c, #1f5fbf); box-shadow: inset 0 -5px 0 rgba(0,0,0,.18), 0 3px 6px rgba(11,31,68,.18); display: flex; align-items: center; justify-content: center; gap: 4px; transition: transform .15s ease; }
+  .demo .dil { position: relative; aspect-ratio: 2 / 1.15; border: 0; border-radius: 4px; padding: 0; font: inherit; font-weight: 900; font-size: clamp(13px, 1.6vw, 17px); color: #fff; background: var(--c, #004996); box-shadow: inset 0 -5px 0 rgba(0,0,0,.18), 0 3px 6px rgba(11,31,68,.18); display: flex; align-items: center; justify-content: center; gap: 4px; transition: transform .15s ease; }
   .demo .dil::before, .demo .dil::after { content: ""; position: absolute; top: -6px; width: 26%; height: 7px; border-radius: 3px 3px 0 0; background: inherit; box-shadow: inset 0 2px 0 rgba(255,255,255,.35); }
   .demo .dil::before { left: 13%; } .demo .dil::after { right: 13%; }
   .demo .dil:hover { transform: translateY(-2px); }
   .demo .dil svg { width: 15px; height: 15px; }
-  .demo .dil.locked, .demo .dil.missed { background: transparent; color: #4a5f86; box-shadow: none; outline: 2px dashed rgba(31,95,191,.45); outline-offset: -2px; }
-  .demo .dil.locked::before, .demo .dil.locked::after, .demo .dil.missed::before, .demo .dil.missed::after { background: transparent; box-shadow: none; outline: 2px dashed rgba(31,95,191,.35); outline-offset: -2px; }
+  .demo .dil.locked, .demo .dil.missed { background: transparent; color: #3d4a7a; box-shadow: none; outline: 2px dashed rgba(0,73,150,.45); outline-offset: -2px; }
+  .demo .dil.locked::before, .demo .dil.locked::after, .demo .dil.missed::before, .demo .dil.missed::after { background: transparent; box-shadow: none; outline: 2px dashed rgba(0,73,150,.35); outline-offset: -2px; }
   .demo .dil.missed { color: #8a94a8; text-decoration: line-through; outline-color: rgba(138,148,168,.6); }
-  .demo .dil.today { background: #ffcc00; color: #0b1f44; animation: rkPulse 1.6s ease-in-out infinite; }
+  .demo .dil.today { background: #ffcd00; color: #0b093b; animation: rkPulse 1.6s ease-in-out infinite; }
   @keyframes rkPulse { 50% { box-shadow: inset 0 -5px 0 rgba(0,0,0,.12), 0 0 0 6px rgba(255,204,0,.35); } }
-  .demo .rk-start { align-self: center; margin: -4px 0 10px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; color: #1f5fbf; text-decoration: underline; cursor: pointer; }
+  .demo .rk-start { align-self: center; margin: -4px 0 10px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; color: #004996; text-decoration: underline; cursor: pointer; }
   @media (prefers-reduced-motion: reduce) { .demo .rk .rk-l.today, .demo .rk .rk-l.drop, .demo .rk .rk-ring, .demo .dil.today, .demo .rk.launch .rk-ship, .demo .rk.launch .rk-flame { animation: none; } .demo .rk.launch .rk-done { animation: none; opacity: 1; } }
   /* téma: 7 nocí pro lepší spánek (fotka z Higgsfieldu, měsíc a světla v kódu) */
   .demo[data-theme="spani"] { --d-bg: #f5f1ec; --d-ink: #483628; --d-ink-2: #7d6b5c; --d-today: #c3a15a; --d-today-ink: #fff; --d-btn: #c3a15a; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #e2dfdd; }
@@ -1185,14 +1186,14 @@
           <button type="button" class="vz-th" data-theme="pas" aria-pressed="false" aria-label="Cestovní pas" title="Cestovní pas" data-kat="Kdykoli během roku" data-meta="Duty free na hranici · 14 dní" data-stitek="Nový návrh" data-review-id="demo-vzhled-pas"><img src="img/nahledy/pas.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
         </div></div>
       </div>
-      <div class="vz-cap" id="vz-cap" aria-live="polite"><span class="vz-cap-k" id="vz-cap-k">Vánoce a advent</span><strong id="vz-cap-t">Dům s okny</strong><span class="vz-cap-m" id="vz-cap-m">Fototechnika · 24 dní</span><span class="vz-cap-s" id="vz-cap-s">Skutečná kampaň</span></div>
     </div>
-    <div class="grp device"><span class="lbl" id="lbl-zarizeni">Zobrazení</span>
+    <div class="grp device"><span class="lbl vz-k" id="lbl-zarizeni">Zobrazení</span>
       <div class="seg" role="group" aria-labelledby="lbl-zarizeni">
         <button type="button" data-device="desktop" aria-pressed="true" data-review-id="demo-zobrazeni-pocitac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Počítač</button>
         <button type="button" data-device="mobile" aria-pressed="false" data-review-id="demo-zobrazeni-mobil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>Mobil</button>
       </div>
     </div>
+    <div class="vz-cap" id="vz-cap" aria-live="polite"><strong id="vz-cap-t">Dům s okny</strong><span class="vz-cap-m" id="vz-cap-m">Fototechnika · 24 dní</span><span class="vz-cap-s" id="vz-cap-s">Skutečná kampaň</span></div>
   </div>
 
   <div class="demo-frame" id="demo-frame" data-review-id="demo-ram">
@@ -1577,7 +1578,7 @@
     '<ellipse cx="581" cy="480" rx="48" ry="44" fill="#000" opacity=".35"/><circle cx="575" cy="468" r="47" fill="#ffd400"/><circle cx="575" cy="468" r="45" fill="none" stroke="#c9a200" stroke-width="4"/><circle cx="575" cy="472" r="38" fill="#c2004e"/><circle cx="575" cy="468" r="37" fill="#ff0066"/><circle cx="575" cy="466" r="27" fill="#fff"/><circle cx="575" cy="466" r="25" fill="none" stroke="#ffd1e3" stroke-width="4"/><path d="M545 454 A33 33 0 0 1 569 434" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".75"/>' +
     '<ellipse cx="471" cy="584" rx="48" ry="44" fill="#000" opacity=".35"/><circle cx="465" cy="572" r="47" fill="#44bdb4"/><circle cx="465" cy="572" r="45" fill="none" stroke="#c9a200" stroke-width="4"/><circle cx="465" cy="576" r="38" fill="#c2004e"/><circle cx="465" cy="572" r="37" fill="#ff0066"/><circle cx="465" cy="570" r="27" fill="#fff"/><circle cx="465" cy="570" r="25" fill="none" stroke="#ffd1e3" stroke-width="4"/><path d="M435 558 A33 33 0 0 1 459 538" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".75"/>' +
     '<circle cx="144" cy="484" r="32" fill="#000" opacity=".3"/><circle cx="144" cy="480" r="32" fill="#002651"/><circle cx="144" cy="480" r="27" fill="#ff0066"/><circle cx="144" cy="480" r="25" fill="none" stroke="#c2004e" stroke-width="4"/><circle cx="144" cy="480" r="27" fill="url(#pb-shine)"/><path d="M135.6 433.6 L144 425.2 L152.4 433.6" fill="none" stroke="#ff0066" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><circle cx="144" cy="584" r="32" fill="#000" opacity=".3"/><circle cx="144" cy="580" r="32" fill="#002651"/><circle cx="144" cy="580" r="27" fill="#ff0066"/><circle cx="144" cy="580" r="25" fill="none" stroke="#c2004e" stroke-width="4"/><circle cx="144" cy="580" r="27" fill="url(#pb-shine)"/><path d="M135.6 533.6 L144 525.2 L152.4 533.6" fill="none" stroke="#ff0066" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><circle cx="144" cy="684" r="32" fill="#000" opacity=".3"/><circle cx="144" cy="680" r="32" fill="#002651"/><circle cx="144" cy="680" r="27" fill="#ff0066"/><circle cx="144" cy="680" r="25" fill="none" stroke="#c2004e" stroke-width="4"/><circle cx="144" cy="680" r="27" fill="url(#pb-shine)"/><path d="M135.6 633.6 L144 625.2 L152.4 633.6" fill="none" stroke="#ff0066" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><circle cx="788" cy="484" r="32" fill="#000" opacity=".3"/><circle cx="788" cy="480" r="32" fill="#002651"/><circle cx="788" cy="480" r="27" fill="#ff0066"/><circle cx="788" cy="480" r="25" fill="none" stroke="#c2004e" stroke-width="4"/><circle cx="788" cy="480" r="27" fill="url(#pb-shine)"/><path d="M779.6 433.6 L788 425.2 L796.4 433.6" fill="none" stroke="#ff0066" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><circle cx="788" cy="584" r="32" fill="#000" opacity=".3"/><circle cx="788" cy="580" r="32" fill="#002651"/><circle cx="788" cy="580" r="27" fill="#ff0066"/><circle cx="788" cy="580" r="25" fill="none" stroke="#c2004e" stroke-width="4"/><circle cx="788" cy="580" r="27" fill="url(#pb-shine)"/><path d="M779.6 533.6 L788 525.2 L796.4 533.6" fill="none" stroke="#ff0066" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><circle cx="788" cy="684" r="32" fill="#000" opacity=".3"/><circle cx="788" cy="680" r="32" fill="#002651"/><circle cx="788" cy="680" r="27" fill="#ff0066"/><circle cx="788" cy="680" r="25" fill="none" stroke="#c2004e" stroke-width="4"/><circle cx="788" cy="680" r="27" fill="url(#pb-shine)"/><path d="M779.6 633.6 L788 625.2 L796.4 633.6" fill="none" stroke="#ff0066" stroke-width="3.5999999999999996" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>' +
-    '<rect x="240" y="716" width="450" height="20" rx="8" fill="#002651"/><rect x="240" y="716" width="450" height="20" rx="8" fill="none" stroke="url(#pb-chrome)" stroke-width="3"/><rect x="261" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="256" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="256" y="668" width="58" height="44" rx="9" fill="#ffcc00"/><rect x="264" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="351" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="346" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="346" y="668" width="58" height="44" rx="9" fill="#ffcc00"/><rect x="354" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="441" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="436" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="436" y="668" width="58" height="44" rx="9" fill="#ffcc00"/><rect x="444" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="531" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="526" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="526" y="668" width="58" height="44" rx="9" fill="#ffcc00"/><rect x="534" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="621" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="616" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="616" y="668" width="58" height="44" rx="9" fill="#ffcc00"/><rect x="624" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/>' +
+    '<rect x="240" y="716" width="450" height="20" rx="8" fill="#002651"/><rect x="240" y="716" width="450" height="20" rx="8" fill="none" stroke="url(#pb-chrome)" stroke-width="3"/><rect x="261" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="256" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="256" y="668" width="58" height="44" rx="9" fill="#ffcd00"/><rect x="264" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="351" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="346" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="346" y="668" width="58" height="44" rx="9" fill="#ffcd00"/><rect x="354" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="441" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="436" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="436" y="668" width="58" height="44" rx="9" fill="#ffcd00"/><rect x="444" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="531" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="526" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="526" y="668" width="58" height="44" rx="9" fill="#ffcd00"/><rect x="534" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/><rect x="621" y="675" width="58" height="50" rx="9" fill="#000" opacity=".3"/><rect x="616" y="668" width="58" height="52" rx="9" fill="#c79a00"/><rect x="616" y="668" width="58" height="44" rx="9" fill="#ffcd00"/><rect x="624" y="675" width="42" height="9" rx="4.5" fill="#fff" opacity=".45"/>' +
     '<circle cx="465" cy="819" r="32" fill="#000" opacity=".3"/><circle cx="465" cy="815" r="32" fill="#002651"/><circle cx="465" cy="815" r="27" fill="#1dca62"/><circle cx="465" cy="815" r="25" fill="none" stroke="#c9a200" stroke-width="4"/><circle cx="465" cy="815" r="27" fill="url(#pb-shine)"/><circle cx="465" cy="899" r="32" fill="#000" opacity=".3"/><circle cx="465" cy="895" r="32" fill="#002651"/><circle cx="465" cy="895" r="27" fill="#ffd400"/><circle cx="465" cy="895" r="25" fill="none" stroke="#c9a200" stroke-width="4"/><circle cx="465" cy="895" r="27" fill="url(#pb-shine)"/><circle cx="465" cy="979" r="32" fill="#000" opacity=".3"/><circle cx="465" cy="975" r="32" fill="#002651"/><circle cx="465" cy="975" r="27" fill="#44bdb4"/><circle cx="465" cy="975" r="25" fill="none" stroke="#c9a200" stroke-width="4"/><circle cx="465" cy="975" r="27" fill="url(#pb-shine)"/>' +
     '<path d="M122 845 L122 1030 L282 1075 Z" fill="#000" opacity=".3" transform="translate(6 8)" stroke="#000" stroke-width="16" stroke-linejoin="round"/><path d="M122 845 L122 1030 L282 1075 Z" fill="#ff0066" stroke="#fff" stroke-width="16" stroke-linejoin="round"/><path d="M122 845 L122 1030 L282 1075 Z" fill="none" stroke="#c2004e" stroke-width="3" stroke-linejoin="round"/><circle cx="170" cy="1004" r="29" fill="#000" opacity=".3"/><circle cx="170" cy="1000" r="29" fill="#002651"/><circle cx="170" cy="1000" r="24" fill="#1dca62"/><circle cx="170" cy="1000" r="22" fill="none" stroke="#c9a200" stroke-width="4"/><circle cx="170" cy="1000" r="24" fill="url(#pb-shine)"/>' +
     '<path d="M808 845 L808 1030 L648 1075 Z" fill="#000" opacity=".3" transform="translate(6 8)" stroke="#000" stroke-width="16" stroke-linejoin="round"/><path d="M808 845 L808 1030 L648 1075 Z" fill="#ff0066" stroke="#fff" stroke-width="16" stroke-linejoin="round"/><path d="M808 845 L808 1030 L648 1075 Z" fill="none" stroke="#c2004e" stroke-width="3" stroke-linejoin="round"/><circle cx="760" cy="1004" r="29" fill="#000" opacity=".3"/><circle cx="760" cy="1000" r="29" fill="#002651"/><circle cx="760" cy="1000" r="24" fill="#ffd400"/><circle cx="760" cy="1000" r="22" fill="none" stroke="#c9a200" stroke-width="4"/><circle cx="760" cy="1000" r="24" fill="url(#pb-shine)"/>' +
@@ -1608,15 +1609,15 @@
   // raketa ze stavebnice: izometrické kostky v SVG, jedna vrstva = jeden den
   var RK = [
     { w: 2, h: 1, c: '#3b4357' },
-    { w: 4, h: 1.2, c: '#e3242b', fins: 1 },
+    { w: 4, h: 1.2, c: '#ee1d23', fins: 1 },
     { w: 3, h: 1.2, c: '#f2f5fa' },
     { w: 3, h: 1.2, c: '#f2f5fa', win: 1 },
-    { w: 3, h: 0.4, c: '#e3242b' },
-    { w: 3, h: 1.2, c: '#1f5fbf' },
+    { w: 3, h: 0.4, c: '#ee1d23' },
+    { w: 3, h: 1.2, c: '#004996' },
     { w: 3, h: 1.2, c: '#f2f5fa', win: 1 },
-    { w: 3, h: 0.4, c: '#ffcc00' },
-    { w: 2, h: 1.2, c: '#e3242b' },
-    { w: 1, h: 1.2, c: '#e3242b', ant: 1 }
+    { w: 3, h: 0.4, c: '#ffcd00' },
+    { w: 2, h: 1.2, c: '#52c018' },
+    { w: 1, h: 1.2, c: '#ee1d23', ant: 1 }
   ];
   function odstin(hex, f) {
     var n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255, t = f < 0 ? 0 : 255, p = Math.abs(f);
@@ -1640,11 +1641,11 @@
     }
     function okynko(x, z) {
       var p = P(x, 0, z).split(','), a = -K * U * 0.55, b = 0.5 * U * 0.55, d = -U * 0.55;
-      return '<g transform="matrix(' + a.toFixed(2) + ' ' + b.toFixed(2) + ' 0 ' + d.toFixed(2) + ' ' + p[0] + ' ' + p[1] + ')"><circle r="1" fill="#c9d6ea"/><circle r=".72" fill="#0b1f44"/><circle cx="-.25" cy=".25" r=".22" fill="#7fb2ff"/></g>';
+      return '<g transform="matrix(' + a.toFixed(2) + ' ' + b.toFixed(2) + ' 0 ' + d.toFixed(2) + ' ' + p[0] + ' ' + p[1] + ')"><circle r="1" fill="#c9d6ea"/><circle r=".72" fill="#0b093b"/><circle cx="-.25" cy=".25" r=".22" fill="#7fb2ff"/></g>';
     }
     function vrstva(L, z, s) {
       var x0 = -L.w / 2, out = '';
-      var ghost = s === 'missed' ? 'fill="none" stroke="#8a94a8" stroke-width="1.4" stroke-dasharray="4 3"' : s === 'today' ? 'fill="rgba(255,204,0,.22)" stroke="#e0a800" stroke-width="2" stroke-dasharray="5 3"' : 'fill="none" stroke="#1f5fbf" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="3 3"';
+      var ghost = s === 'missed' ? 'fill="none" stroke="#8a94a8" stroke-width="1.4" stroke-dasharray="4 3"' : s === 'today' ? 'fill="rgba(255,204,0,.22)" stroke="#e0a800" stroke-width="2" stroke-dasharray="5 3"' : 'fill="none" stroke="#004996" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="3 3"';
       if (s !== 'open') {
         if (L.fins) out += kvadr(x0 - 1.2, -0.2, z, 1.2, 0.4, L.h, '', ghost) + kvadr(-0.2, x0 - 1.2, z, 0.4, 1.2, L.h, '', ghost);
         out += kvadr(x0, x0, z, L.w, L.w, L.h, '', ghost);
@@ -1654,12 +1655,12 @@
       if (L.fins) out += kvadr(x0 - 1.2, -0.2, z - 0.3, 1.2, 0.4, L.h + 0.3, L.c) + kvadr(-0.2, x0 - 1.2, z - 0.3, 0.4, 1.2, L.h + 0.3, L.c);
       out += kvadr(x0, x0, z, L.w, L.w, L.h, L.c);
       if (L.win) out += okynko(-x0, z + L.h / 2);
-      if (L.ant) out += kvadr(-0.15, -0.15, z + L.h, 0.3, 0.3, 0.9, '#9aa3b5') + '<circle cx="' + P(0, 0, z + L.h + 1.05).split(',')[0] + '" cy="' + P(0, 0, z + L.h + 1.05).split(',')[1] + '" r="3.2" fill="#ffcc00"/>';
+      if (L.ant) out += kvadr(-0.15, -0.15, z + L.h, 0.3, 0.3, 0.9, '#9aa3b5') + '<circle cx="' + P(0, 0, z + L.h + 1.05).split(',')[0] + '" cy="' + P(0, 0, z + L.h + 1.05).split(',')[1] + '" r="3.2" fill="#ffcd00"/>';
       else out += cudliky(x0, x0, z + L.h, L.w, L.c);
       if (L.fins) out += kvadr(-x0, -0.2, z - 0.3, 1.2, 0.4, L.h + 0.3, L.c) + kvadr(-0.2, -x0, z - 0.3, 0.4, 1.2, L.h + 0.3, L.c);
       return out;
     }
-    var s = '<svg class="rk' + (vse ? ' launch' : '') + '" viewBox="0 0 420 400" aria-hidden="true"><defs><pattern id="rk-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1f5fbf" stroke-opacity=".09"/></pattern></defs><rect width="420" height="400" fill="url(#rk-grid)"/>';
+    var s = '<svg class="rk' + (vse ? ' launch' : '') + '" viewBox="0 0 420 400" aria-hidden="true"><defs><pattern id="rk-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#004996" stroke-opacity=".09"/></pattern></defs><rect width="420" height="400" fill="url(#rk-grid)"/>';
     // rampa a věž
     s += '<g stroke="#9aa3b5" stroke-width="3" fill="none"><path d="M78 302V44M110 318V60M78 44l32 16"/><path d="M78 80l32 16M78 120l32 16M78 160l32 16M78 200l32 16M78 240l32 16M78 280l32 16" stroke-width="2"/><path d="M78 80l32 56M78 160l32 56M78 240l32 56" stroke-width="1.5"/><path d="M110 120h52M110 200h46" stroke-width="2.5"/></g>';
     s += kvadr(-3.5, -3.5, -0.5, 7, 7, 0.5, '#c3cad8') + cudliky(-3.5, -3.5, 0, 7, '#c3cad8');
@@ -1670,14 +1671,14 @@
     for (d = 1; d <= RK.length; d++) {
       var st = vse ? 'open' : stavy[d - 1];
       s += '<g class="rk-l ' + st + (padajici === d ? ' drop' : '') + '">' + vrstva(RK[d - 1], z, st) + '</g>';
-      if (padajici === d) { var pc = P(0, 0, z).split(','); kolem = '<ellipse class="rk-ring" cx="' + pc[0] + '" cy="' + pc[1] + '" rx="' + (RK[d - 1].w * U * 0.9) + '" ry="' + (RK[d - 1].w * U * 0.5) + '" fill="none" stroke="#ffcc00" stroke-width="3"/>'; }
+      if (padajici === d) { var pc = P(0, 0, z).split(','); kolem = '<ellipse class="rk-ring" cx="' + pc[0] + '" cy="' + pc[1] + '" rx="' + (RK[d - 1].w * U * 0.9) + '" ry="' + (RK[d - 1].w * U * 0.5) + '" fill="none" stroke="#ffcd00" stroke-width="3"/>'; }
       z += RK[d - 1].h;
     }
     s += kolem + '</g>';
     var hotovo = stavy.filter(function (x) { return x === 'open'; }).length, zbyva = vse ? 0 : RK.length - dnes;
-    s += '<g font-family="JetBrains Mono, monospace" font-weight="700"><rect x="268" y="22" width="134" height="62" rx="10" fill="#0b1f44"/><text x="282" y="42" font-size="10" fill="#7fb2ff" letter-spacing="1.5">ODPOČET</text><text x="282" y="68" font-size="22" fill="#ffcc00">' + (zbyva ? 'T−' + zbyva + (zbyva === 1 ? ' DEN' : zbyva < 5 ? ' DNY' : ' DNÍ') : 'START') + '</text>';
-    s += '<text x="268" y="102" font-size="10.5" fill="#4a5f86">DÍLKY ' + (vse ? RK.length : hotovo) + '/' + RK.length + '</text></g>';
-    s += '<g class="rk-done" font-family="Inter, Arial, sans-serif" text-anchor="middle"><text x="232" y="190" font-size="30" font-weight="900" fill="#0b1f44">Start!</text><text x="232" y="216" font-size="14" font-weight="600" fill="#4a5f86">Nová řada je venku.</text></g>';
+    s += '<g font-family="JetBrains Mono, monospace" font-weight="700"><rect x="268" y="22" width="134" height="62" rx="10" fill="#0b093b"/><text x="282" y="42" font-size="10" fill="#7fb2ff" letter-spacing="1.5">ODPOČET</text><text x="282" y="68" font-size="22" fill="#ffcd00">' + (zbyva ? 'T−' + zbyva + (zbyva === 1 ? ' DEN' : zbyva < 5 ? ' DNY' : ' DNÍ') : 'START') + '</text>';
+    s += '<text x="268" y="102" font-size="10.5" fill="#3d4a7a">DÍLKY ' + (vse ? RK.length : hotovo) + '/' + RK.length + '</text></g>';
+    s += '<g class="rk-done" font-family="Inter, Arial, sans-serif" text-anchor="middle"><text x="232" y="190" font-size="30" font-weight="900" fill="#0b093b">Start!</text><text x="232" y="216" font-size="14" font-weight="600" fill="#3d4a7a">Nová řada je venku.</text></g>';
     return s + '</svg>';
   }
 
@@ -1928,7 +1929,6 @@
     Array.prototype.forEach.call(document.querySelectorAll('button[data-theme]'), function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-theme') === t ? 'true' : 'false'); });
     var vyb = document.querySelector('button.vz-th[data-theme="' + t + '"]');
     if (vyb) {
-      document.getElementById('vz-cap-k').textContent = vyb.getAttribute('data-kat');
       document.getElementById('vz-cap-t').textContent = vyb.getAttribute('aria-label');
       document.getElementById('vz-cap-m').textContent = vyb.getAttribute('data-meta');
       var st = document.getElementById('vz-cap-s'); st.textContent = vyb.getAttribute('data-stitek'); st.hidden = !st.textContent;
@@ -1958,9 +1958,9 @@
     var w = 1000, h = 700, r = rnd(th.length * 7 + 3), s = '', i;
     deco.setAttribute('viewBox', '0 0 ' + w + ' ' + h); deco.setAttribute('preserveAspectRatio', 'none');
     if (th === 'raketa') {
-      for (i = 0; i <= w; i += 50) s += '<path d="M' + i + ' 0V' + h + '" stroke="#1f5fbf" stroke-opacity=".06"/>';
-      for (i = 0; i <= h; i += 50) s += '<path d="M0 ' + i + 'H' + w + '" stroke="#1f5fbf" stroke-opacity=".06"/>';
-      for (i = 0; i < 14; i++) { var px = Math.round(r() * w), py = Math.round(r() * h); s += '<path d="M' + (px - 5) + ' ' + py + 'h10M' + px + ' ' + (py - 5) + 'v10" stroke="#1f5fbf" stroke-opacity=".25" stroke-width="1.5"/>'; }
+      for (i = 0; i <= w; i += 50) s += '<path d="M' + i + ' 0V' + h + '" stroke="#004996" stroke-opacity=".06"/>';
+      for (i = 0; i <= h; i += 50) s += '<path d="M0 ' + i + 'H' + w + '" stroke="#004996" stroke-opacity=".06"/>';
+      for (i = 0; i < 14; i++) { var px = Math.round(r() * w), py = Math.round(r() * h); s += '<path d="M' + (px - 5) + ' ' + py + 'h10M' + px + ' ' + (py - 5) + 'v10" stroke="#004996" stroke-opacity=".25" stroke-width="1.5"/>'; }
     } else if (th === 'fotoskoda' || th === 'snehulak') {
       for (i = 0; i < 80; i++) s += '<circle cx="' + (r() * w).toFixed(0) + '" cy="' + (r() * h).toFixed(0) + '" r="' + (0.8 + r() * 2).toFixed(1) + '" fill="#fff" opacity="' + (0.15 + r() * 0.45).toFixed(2) + '"/>';
     } else if (th === 'zlate') {
