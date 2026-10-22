@@ -22,21 +22,23 @@ def one(s, a, b):
 def switcher(active):
     return ('<!-- INTERNAL: version switcher for comparing the landing page variants. Remove before publishing. -->\n'
             '<nav class="ver-switch" aria-label="Interní přepínač verzí" data-review-id="interni-prepinac-verzi"><span>Interní náhled</span>'
-            '<a href="index.html" data-ver' + (' aria-current="page"' if active == 1 else '') + '>Původní</a>'
-            '<a href="index-v2.html" data-ver' + (' aria-current="page"' if active == 2 else '') + '>Nová</a></nav>\n'
+            '<a href="index-v2.html" data-ver' + (' aria-current="page"' if active == 2 else '') + '>Nová</a>'
+            '<a href="index.html" data-ver' + (' aria-current="page"' if active == 1 else '') + '>Původní</a></nav>\n'
             '<style>.ver-switch{position:fixed;left:14px;bottom:14px;z-index:95;display:flex;align-items:center;gap:4px;padding:4px 4px 4px 12px;border-radius:100px;background:rgba(10,10,10,.88);color:#fff;font:600 12.5px/1 system-ui,Arial,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25)}'
             '.ver-switch span{opacity:.7;margin-right:6px}.ver-switch a{color:#fff;border:0;padding:7px 12px;border-radius:100px}.ver-switch a[aria-current]{background:#fff;color:#0a0a0a}'
             '@media print{.ver-switch{display:none}}</style>\n'
             '<script>document.querySelectorAll(".ver-switch a[data-ver]").forEach(function(a){a.addEventListener("click",function(){a.href=a.getAttribute("href").split("#")[0]+location.hash;});});</script>\n')
 
 
-v1 = src
-if 'class="ver-switch"' not in v1:
-    v1 = one(v1, '\n</body>', '\n' + switcher(1) + '</body>')
+# v2 is the default page (vercel.json rewrites / to it), so the old page is the one kept out of search
+v1 = re.sub(r'<!-- INTERNAL: version switcher[\s\S]*?</script>\n', '', src)
+v1 = one(v1, '\n</body>', '\n' + switcher(1) + '</body>')
+if '<meta name="robots" content="noindex">' not in v1:
+    v1 = re.sub(r'(<title>[^<]*</title>)', r'\1\n<meta name="robots" content="noindex">', v1, count=1)
 open(os.path.join(W, 'index.html'), 'w', encoding='utf-8').write(v1)
 
 s = re.sub(r'<!-- INTERNAL: version switcher[\s\S]*?</script>\n', '', src)
-s = re.sub(r'(<title>[^<]*</title>)', r'\1\n<meta name="robots" content="noindex">', s, count=1)
+s = s.replace('<meta name="robots" content="noindex">\n', '')
 s = one(s, '<link rel="preload" href="fonts/Inter-Variable-latin-ext.woff2"', '<link rel="preload" href="fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>\n<link rel="preload" href="fonts/Inter-Variable-latin-ext.woff2"')
 s = one(s, '\n</head>', '\n' + css + '</head>')
 

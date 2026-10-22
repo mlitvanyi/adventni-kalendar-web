@@ -34,7 +34,8 @@ Poznámka od Michala, 22. 10. 2026. Robí sa oddelene od nových vzhľadov kalen
 ## Stav: interná verzia 2 (22. 10. 2026)
 
 **Súbory a prepínač**
-- `index-v2.html` je vedľa pôvodného `index.html` a má `noindex`. Generuje sa skriptom z `index.html`, takže obsah je rovnaký.
+- `index-v2.html` je vedľa pôvodného `index.html` a generuje sa skriptom z `index.html`, takže obsah je rovnaký.
+- **Nová verzia je predvolená:** `vercel.json` presmeruje `/` na `index-v2.html`. `noindex` má teraz pôvodná `index.html` a v prepínači je „Nová“ prvá.
 - Interný prepínač „Původní / Nová“ je vľavo dole na oboch stránkach a zachová kotvu (`#ukazka` ostane `#ukazka`). Je to blok `.ver-switch` označený `INTERNAL` a pred publikáciou sa zmaže.
 
 **Hlavička a navigácia**
