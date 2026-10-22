@@ -129,6 +129,8 @@ Hand-painted illustrated map of a peaceful Central European summer countryside s
 ---
 
 ## 5. Navyše, pre akýkoľvek e-shop: „Obálky ve tvaru výročí“
+**Stav:** postavené (vzhľad `obalky`, „Deset let, deset obálek“). Stena s interiérom z Higgsfieldu (GPT Image 2.5, high, 2k, 2,75 kreditu, prvý pokus, `img/obalky-stena.webp`). 10 obálok v kóde je poskladaných do čísla 10 nad stoličkou; väčšia obálka = väčší dárok, najväčšia je 10. deň. Otvorenie: chlopňa sa preklopí a vysunie sa kartička. Zmeškaná obálka vybledne. Koniec: všetky otvorené a páska „Děkujeme za 10 let“.
+
 **Klient (anonymne):** e-shop alebo predajňa, ktorá slávi výročie (5, 10, 15 alebo 30 rokov).
 **Príležitosť:** narodeniny firmy. Univerzálny nástupca „Slavíme 30 let“.
 **Dĺžka:** podľa výročia, napr. 15 dní na 15 rokov.

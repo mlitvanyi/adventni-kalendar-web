@@ -230,10 +230,10 @@
   .demo .d-wrap { position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 28px; align-items: start; }
   #demo-stage { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 560px; margin: 0 auto; aspect-ratio: 4 / 5; }
   #demo-stage .scene { margin: 0; max-height: 100%; max-width: calc(100% * var(--sc-ar, 0.8) / 0.8); }
-  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa, .demo .scene.spani, .demo .scene.pas-scene, .demo .scene.chalupa, .demo .scene.vzk-scene { --sc-ar: 0.8; }
+  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa, .demo .scene.spani, .demo .scene.pas-scene, .demo .scene.chalupa, .demo .scene.vzk-scene, .demo .scene.obl-scene { --sc-ar: 0.8; }
   .demo .scene.wardrobe { --sc-ar: 0.8003; }
   .demo .scene.basket { --sc-ar: 1.3333; }
-  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa):not(.spani):not(.pas-scene):not(.chalupa):not(.vzk-scene) { --sc-ar: 0.8056; }
+  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa):not(.spani):not(.pas-scene):not(.chalupa):not(.vzk-scene):not(.obl-scene) { --sc-ar: 0.8056; }
   #demo-stage .grid { width: 100%; align-self: start; }
   .demo .scene.basket { width: 100%; }
   .demo .d-top { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--d-ink-2); min-height: 28px; }
@@ -541,6 +541,40 @@
   @keyframes vzkDone { from { opacity: 0; transform: translateY(10px); } }
   .demo .scene.vzk-scene.finale .vzk-head { opacity: 0; }
   @media (prefers-reduced-motion: reduce) { .demo .vzk-c.drop, .demo .vzk-ghost, .demo .vzk.today, .demo .vzk.just, .demo .vzk-done { animation: none; } }
+  /* téma: Obálky ve tvaru výročí (stěna z Higgsfieldu, obálky v kódu) */
+  .demo[data-theme="obalky"] { --d-bg: #f6f3ee; --d-ink: #2b2523; --d-ink-2: #6d625c; --d-today: #d9343a; --d-today-ink: #fff; --d-btn: #d9343a; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #e7e0d6; }
+  .demo[data-theme="obalky"] .d-title { font-weight: 900; letter-spacing: -0.03em; }
+  .demo[data-theme="obalky"] .d-btn { border-radius: 100px; }
+  .demo[data-theme="obalky"] .d-finale { background: rgba(43,37,35,.82); }
+  .demo .scene.obl-scene { aspect-ratio: 4 / 5; max-width: 480px; background: #ece8e1 url('img/obalky-stena.webp') center / cover no-repeat; perspective: 1400px; }
+  .demo .obl { --e: #d9343a; position: absolute; padding: 0; border: 0; background: none; font: inherit; rotate: var(--rot); filter: drop-shadow(0 6px 6px rgba(60,30,20,.28)); transition: translate .2s ease; cursor: pointer; transform-style: preserve-3d; }
+  .demo .obl:hover { translate: 0 -3px; }
+  .demo .obl > span { position: absolute; display: block; }
+  .demo .obl-back { inset: 0; border-radius: 3px; background: color-mix(in srgb, var(--e) 82%, #000); }
+  .demo .obl-card { left: 8%; right: 8%; top: 10%; bottom: 8%; border-radius: 2px; background: #fffaf3; display: grid !important; place-items: center; color: var(--e); transition: translate .55s cubic-bezier(.3,1.4,.5,1) .25s; }
+  .demo .obl-card svg { width: 46%; max-width: 30px; height: auto; }
+  .demo .obl-front { inset: 0; border-radius: 3px; background: linear-gradient(160deg, color-mix(in srgb, var(--e) 92%, #fff), var(--e)); clip-path: polygon(0 0, 50% 46%, 100% 0, 100% 100%, 0 100%); }
+  .demo .obl-front::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - 1px), rgba(0,0,0,.1) 50%, transparent calc(50% + 1px)) left bottom / 50% 54% no-repeat, linear-gradient(to top left, transparent calc(50% - 1px), rgba(0,0,0,.1) 50%, transparent calc(50% + 1px)) right bottom / 50% 54% no-repeat; }
+  .demo .obl-flap { left: 0; right: 0; top: 0; height: 62%; background: linear-gradient(180deg, color-mix(in srgb, var(--e) 88%, #fff), color-mix(in srgb, var(--e) 94%, #000)); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: 50% 0; transition: transform .5s ease; z-index: 2; }
+  .demo .obl.sirka .obl-flap { height: 70%; }
+  .demo .obl-n { right: 8%; bottom: 7%; z-index: 3; color: #fff; font-family: 'Inter', Arial, sans-serif; font-size: clamp(13px, 1.8vw, 19px); font-weight: 800; line-height: 1; text-shadow: 0 1px 2px rgba(0,0,0,.2); }
+  .demo .obl-clip { left: 50%; top: -6px; z-index: 4; width: 9px; height: 22px; margin-left: -4.5px; border: 2px solid #b89a52; border-radius: 6px; }
+  .demo .obl.open .obl-flap { transform: rotateX(180deg); z-index: 0; filter: brightness(.82); }
+  .demo .obl.open .obl-card { translate: 0 -42%; }
+  .demo .obl.open .obl-clip { display: none; }
+  .demo .obl.locked { --e: #d9343a; }
+  .demo .obl.missed { --e: #c9b3ad; filter: drop-shadow(0 3px 4px rgba(60,30,20,.15)); }
+  .demo .obl.missed .obl-n { text-decoration: line-through; color: #f4ece8; }
+  .demo .obl.today { --e: #e6453b; animation: oblWiggle 2.4s ease-in-out infinite; filter: drop-shadow(0 0 14px rgba(255,190,60,.9)) drop-shadow(0 6px 6px rgba(60,30,20,.3)); }
+  .demo .obl.today .obl-clip { border-color: #e4bd57; }
+  @keyframes oblWiggle { 0%, 70%, 100% { rotate: var(--rot); } 76% { rotate: calc(var(--rot) - 4deg); } 82% { rotate: calc(var(--rot) + 4deg); } 88% { rotate: calc(var(--rot) - 2deg); } 94% { rotate: var(--rot); } }
+  .demo .obl.just .obl-flap { animation: oblFlap .5s ease both; }
+  @keyframes oblFlap { from { transform: rotateX(0); } to { transform: rotateX(180deg); } }
+  .demo .obl.just .obl-card { animation: oblCard .6s cubic-bezier(.3,1.4,.5,1) .35s both; }
+  @keyframes oblCard { from { translate: 0 0; } to { translate: 0 -42%; } }
+  .demo .obl-done { position: absolute; left: 50%; top: 47%; z-index: 5; padding: 8px 22px; translate: -50% 0; rotate: -3deg; background: rgba(227,208,168,.92); color: #5a4126; font-family: 'Inter', Arial, sans-serif; font-size: clamp(14px, 2vw, 20px); font-weight: 800; letter-spacing: .02em; box-shadow: 0 3px 8px rgba(0,0,0,.15); clip-path: polygon(2% 0, 98% 4%, 100% 100%, 0 96%); animation: oblDone .6s .4s ease both; }
+  @keyframes oblDone { from { opacity: 0; translate: -50% -10px; } }
+  @media (prefers-reduced-motion: reduce) { .demo .obl.today, .demo .obl.just .obl-flap, .demo .obl.just .obl-card, .demo .obl-done { animation: none; } .demo .obl-flap, .demo .obl-card { transition: none; } }
 
   /* téma: Sněhulák a sobi (vymyšlené, kreslené) */
   .demo[data-theme="snehulak"] { --d-bg: #0f3d2e; --d-ink: #f4f7ff; --d-ink-2: #bfd5c8; --d-today: #ffd21f; --d-today-ink: #132747; --d-btn: #DA2A49; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: rgba(255,255,255,.08); --d-card-line: rgba(255,255,255,.16); }
@@ -1294,6 +1328,7 @@
         <span class="vz-sep" aria-hidden="true"></span>
         <div class="vz-set" role="group" aria-label="Kdykoli během roku"><span class="vz-k" aria-hidden="true">Kdykoli během roku</span><div class="vz-thumbs">
           <button type="button" class="vz-th" data-theme="harfa" aria-pressed="false" aria-label="Slavíme 30 let" title="Slavíme 30 let" data-kat="Kdykoli během roku" data-meta="Sportovní e‑shop · 30 dní" data-stitek="Skutečná kampaň" data-review-id="demo-vzhled-harfa"><img src="img/nahledy/harfa.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="obalky" aria-pressed="false" aria-label="Deset let, deset obálek" title="Deset let, deset obálek" data-kat="Kdykoli během roku" data-meta="Výročí e‑shopu · 10 dní" data-stitek="Nový návrh" data-review-id="demo-vzhled-obalky"><img src="img/nahledy/obalky.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
           <button type="button" class="vz-th" data-theme="velikonoce" aria-pressed="false" aria-label="Velikonoční kraslice" title="Velikonoční kraslice" data-kat="Kdykoli během roku" data-meta="Zahrada a jaro · 24 dní" data-stitek="" data-review-id="demo-vzhled-velikonoce"><img src="img/nahledy/velikonoce.webp" alt="" width="60" height="75" decoding="async"></button>
           <button type="button" class="vz-th" data-theme="raketa" aria-pressed="false" aria-label="Odpočet ke startu" title="Odpočet ke startu" data-kat="Kdykoli během roku" data-meta="Stavebnice · 10 dní" data-stitek="Nový návrh" data-review-id="demo-vzhled-raketa"><img src="img/nahledy/raketa.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
           <button type="button" class="vz-th" data-theme="spani" aria-pressed="false" aria-label="7 nocí pro spánek" title="7 nocí pro spánek" data-kat="Kdykoli během roku" data-meta="Bytový textil · 7 nocí" data-stitek="Nový návrh" data-review-id="demo-vzhled-spani"><img src="img/nahledy/spani.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
@@ -1878,6 +1913,22 @@
     return h + '<button type="button" class="d-finale" data-review-id="demo-finale">' + T.finale + '</button></div>';
   }
 
+  // Obálky ve tvaru výročí: stěna z Higgsfieldu, obálky v kódu poskládané do čísla 10 (scéna 1000 × 1250)
+  var OBALKY = [[188, 112, 102, 66, -16], [304, 77, 94, 110, 2], [492, 70, 246, 88, -1], [449, 176, 98, 139, 1.5], [691, 176, 98, 139, -2], [304, 201, 94, 146, -1], [449, 329, 98, 124, -1], [691, 329, 98, 124, 2], [304, 362, 94, 175, 1], [492, 464, 246, 95, -1]];
+  DARKY.obalky = seznam([['sleva', 'Výroční sleva 10 %'], ['doprava', 'Doprava zdarma'], ['darek', 'Dárek k objednávce'], ['sleva', 'Sleva 20 % na bestsellery'], ['akce', 'Výroční akce 2 + 1'], ['prodejna', 'Poradenství zdarma na prodejně'], ['sleva', 'Sleva 15 % na novinky'], ['doprava', 'Doprava zdarma'], ['darek', 'Překvapení pro věrné zákazníky'], ['sleva', 'Sleva 30 % na celý nákup']], 10, 'VY');
+  TEMATA.obalky = { dni: 10, dnes: 6, layout: 'obalky', top: '', eyebrow: 'Výročí e‑shopu · 10 let', t: 'Deset let, deset obálek', l: 'Na' + NB + 'stěně visí obálky poskládané do' + NB + 'čísla našeho výročí. Každý den otevřete jednu. Čím větší obálka, tím větší dárek. Ta největší čeká desátý den.', btn: 'Otevřít dnešní obálku', den: 'obálka', tip: 'Klikněte na' + NB + 'obálku, která se' + NB + 'třese, a' + NB + 'otevřete ji.', finale: 'Ukázat 10. den: všechny obálky', odkryto: { 1: true, 2: true, 3: true, 5: true },
+    umi: ['Otevřít jde jen <strong>dnešní obálku</strong>. Propásnutá zůstane zavřená a vybledne.', 'Tvar podle výročí: <strong>10 let, 10 obálek</strong>, ale i' + NB + '5, 15 nebo 30. Větší obálka znamená větší dárek.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba na' + NB + 'prodejně, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] };
+  function obalkyHTML() {
+    var T = TEMATA.obalky, D = DARKY.obalky, d, h = '<div class="scene obl-scene' + (finale ? ' finale' : '') + '" role="group" aria-label="Obálky kalendáře">';
+    for (d = 1; d <= T.dni; d++) {
+      var o = OBALKY[d - 1], st = stav(d);
+      h += '<button type="button" class="obl ' + st + (padajici === d ? ' just' : '') + (o[2] > 200 ? ' sirka' : '') + '" data-den="' + d + '" data-review-id="demo-obalka-' + d + '" aria-label="Obálka ' + d + ': ' + popisek(st) + '" style="left:' + (o[0] / 10) + '%;top:' + (o[1] / 12.5) + '%;width:' + (o[2] / 10) + '%;height:' + (o[3] / 12.5) + '%;--rot:' + o[4] + 'deg">' +
+        '<span class="obl-back"></span><span class="obl-card">' + (st === 'open' ? ICO[D[d - 1].typ] : '') + '</span><span class="obl-front"></span><span class="obl-flap"></span><span class="obl-n">' + d + '</span><span class="obl-clip"></span></button>';
+    }
+    if (finale) h += '<div class="obl-done" aria-hidden="true">Děkujeme za 10 let</div>';
+    return h + '<button type="button" class="d-finale" data-review-id="demo-finale">' + T.finale + '</button></div>';
+  }
+
   // Víkendy na chalupě: malovaná mapa z Higgsfieldu (1792 × 2240), trasa, špendlíky a turista v kódu; 1 okénko = 1 víkend
   var OKNA_CH = { 1: [594, 1826, 347, 246], 2: [134, 1378, 918, 302], 3: [806, 1154, 314, 123], 4: [930, 918, 235, 112], 5: [538, 638, 246, 224], 6: [918, 314, 560, 426], 7: [627, 213, 134, 190], 8: [941, 18, 90, 150] };
   // the sandy footpath in the painting, bottom to top (image px); stops snap to its nearest point
@@ -2010,6 +2061,7 @@
     var T = TEMATA[tema], D = DARKY[tema], s, d, html = '';
     if (T.layout === 'pas') html = pasHTML();
     else if (T.layout === 'vzorky') html = vzorkyHTML();
+    else if (T.layout === 'obalky') html = obalkyHTML();
     else if (T.layout === 'raketa') {
       var stavy = [];
       for (d = 1; d <= T.dni; d++) stavy.push(stav(d));
@@ -2054,6 +2106,7 @@
     if (nove) for (i = 0; i < 18; i++) { var a = i / 18 * Math.PI * 2, r = 120 + (i % 3) * 40; fx += '<i class="dc-fx" style="--x:' + Math.round(Math.cos(a) * r) + 'px;--y:' + Math.round(Math.sin(a) * r * 0.8) + 'px;--r:' + (i * 47 % 360) + 'deg;background:' + barvy[i % 4] + '"></i>'; }
     var zbyva = T.dni - d, pozn;
     if (tema === 'raketa') pozn = zbyva ? 'Dílek ' + d + ' je na' + NB + 'raketě. Do' + NB + 'startu ' + (zbyva === 1 ? 'zbývá 1' + NB + 'dílek.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'dílky.' : 'zbývá ' + zbyva + NB + 'dílků.') : 'Raketa je kompletní. Start!';
+    else if (tema === 'obalky') pozn = zbyva ? 'Obálka ' + d + ' je otevřená. Do' + NB + 'té největší zbývá ' + dni(zbyva) + '.' : 'Všech deset obálek otevřeno. Děkujeme za' + NB + '10' + NB + 'let!';
     else if (tema === 'vzorky') pozn = zbyva ? 'Látka ' + VZORKY[d - 1][0] + ' je na' + NB + 'pohovce. Do' + NB + 'otevření archivu zbývá ' + dni(zbyva) + '.' : 'Archiv je otevřený. Přijďte si vybrat svůj kousek.';
     else if (tema === 'chalupa') pozn = zbyva ? 'Turista došel k' + NB + 'zastávce ' + d + '. Do' + NB + 'rozhledny zbývá ' + (zbyva === 1 ? '1' + NB + 'víkend.' : zbyva < 5 ? zbyva + NB + 'víkendy.' : zbyva + NB + 'víkendů.') : 'Rozhledna dobyta. Víkend pro dva za' + NB + 'polovic je váš.';
     else if (tema === 'pas') pozn = zbyva ? 'Razítko prodejny na' + NB + 'hranici ' + PAS[d - 1] + ' je v' + NB + 'pasu. Do' + NB + 'plného pasu zbývá ' + dni(zbyva) + ', čtrnáctý den čeká velký cestovní koš.' : 'Pas je plný. Velký cestovní koš je váš.';
