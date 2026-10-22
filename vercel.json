@@ -3,10 +3,10 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": ".",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
-      "destination": "/index-v2.html"
+      "src": "/",
+      "dest": "/index-v2.html"
     }
   ]
 }

@@ -30,7 +30,7 @@ def switcher(active):
             '<script>document.querySelectorAll(".ver-switch a[data-ver]").forEach(function(a){a.addEventListener("click",function(){a.href=a.getAttribute("href").split("#")[0]+location.hash;});});</script>\n')
 
 
-# v2 is the default page (vercel.json rewrites / to it), so the old page is the one kept out of search
+# v2 is the default page (a vercel.json route serves it at /), so the old page is the one kept out of search
 v1 = re.sub(r'<!-- INTERNAL: version switcher[\s\S]*?</script>\n', '', src)
 v1 = one(v1, '\n</body>', '\n' + switcher(1) + '</body>')
 if '<meta name="robots" content="noindex">' not in v1:
