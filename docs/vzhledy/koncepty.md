@@ -21,6 +21,19 @@ Pracovný dokument na spoločnú revíziu. Nič z toho sa zatiaľ negenerovalo.
 - **Čísla a texty kreslí kód, nikdy obrázok.** Prompt vždy chce prázdne plochy bez textu, aby sedel jazyk, počet a súradnice.
 - **Pohyb je v kóde (CSS/SVG)** nad obrázkom, ako hojdajúce sa vajíčko pri Veľkej noci. Rešpektuje `prefers-reduced-motion`.
 
+## Kód, alebo Higgsfield?
+Rozhoduje, čo sa má hýbať a ako presne musí sedieť počet okienok. **Všetko, čo sa skladá, otvára alebo počíta, kreslí kód (SVG/CSS).** Každý kus je samostatný prvok, dá sa animovať a presne sedí na počet dní aj farby klienta. Higgsfield je len tam, kde rozhoduje fotografická atmosféra a obraz je pozadie, nad ktorým kód kreslí okienka.
+
+| # | Koncept | Médium | Prečo |
+|---|---|---|---|
+| 1 | Odpočet ke startu (stavebnica) | **celé v kóde** | raketa sa skladá z kociek, každá kocka je samostatný SVG prvok, ktorý dopadne a zacvakne |
+| 2 | 7 nocí pro lepší spánek | Higgsfield foto + kódová vrstva (mesiac, para, záclona) | atmosféra spálne je fotografická |
+| 3 | Cestovní pas | Higgsfield flat lay + razítka a listovanie v kóde | razítka musia niesť texty a dopadať |
+| 4 | Víkendy na chalupě | Higgsfield mapa + trasa a pochodujúca bodka v kóde | maľovaná krajina, presná trasa |
+| 5 | Obálky ve tvaru výročí | Higgsfield stena + obálky v kóde | tvar čísla a počet sa mení podľa klienta |
+
+**Latka kvality:** každý koncept má jednu myšlienku, ktorá má začiatok a koniec. Napríklad pri rakete: odpočet, ku ktorému každý deň pribudne dielik, a na konci štart. Otvorenie okienka má byť fyzický zážitok (dopad, vysunutie, razítko), po ktorom príde karta odmeny s kódom. Prepínanie, mobil, klávesnica a `prefers-reduced-motion` musia fungovať ako hotový nástroj, nie ako statický obrázok.
+
 ## Higgsfield: spoločné nastavenie
 - Model: **GPT Image 2.5** (`gpt_image_2_5`, variant `flare`), `quality: high`, `resolution: 2k`. Dobre drží kompozíciu, počty objektov aj fotoreál a vie editovať s referenciou, keď treba niečo opraviť.
 - Pomer strán: **4:5** (demo plocha je 4:5, max 560 px). Pri širokej kompozícii 5:4.
@@ -33,23 +46,18 @@ Pracovný dokument na spoločnú revíziu. Nič z toho sa zatiaľ negenerovalo.
 
 ---
 
-## 1. Hračky / stavebnice: „Postav si to s námi“ ⭐ úplne iný layout
+## 1. Hračky / stavebnice: „Odpočet ke startu“ ⭐ úplne iný layout, celé v kóde
 **Klient (anonymne):** predajňa hračiek a stavebníc. Typ Sparkys alebo predajca, ktorý má sezónu stavebníc.
-**Príležitosť:** uvedenie novej série stavebníc / letné prázdniny.
-**Dĺžka:** 10 dní, 10. deň je hlavná výhra.
+**Príležitosť:** štart novej série stavebníc.
+**Dĺžka:** 10 dní, čo je odpočet T−10 až T−1.
 
-**Čím je iný:** nie je to obrázok s okienkami na ploche. Vľavo (na mobile hore) stojí **model, ktorý sa skladá zdola nahor**. Každý otvorený deň odhalí ďalší „poschodový“ výsek modelu. Neodhalená časť je modrotlačový náčrt: polopriehľadná, modro tónovaná a s mriežkou, ako stavebný plán. Vpravo (na mobile dole) je **rad 10 dielikov**, čo sú samotné okienka (kocky s „čudlíkmi“).
-**Ako to otvorí:** dielik vyskočí, preletí k modelu a zacvakne. Ďalší pás modelu sa z náčrtu „vyfarbí“ (clip-path animácia). Potom sa ukáže karta odmeny.
-**Prečo je to zvládnuteľné:** stačí jeden obrázok hotového modelu. Postup skladania je len orez `clip-path: inset()` po 10 pásoch a náčrt je ten istý obrázok s CSS filtrom.
+**Myšlienka:** na odpaľovacej rampe stojí plán rakety. Každý deň zákazník odkryje jeden dielik: kocka dopadne na model, zacvakne a k nej príde dárok. Zmeškaný deň v modeli chýba a ostane len čiarkovaný obrys, čo je dôvod chodiť každý deň. Desiaty deň je raketa celá a odštartuje, rovnako ako nová séria.
 
-**Odmeny (10):** −10 % na stavebnice · doprava zdarma · minifigúrka k nákupu · −15 % na novú sériu · stavebný workshop v predajni · 2+1 na sáčky dielikov · dvojnásobné body · −20 % víkend · darček k nákupu nad 1 500 Kč · **10. deň: súťaž o celý model**
-**Farby:** svetlé pozadie `#f4f7fb`, modrotlač `#1f5fbf`, akcent žltá `#ffcc00` a červená `#e3242b`. Font: Inter 900.
-**Body „Co umí“:** postupné odhaľovanie výhry · hlavná cena posledný deň · nová séria v hlavnej úlohe · pozvánka do predajne.
+**Čím je iný:** namiesto obrázka s okienkami je tu modrotlačový plán. Model rakety rastie zdola nahor a okienka sú rad desiatich kociek pod ním. Na displeji svieti „Start za X dny“.
+**Médium:** izometrické kocky s čudlíkmi v SVG, bez Higgsfieldu.
 
-**Prompt:**
-```
-Studio product render of a single large, intricate toy building-brick model of a whimsical lighthouse on a small rocky island with a tiny harbour house, built from generic plastic interlocking bricks (no brand, no logos, no minifigure faces), standing upright and centered, seen from a slight 3/4 front angle. The model is tall and roughly evenly layered from base to top so it can be read as ten horizontal building stages. Bright cheerful colours: primary red, sunny yellow, sky blue and white bricks, glossy plastic with subtle stud highlights. Clean seamless light grey-blue studio background (#f4f7fb), soft large softbox lighting, gentle contact shadow, no props, no text, no numbers, no packaging. Crisp detail, high-end toy catalogue photography, vertical 4:5 composition with generous empty space above and below the model.
-```
+**Odmeny (10):** −10 % na stavebnice · doprava zdarma · minifigúrka k nákupu · −15 % na novú sériu · stavanie s nami v predajni · sáčky dielikov 2+1 · −20 % nad 1 000 Kč · doprava zdarma · plagát novej série · **10. deň: −25 % na celú novú sériu**
+**Farby:** plánový papier `#eef3fb`, modrotlač `#1f5fbf`, červená `#e3242b`, žltá `#ffcc00`. Font: Inter 900, JetBrains Mono na displej.
 
 ---
 
@@ -150,6 +158,6 @@ Je to čisté SVG/CSS, bez Higgsfieldu a bez videa.
 - Slot na obrázok alebo produkt klienta v karte odmeny, nielen ikona.
 
 ## Otázky na spoločnú revíziu
-1. Ktorý koncept má mať **úplne iný layout**: 1 (stavebnica) alebo 3 (pas)? Odporúčam 1, je lacnejší (jeden obrázok) a efektnejší.
+1. Úplne iný layout má koncept 1 (raketa, celá v kóde). Je to prvý postavený vzhľad a nastavuje latku kvality pre ostatné.
 2. Je v poriadku hybrid v koncepte 5 (pozadie z Higgsfieldu, obálky v kóde)?
 3. Poradie generovania: navrhujem 1 → 4 → 2 → 3 → 5.

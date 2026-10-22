@@ -193,10 +193,10 @@
   .demo .d-wrap { position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 28px; align-items: start; }
   #demo-stage { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 560px; margin: 0 auto; aspect-ratio: 4 / 5; }
   #demo-stage .scene { margin: 0; max-height: 100%; max-width: calc(100% * var(--sc-ar, 0.8) / 0.8); }
-  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg { --sc-ar: 0.8; }
+  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa { --sc-ar: 0.8; }
   .demo .scene.wardrobe { --sc-ar: 0.8003; }
   .demo .scene.basket { --sc-ar: 1.3333; }
-  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket) { --sc-ar: 0.8056; }
+  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa) { --sc-ar: 0.8056; }
   #demo-stage .grid { width: 100%; align-self: start; }
   .demo .scene.basket { width: 100%; }
   .demo .d-top { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--d-ink-2); min-height: 28px; }
@@ -252,6 +252,71 @@
   .demo .win.today .b { background: #ffd21f; color: #14204a; }
   @keyframes glow { 50% { box-shadow: 0 0 0 3px #ffd21f, 0 0 10px 2px rgba(255,210,31,.4); } }
   @media (prefers-reduced-motion: reduce) { .demo .door.today, .demo .win.today { animation: none; } }
+
+  /* interakce: otevření okénka, karta dárku */
+  .demo .win, .demo .door, .demo .dil { cursor: pointer; }
+  .demo .win:focus-visible, .demo .door:focus-visible, .demo .dil:focus-visible, .demo .d-btn:focus-visible { outline: 3px solid var(--d-today); outline-offset: 3px; }
+  .demo .d-btn { cursor: pointer; }
+  .demo .door.just, .demo .scene:not(.basket):not(.wardrobe) .win.just { animation: dOdkryt .6s cubic-bezier(.3,1.3,.5,1) both; }
+  @keyframes dOdkryt { 0% { transform: perspective(500px) rotateY(0) scale(1); } 40% { transform: perspective(500px) rotateY(-75deg) scale(1.08); } 100% { transform: perspective(500px) rotateY(0) scale(1); } }
+  .demo .shake { animation: dShake .45s ease both; }
+  @keyframes dShake { 20% { translate: -4px 0; } 40% { translate: 4px 0; } 60% { translate: -3px 0; } 80% { translate: 2px 0; } }
+  .demo .d-reveal { position: absolute; inset: 0; z-index: 20; background: rgba(8,14,32,.42); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+  .demo .d-reveal[hidden] { display: none; }
+  .demo .d-card { position: absolute; left: var(--cx, 50%); top: var(--cy, 50%); translate: -50% -50%; width: min(calc(100% - 32px), 360px); background: #fff; color: #14204a; border-radius: 20px; padding: 26px 24px 22px; text-align: center; box-shadow: 0 30px 70px rgba(0,0,0,.35); font-family: 'Inter', 'Inter Fallback', Arial, sans-serif; animation: dcIn .55s cubic-bezier(.2,1.35,.4,1) both; }
+  .demo .d-card::before { content: ""; position: absolute; left: 50%; top: -9px; width: 64px; height: 18px; translate: -50% 0; border-radius: 0 0 10px 10px; background: var(--d-today); }
+  @keyframes dcIn { 0% { opacity: 0; transform: translateY(60px) scale(.86) rotate(-3deg); } 100% { opacity: 1; transform: none; } }
+  .demo .dc-x { position: absolute; right: 10px; top: 10px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #f1f3f8; color: #14204a; font-size: 20px; line-height: 1; cursor: pointer; }
+  .demo .dc-ico { width: 64px; height: 64px; margin: 4px auto 12px; border-radius: 18px; display: grid; place-items: center; background: var(--d-today); color: var(--d-today-ink); }
+  .demo .dc-ico svg { width: 32px; height: 32px; }
+  .demo .dc-k { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: #5d6785; }
+  .demo .dc-t { font-family: var(--d-font); font-size: 24px; line-height: 1.15; font-weight: 800; margin: 6px 0 14px; color: #14204a; }
+  .demo .dc-code { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 2px dashed #c9d0e2; border-radius: 12px; padding: 8px 8px 8px 14px; margin-bottom: 14px; }
+  .demo .dc-code code { font-family: var(--mono); font-size: 17px; font-weight: 700; letter-spacing: .06em; color: #14204a; }
+  .demo .dc-copy { border: 0; border-radius: 8px; padding: 8px 12px; background: #14204a; color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .demo .dc-cta { display: block; width: 100%; border: 0; border-radius: 100px; padding: 13px 18px; background: var(--d-btn); color: var(--d-btn-ink); font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; }
+  .demo .dc-note { font-size: 12.5px; color: #5d6785; margin: 12px 0 0; }
+  .demo .dc-again { border: 0; background: none; padding: 0; margin-top: 10px; font: inherit; font-size: 12.5px; color: #5d6785; text-decoration: underline; cursor: pointer; }
+  .demo .dc-fx { position: absolute; left: var(--cx, 50%); top: var(--cy, 50%); width: 9px; height: 5px; border-radius: 2px; pointer-events: none; animation: dcFx .95s cubic-bezier(.15,.7,.3,1) both; }
+  @keyframes dcFx { 0% { opacity: 1; transform: translate(-50%,-50%) scale(.3); } 100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)) scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .demo .d-card, .demo .dc-fx, .demo .shake, .demo .door.just, .demo .win.just { animation: none !important; } .demo .dc-fx { display: none; } }
+
+  /* téma: Odpočet ke startu (stavebnice, kreslené v kódu) */
+  .demo[data-theme="raketa"] { --d-bg: #eef3fb; --d-ink: #0b1f44; --d-ink-2: #4a5f86; --d-today: #ffcc00; --d-today-ink: #0b1f44; --d-btn: #e3242b; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #d3deef; }
+  .demo[data-theme="raketa"] .d-title { font-weight: 900; letter-spacing: -0.035em; }
+  .demo .scene.raketa { aspect-ratio: 4 / 5; max-width: 480px; display: flex; flex-direction: column; background: #f8fbff; border: 1px solid #d3deef; box-shadow: 0 16px 40px rgba(11,31,68,.16); }
+  .demo .scene.raketa .rk { display: block; width: 100%; flex: 1 1 auto; min-height: 0; }
+  .demo .rk .rk-l { transform-box: view-box; }
+  .demo .rk .rk-l.today { animation: rkHint 1.6s ease-in-out infinite; }
+  @keyframes rkHint { 50% { opacity: .35; } }
+  .demo .rk .rk-l.drop { animation: rkDrop .7s cubic-bezier(.3,1.5,.55,1) both; }
+  @keyframes rkDrop { 0% { transform: translateY(-150px); opacity: 0; } 55% { opacity: 1; } 100% { transform: none; opacity: 1; } }
+  .demo .rk .rk-ring { transform-box: fill-box; transform-origin: center; animation: rkRing .7s .45s ease-out both; }
+  @keyframes rkRing { 0% { opacity: .8; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.6); } }
+  .demo .rk .rk-flame { opacity: 0; transform-box: fill-box; transform-origin: 50% 0; }
+  .demo .rk.launch .rk-flame { opacity: 1; animation: rkFlame .12s linear infinite alternate; }
+  @keyframes rkFlame { to { transform: scaleY(1.25) scaleX(.9); } }
+  .demo .rk.launch .rk-ship { animation: rkLift 3s cubic-bezier(.5,0,.8,.4) .5s both; }
+  @keyframes rkLift { 0% { transform: translate(0,0); } 6% { transform: translate(-1.5px,0); } 12% { transform: translate(1.5px,0); } 18% { transform: translate(0,0); } 100% { transform: translate(0,-460px); } }
+  .demo .rk .rk-smoke circle { opacity: 0; }
+  .demo .rk.launch .rk-smoke circle { animation: rkSmoke 2.4s ease-out both; }
+  @keyframes rkSmoke { 0% { opacity: 0; transform: scale(.2); } 20% { opacity: .9; } 100% { opacity: 0; transform: scale(1.8); } }
+  .demo .rk .rk-done { opacity: 0; }
+  .demo .rk.launch .rk-done { animation: rkDone .6s 2.6s ease both; }
+  @keyframes rkDone { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .demo .rk-dily { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 8px; padding: 4px 16px 14px; }
+  .demo .dil { position: relative; aspect-ratio: 2 / 1.15; border: 0; border-radius: 4px; padding: 0; font: inherit; font-weight: 900; font-size: clamp(13px, 1.6vw, 17px); color: #fff; background: var(--c, #1f5fbf); box-shadow: inset 0 -5px 0 rgba(0,0,0,.18), 0 3px 6px rgba(11,31,68,.18); display: flex; align-items: center; justify-content: center; gap: 4px; transition: transform .15s ease; }
+  .demo .dil::before, .demo .dil::after { content: ""; position: absolute; top: -6px; width: 26%; height: 7px; border-radius: 3px 3px 0 0; background: inherit; box-shadow: inset 0 2px 0 rgba(255,255,255,.35); }
+  .demo .dil::before { left: 13%; } .demo .dil::after { right: 13%; }
+  .demo .dil:hover { transform: translateY(-2px); }
+  .demo .dil svg { width: 15px; height: 15px; }
+  .demo .dil.locked, .demo .dil.missed { background: transparent; color: #4a5f86; box-shadow: none; outline: 2px dashed rgba(31,95,191,.45); outline-offset: -2px; }
+  .demo .dil.locked::before, .demo .dil.locked::after, .demo .dil.missed::before, .demo .dil.missed::after { background: transparent; box-shadow: none; outline: 2px dashed rgba(31,95,191,.35); outline-offset: -2px; }
+  .demo .dil.missed { color: #8a94a8; text-decoration: line-through; outline-color: rgba(138,148,168,.6); }
+  .demo .dil.today { background: #ffcc00; color: #0b1f44; animation: rkPulse 1.6s ease-in-out infinite; }
+  @keyframes rkPulse { 50% { box-shadow: inset 0 -5px 0 rgba(0,0,0,.12), 0 0 0 6px rgba(255,204,0,.35); } }
+  .demo .rk-start { align-self: center; margin: -4px 0 10px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; color: #1f5fbf; text-decoration: underline; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .demo .rk .rk-l.today, .demo .rk .rk-l.drop, .demo .rk .rk-ring, .demo .dil.today, .demo .rk.launch .rk-ship, .demo .rk.launch .rk-flame { animation: none; } .demo .rk.launch .rk-done { animation: none; opacity: 1; } }
 
   /* téma: Sněhulák a sobi (vymyšlené, kreslené) */
   .demo[data-theme="snehulak"] { --d-bg: #0f3d2e; --d-ink: #f4f7ff; --d-ink-2: #bfd5c8; --d-today: #ffd21f; --d-today-ink: #132747; --d-btn: #DA2A49; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: rgba(255,255,255,.08); --d-card-line: rgba(255,255,255,.16); }
@@ -1006,6 +1071,7 @@
       <div class="seg" role="group" aria-labelledby="lbl-jindy">
         <button type="button" data-theme="harfa" aria-pressed="false" data-review-id="demo-vzhled-harfa"><i style="background:#4ead9e"></i>Slavíme 30 let</button>
         <button type="button" data-theme="velikonoce" aria-pressed="false" data-review-id="demo-vzhled-velikonoce"><i style="background:#8bc34a"></i>Velikonoce</button>
+        <button type="button" data-theme="raketa" aria-pressed="false" data-review-id="demo-vzhled-raketa"><i style="background: linear-gradient(135deg,#e3242b 50%,#1f5fbf 50%)"></i>Odpočet ke startu</button>
       </div>
     </div>
     <div class="grp device"><span class="lbl" id="lbl-zarizeni">Zobrazení</span>
@@ -1030,7 +1096,7 @@
             <div class="k">Dnešní dárek · den <span id="demo-today-n">7</span></div>
             <div class="t" id="demo-today-t">Překvapení čeká</div>
             <div class="cd">Zmizí za <span id="demo-cd">--:--:--</span></div>
-            <span class="d-btn" id="demo-today-btn" aria-hidden="true">Odkrýt dnešní dárek</span>
+            <button type="button" class="d-btn" id="demo-today-btn">Odkrýt dnešní dárek</button>
           </div>
         </div>
 <div class="d-umi" data-review-id="kalendar-umi">
@@ -1049,6 +1115,7 @@
       <div id="demo-stage"></div>
     </div>
     <div class="d-toast" id="demo-toast" role="status" aria-live="polite"></div>
+    <div class="d-reveal" id="demo-reveal" hidden></div>
   </div>
   </div>
   <p class="demo-note">Celý kalendář je responzivní: přepněte na Mobil a uvidíte ho tak, jak ho uvidí zákazník v telefonu.</p>
@@ -1310,6 +1377,7 @@
     vyroci: seznam([['sleva', 'Výroční sleva 10 %'], ['doprava', 'Doprava zdarma'], ['sleva', 'Sleva 20 % na bestsellery'], ['darek', 'Dárek pro věrné zákazníky'], ['akce', 'Výroční edice v akci'], ['prodejna', 'Poradenství zdarma na prodejně'], ['sleva', 'Kousek z roku 2016 za tehdejší cenu'], ['sleva', 'Sleva 25 % na novou kolekci']], 24, 'VY'),
     sever: seznam([['doprava', 'Doprava zdarma'], ['sleva', 'Sleva 20 % na svetry'], ['sleva', 'Sleva 15 % na značku měsíce'], ['akce', 'Druhý kus za polovic'], ['darek', 'Ponožky k nákupu'], ['sleva', 'Hero produkt za vánoční cenu'], ['prodejna', 'Balení dárků zdarma'], ['sleva', 'Sleva 25 % na doplňky']], 24, 'NO')
   };
+  DARKY.raketa = seznam([['sleva', 'Sleva 10 % na stavebnice'], ['doprava', 'Doprava zdarma'], ['darek', 'Minifigurka k nákupu'], ['sleva', 'Sleva 15 % na novou řadu'], ['prodejna', 'Stavění s námi na prodejně'], ['akce', 'Sáčky dílků 2 + 1 zdarma'], ['sleva', 'Sleva 20 % na stavebnice nad 1 000 Kč'], ['doprava', 'Doprava zdarma'], ['darek', 'Plakát nové řady k objednávce'], ['sleva', 'Sleva 25 % na celou novou řadu']], 10, 'RK');
   // souřadnice oken na ilustraci domu (z návrhu kampaně, obrázek 1856 × 2304)
   var OKNA = {1:[868,1577,117,168],2:[868,915,117,185],3:[619,915,172,185],4:[625,1232,152,211],5:[1294,1522,155,196],6:[1278,555,169,229],7:[392,555,171,229],8:[619,1521,144,197],9:[1081,1232,151,211],10:[1137,1970,271,226],11:[1070,555,169,229],12:[880,605,101,179],13:[1280,915,168,185],14:[1091,1523,143,195],15:[867,1268,118,134],16:[627,555,171,229],17:[437,1970,271,226],18:[1290,1231,158,212],19:[405,1231,153,212],20:[864,1978,119,222],21:[1068,915,172,185],22:[402,915,168,185],23:[400,1520,157,198],24:[789,246,276,144]};
   var OKNA_SN = {1:[398,262,56,56],2:[546,262,56,56],3:[470,198,60,60],4:[420,535,70,70],5:[510,535,70,70],6:[420,630,70,70],7:[510,630,70,70],8:[465,712,70,70],9:[362,842,76,76],10:[462,830,76,76],11:[562,842,76,76],12:[354,937,76,76],13:[462,937,76,76],14:[570,937,76,76],15:[407,1032,76,76],16:[517,1032,76,76],17:[202,628,60,60],18:[110,876,80,80],19:[738,628,60,60],20:[810,876,80,80],21:[46,1140,70,70],22:[232,1160,70,70],23:[698,1160,70,70],24:[884,1140,70,70]};
@@ -1419,14 +1487,93 @@
     velikonoce: { dni: 24, layout: 'scene', top: '', eyebrow: 'Velikonoce · 24' + NB + 'dní', t: 'Velikonoční kraslice', l: 'Každý den odkryjete jeden ornament na' + NB + 'kraslici. Otevřít jde jen ten dnešní.', btn: 'Odkrýt dnešní dárek', den: 'okénko' },
     narozeniny: { dni: 20, layout: 'scene', top: '', eyebrow: 'Narozeniny · 20 dní oslav', t: 'Slavíme 50' + NB + 'let!', l: 'Padesát let s' + NB + 'vámi. Každá svíčka a' + NB + 'každé patro dortu skrývá jedno okénko.', btn: 'Odkrýt dnešní dárek', den: 'okénko' },
     vyroci: { dni: 10, layout: 'grid', top: '', eyebrow: 'Výročí · 10 let, 10 dnů', t: '10' + NB + 'let s' + NB + 'vámi', l: 'Deset let, deset tisíc objednávek. Děkujeme každý den jedním dárkem.', btn: 'Odkrýt dnešní dárek', den: 'okénko' },
-    sever: { dni: 24, layout: 'grid', top: '', eyebrow: 'Vaše značka · advent 2026', t: 'Útulné Vánoce', l: 'Každý den jedno okénko a' + NB + 'jeden důvod udělat si radost.', btn: 'Odkrýt dnešní dárek', den: 'okénko' }
+    sever: { dni: 24, layout: 'grid', top: '', eyebrow: 'Vaše značka · advent 2026', t: 'Útulné Vánoce', l: 'Každý den jedno okénko a' + NB + 'jeden důvod udělat si radost.', btn: 'Odkrýt dnešní dárek', den: 'okénko' },
+    raketa: { dni: 10, layout: 'raketa', top: '', eyebrow: 'Hračky a stavebnice · nová řada', t: 'Odpočet ke startu', l: 'Deset dní, deset dílků. Každý den přidáte na' + NB + 'raketu jeden dílek a' + NB + 'k' + NB + 'němu dostanete dárek. Desátý den je raketa celá a' + NB + 'startuje s' + NB + 'ní nová řada stavebnic.', btn: 'Přidat dnešní dílek', den: 'dílek', odkryto: { 1: true, 2: true, 3: true, 5: true, 6: true },
+      umi: ['Otevřít jde jen <strong>dnešní dílek</strong>. Propásnutý v' + NB + 'raketě chybí, budoucí jsou zatím jen v' + NB + 'plánu.', 'Délka podle kampaně: <strong>10 dní</strong>, 4 týdny nebo celý advent. Poslední den nejvyšší dárek.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba na' + NB + 'prodejně, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] }
   };
+
+  // raketa ze stavebnice: izometrické kostky v SVG, jedna vrstva = jeden den
+  var RK = [
+    { w: 2, h: 1, c: '#3b4357' },
+    { w: 4, h: 1.2, c: '#e3242b', fins: 1 },
+    { w: 3, h: 1.2, c: '#f2f5fa' },
+    { w: 3, h: 1.2, c: '#f2f5fa', win: 1 },
+    { w: 3, h: 0.4, c: '#e3242b' },
+    { w: 3, h: 1.2, c: '#1f5fbf' },
+    { w: 3, h: 1.2, c: '#f2f5fa', win: 1 },
+    { w: 3, h: 0.4, c: '#ffcc00' },
+    { w: 2, h: 1.2, c: '#e3242b' },
+    { w: 1, h: 1.2, c: '#e3242b', ant: 1 }
+  ];
+  function odstin(hex, f) {
+    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255, t = f < 0 ? 0 : 255, p = Math.abs(f);
+    return 'rgb(' + Math.round(r + (t - r) * p) + ',' + Math.round(g + (t - g) * p) + ',' + Math.round(b + (t - b) * p) + ')';
+  }
+  function raketaSVG(stavy, padajici, vse) {
+    var U = 21, CX = 222, CY = 300, K = 0.866;
+    function P(x, y, z) { return (CX + (x - y) * K * U).toFixed(1) + ',' + (CY + (x + y) * 0.5 * U - z * U).toFixed(1); }
+    function kvadr(x0, y0, z0, w, d, h, c, styl) {
+      var x1 = x0 + w, y1 = y0 + d, z1 = z0 + h;
+      var top = [P(x0, y0, z1), P(x1, y0, z1), P(x1, y1, z1), P(x0, y1, z1)], pr = [P(x1, y0, z1), P(x1, y1, z1), P(x1, y1, z0), P(x1, y0, z0)], lv = [P(x0, y1, z1), P(x1, y1, z1), P(x1, y1, z0), P(x0, y1, z0)];
+      if (styl) return '<polygon points="' + top.join(' ') + '" ' + styl + '/><polygon points="' + pr.join(' ') + '" ' + styl + '/><polygon points="' + lv.join(' ') + '" ' + styl + '/>';
+      return '<polygon points="' + lv.join(' ') + '" fill="' + odstin(c, -0.22) + '"/><polygon points="' + pr.join(' ') + '" fill="' + c + '"/><polygon points="' + top.join(' ') + '" fill="' + odstin(c, 0.28) + '"/>';
+    }
+    function cudliky(x0, y0, z, w, c) {
+      var s = '', i, j, rx = 0.3 * 1.2247 * U, ry = 0.3 * 0.7071 * U, sh = 0.22 * U;
+      for (var k = 0; k <= 2 * (w - 1); k++) for (i = 0; i < w; i++) { j = k - i; if (j < 0 || j >= w) continue;
+        var p = P(x0 + i + 0.5, y0 + j + 0.5, z).split(','), x = +p[0], y = +p[1];
+        s += '<path d="M' + (x - rx).toFixed(1) + ' ' + y + 'v' + (-sh) + 'h' + (2 * rx).toFixed(1) + 'v' + sh + 'z" fill="' + odstin(c, -0.12) + '"/><ellipse cx="' + x + '" cy="' + y + '" rx="' + rx.toFixed(1) + '" ry="' + ry.toFixed(1) + '" fill="' + odstin(c, -0.12) + '"/><ellipse cx="' + x + '" cy="' + (y - sh).toFixed(1) + '" rx="' + rx.toFixed(1) + '" ry="' + ry.toFixed(1) + '" fill="' + odstin(c, 0.42) + '"/>'; }
+      return s;
+    }
+    function okynko(x, z) {
+      var p = P(x, 0, z).split(','), a = -K * U * 0.55, b = 0.5 * U * 0.55, d = -U * 0.55;
+      return '<g transform="matrix(' + a.toFixed(2) + ' ' + b.toFixed(2) + ' 0 ' + d.toFixed(2) + ' ' + p[0] + ' ' + p[1] + ')"><circle r="1" fill="#c9d6ea"/><circle r=".72" fill="#0b1f44"/><circle cx="-.25" cy=".25" r=".22" fill="#7fb2ff"/></g>';
+    }
+    function vrstva(L, z, s) {
+      var x0 = -L.w / 2, out = '';
+      var ghost = s === 'missed' ? 'fill="none" stroke="#8a94a8" stroke-width="1.4" stroke-dasharray="4 3"' : s === 'today' ? 'fill="rgba(255,204,0,.22)" stroke="#e0a800" stroke-width="2" stroke-dasharray="5 3"' : 'fill="none" stroke="#1f5fbf" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="3 3"';
+      if (s !== 'open') {
+        if (L.fins) out += kvadr(x0 - 1.2, -0.2, z, 1.2, 0.4, L.h, '', ghost) + kvadr(-0.2, x0 - 1.2, z, 0.4, 1.2, L.h, '', ghost);
+        out += kvadr(x0, x0, z, L.w, L.w, L.h, '', ghost);
+        if (L.fins) out += kvadr(-x0, -0.2, z, 1.2, 0.4, L.h, '', ghost) + kvadr(-0.2, -x0, z, 0.4, 1.2, L.h, '', ghost);
+        return out;
+      }
+      if (L.fins) out += kvadr(x0 - 1.2, -0.2, z - 0.3, 1.2, 0.4, L.h + 0.3, L.c) + kvadr(-0.2, x0 - 1.2, z - 0.3, 0.4, 1.2, L.h + 0.3, L.c);
+      out += kvadr(x0, x0, z, L.w, L.w, L.h, L.c);
+      if (L.win) out += okynko(-x0, z + L.h / 2);
+      if (L.ant) out += kvadr(-0.15, -0.15, z + L.h, 0.3, 0.3, 0.9, '#9aa3b5') + '<circle cx="' + P(0, 0, z + L.h + 1.05).split(',')[0] + '" cy="' + P(0, 0, z + L.h + 1.05).split(',')[1] + '" r="3.2" fill="#ffcc00"/>';
+      else out += cudliky(x0, x0, z + L.h, L.w, L.c);
+      if (L.fins) out += kvadr(-x0, -0.2, z - 0.3, 1.2, 0.4, L.h + 0.3, L.c) + kvadr(-0.2, -x0, z - 0.3, 0.4, 1.2, L.h + 0.3, L.c);
+      return out;
+    }
+    var s = '<svg class="rk' + (vse ? ' launch' : '') + '" viewBox="0 0 420 400" aria-hidden="true"><defs><pattern id="rk-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1f5fbf" stroke-opacity=".09"/></pattern></defs><rect width="420" height="400" fill="url(#rk-grid)"/>';
+    // rampa a věž
+    s += '<g stroke="#9aa3b5" stroke-width="3" fill="none"><path d="M78 302V44M110 318V60M78 44l32 16"/><path d="M78 80l32 16M78 120l32 16M78 160l32 16M78 200l32 16M78 240l32 16M78 280l32 16" stroke-width="2"/><path d="M78 80l32 56M78 160l32 56M78 240l32 56" stroke-width="1.5"/><path d="M110 120h52M110 200h46" stroke-width="2.5"/></g>';
+    s += kvadr(-3.5, -3.5, -0.5, 7, 7, 0.5, '#c3cad8') + cudliky(-3.5, -3.5, 0, 7, '#c3cad8');
+    s += '<g class="rk-smoke">';
+    for (var m = 0; m < 7; m++) s += '<circle cx="' + (150 + m * 24) + '" cy="' + (330 + (m % 2) * 10) + '" r="' + (18 + (m * 7) % 13) + '" fill="#dfe6f1" style="transform-box:fill-box;transform-origin:center;animation-delay:' + (0.4 + m * 0.07).toFixed(2) + 's"/>';
+    s += '</g><g class="rk-ship"><path class="rk-flame" d="M' + CX + ' ' + CY + ' l-11 0 l11 46 l11 -46z" fill="#ffb000"/><path class="rk-flame" d="M' + CX + ' ' + CY + ' l-6 0 l6 28 l6 -28z" fill="#fff3b0"/>';
+    var z = 0, d, kolem = '';
+    for (d = 1; d <= RK.length; d++) {
+      var st = vse ? 'open' : stavy[d - 1];
+      s += '<g class="rk-l ' + st + (padajici === d ? ' drop' : '') + '">' + vrstva(RK[d - 1], z, st) + '</g>';
+      if (padajici === d) { var pc = P(0, 0, z).split(','); kolem = '<ellipse class="rk-ring" cx="' + pc[0] + '" cy="' + pc[1] + '" rx="' + (RK[d - 1].w * U * 0.9) + '" ry="' + (RK[d - 1].w * U * 0.5) + '" fill="none" stroke="#ffcc00" stroke-width="3"/>'; }
+      z += RK[d - 1].h;
+    }
+    s += kolem + '</g>';
+    var hotovo = stavy.filter(function (x) { return x === 'open'; }).length, zbyva = vse ? 0 : RK.length - dnes;
+    s += '<g font-family="JetBrains Mono, monospace" font-weight="700"><rect x="268" y="22" width="134" height="62" rx="10" fill="#0b1f44"/><text x="282" y="42" font-size="10" fill="#7fb2ff" letter-spacing="1.5">ODPOČET</text><text x="282" y="68" font-size="22" fill="#ffcc00">' + (zbyva ? 'T−' + zbyva + (zbyva === 1 ? ' DEN' : zbyva < 5 ? ' DNY' : ' DNÍ') : 'START') + '</text>';
+    s += '<text x="268" y="102" font-size="10.5" fill="#4a5f86">DÍLKY ' + (vse ? RK.length : hotovo) + '/' + RK.length + '</text></g>';
+    s += '<g class="rk-done" font-family="Inter, Arial, sans-serif" text-anchor="middle"><text x="232" y="190" font-size="30" font-weight="900" fill="#0b1f44">Start!</text><text x="232" y="216" font-size="14" font-weight="600" fill="#4a5f86">Nová řada je venku.</text></g>';
+    return s + '</svg>';
+  }
 
   var demo = document.getElementById('demo'); if (!demo) return;
   var stage = document.getElementById('demo-stage');
   var toast = document.getElementById('demo-toast');
   var deco = document.getElementById('demo-deco');
-  var tema = 'fotoskoda', dnes = 7, odkryto = { 2: true, 5: true, 6: true };
+  var tema = 'fotoskoda', dnes = 7, ODKRYTO = { 2: true, 5: true, 6: true }, odkryto = {}, padajici = 0;
+  var reveal = document.getElementById('demo-reveal'), umiUl = demo.querySelector('.d-umi ul'), umiPuvodni = umiUl ? umiUl.innerHTML : '', navrat = null, startTimer = 0;
 
   function stav(d) {
     if (d === dnes) return odkryto[d] ? 'open' : 'today';
@@ -1434,16 +1581,28 @@
     return odkryto[d] ? 'open' : 'missed';
   }
   function popisek(s) { return s === 'today' ? 'Dnes' : s === 'locked' ? 'Zamčeno' : s === 'missed' ? 'Propásnuto' : 'Odkryto'; }
+  function dni(n) { return n + NB + (n === 1 ? 'den' : n < 5 ? 'dny' : 'dní'); }
+  function velke(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
 
   function vykresli() {
     var T = TEMATA[tema], D = DARKY[tema], s, d, html = '';
-    if (T.layout === 'scene') {
+    if (T.layout === 'raketa') {
+      var stavy = [];
+      for (d = 1; d <= T.dni; d++) stavy.push(stav(d));
+      html = '<div class="scene raketa">' + raketaSVG(stavy, padajici) + '<div class="rk-dily" role="group" aria-label="Dílky rakety">';
+      for (d = 1; d <= T.dni; d++) {
+        s = stavy[d - 1];
+        var c = RK[d - 1].c, svetla = c === '#f2f5fa' || c === '#ffcc00';
+        html += '<button type="button" class="dil ' + s + '" data-den="' + d + '" data-review-id="demo-dilek-' + d + '" aria-label="Dílek ' + d + ': ' + popisek(s) + '"' + (s === 'open' ? ' style="--c:' + c + (svetla ? ';color:#0b1f44' : '') + '"' : '') + '>' + (s === 'open' ? ICO[D[d - 1].typ] : s === 'locked' ? ICO.zamek : '') + d + '</button>';
+      }
+      html += '</div><button type="button" class="rk-start" data-review-id="demo-raketa-start">Ukázat 10. den: start</button></div>';
+    } else if (T.layout === 'scene') {
       var SC = { snehulak: { o: OKNA_SN, w: 10, hh: 12.5, svg: SNEHULAK, cls: ' snow' }, narozeniny: { o: OKNA_NA, w: 10, hh: 12.5, svg: DORT, cls: ' cake' }, hracky: { o: OKNA_HR, w: 10, hh: 12.5, svg: AUTOMAT, cls: ' toy' }, velikonoce: { o: OKNA_VE, w: 10, hh: 12.5, svg: KRASLICE, swing: KRASLICE_VEJCE, cls: ' egg' }, jidlo: { o: OKNA_KO, w: 14, hh: 10.5, svg: '', cls: ' basket' }, moda: { o: OKNA_SK, w: 11.22, hh: 14.02, svg: '', cls: ' wardrobe' } }[tema] || { o: OKNA, w: 18.56, hh: 23.04, svg: '', cls: '' };
       var O = SC.o, W = SC.w, HH = SC.hh;
       html = '<div class="scene' + SC.cls + '" role="group" aria-label="Okénka kalendáře">' + SC.svg + (SC.swing ? '<div class="swing">' + SC.swing : '');
       for (d = 1; d <= T.dni; d++) {
         var o = O[d]; s = stav(d);
-        html += '<div class="win ' + s + '" data-den="' + d + '" data-review-id="demo-okno-' + d + '" aria-label="Okénko ' + d + ': ' + popisek(s) + '" style="left:' + (o[0] / W).toFixed(2) + '%;top:' + (o[1] / HH).toFixed(2) + '%;width:' + (o[2] / W).toFixed(2) + '%;height:' + (o[3] / HH).toFixed(2) + '%">' + (s === 'open' ? ICO[D[d - 1].typ] : '') + '<span class="b">' + d + '</span></div>';
+        html += '<button type="button" class="win ' + s + (padajici === d ? ' just' : '') + '" data-den="' + d + '" data-review-id="demo-okno-' + d + '" aria-label="Okénko ' + d + ': ' + popisek(s) + '" style="left:' + (o[0] / W).toFixed(2) + '%;top:' + (o[1] / HH).toFixed(2) + '%;width:' + (o[2] / W).toFixed(2) + '%;height:' + (o[3] / HH).toFixed(2) + '%">' + (s === 'open' ? ICO[D[d - 1].typ] : '') + '<span class="b">' + d + '</span></button>';
       }
       html += (SC.swing ? '</div>' : '') + '</div>';
     } else {
@@ -1452,27 +1611,108 @@
         s = stav(d);
         var ik = s === 'open' ? ICO[D[d - 1].typ] : s === 'locked' ? ICO.zamek : '';
         if (tema === 'harfa' && s !== 'open') ik = ICO.darek;
-        html += '<div class="door ' + s + '" aria-label="Den ' + d + ': ' + popisek(s) + '"' + (tema === 'harfa' ? ' style="aspect-ratio:3/2"' : '') + '>' + ik + '<span class="n">' + d + '</span>' + (tema === 'harfa' ? '' : '<span class="s">' + popisek(s) + '</span>') + '</div>';
+        html += '<button type="button" class="door ' + s + (padajici === d ? ' just' : '') + '" data-den="' + d + '" aria-label="Den ' + d + ': ' + popisek(s) + '"' + (tema === 'harfa' ? ' style="aspect-ratio:3/2"' : '') + '>' + ik + '<span class="n">' + d + '</span>' + (tema === 'harfa' ? '' : '<span class="s">' + popisek(s) + '</span>') + '</button>';
       }
       html += '</div>';
     }
     stage.innerHTML = html;
-    var g = D[dnes - 1];
+    var g = D[dnes - 1], ok = odkryto[dnes];
     document.getElementById('demo-today-n').textContent = dnes;
-    document.getElementById('demo-today-art').innerHTML = ICO.darek;
-    document.getElementById('demo-today-t').textContent = 'Překvapení čeká';
-    document.getElementById('demo-today-btn').textContent = T.btn;
+    document.getElementById('demo-today-art').innerHTML = ok ? ICO[g.typ] : ICO.darek;
+    document.getElementById('demo-today-t').textContent = ok ? g.t : 'Překvapení čeká';
+    document.getElementById('demo-today-btn').textContent = ok ? 'Zobrazit dárek' : T.btn;
   }
+
+  // karta dárku po otevření okénka
+  function karta(d, nove) {
+    var T = TEMATA[tema], g = DARKY[tema][d - 1], fx = '', i, barvy = ['var(--d-today)', 'var(--d-btn)', '#7fb2ff', '#ffffff'];
+    if (nove) for (i = 0; i < 18; i++) { var a = i / 18 * Math.PI * 2, r = 120 + (i % 3) * 40; fx += '<i class="dc-fx" style="--x:' + Math.round(Math.cos(a) * r) + 'px;--y:' + Math.round(Math.sin(a) * r * 0.8) + 'px;--r:' + (i * 47 % 360) + 'deg;background:' + barvy[i % 4] + '"></i>'; }
+    var zbyva = T.dni - d, pozn;
+    if (tema === 'raketa') pozn = zbyva ? 'Dílek ' + d + ' je na' + NB + 'raketě. Do' + NB + 'startu ' + (zbyva === 1 ? 'zbývá 1' + NB + 'dílek.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'dílky.' : 'zbývá ' + zbyva + NB + 'dílků.') : 'Raketa je kompletní. Start!';
+    else pozn = 'Platí do půlnoci. V' + NB + 'ostrém kalendáři přijde dárek i' + NB + 'e&#8209;mailem.';
+    reveal.innerHTML = fx + '<div class="d-card" role="dialog" aria-modal="true" aria-labelledby="dc-t" data-review-id="demo-karta-darku">' +
+      '<button type="button" class="dc-x" data-akce="zavrit" aria-label="Zavřít">×</button>' +
+      '<div class="dc-ico" aria-hidden="true">' + ICO[g.typ] + '</div>' +
+      '<div class="dc-k">' + velke(T.den) + ' ' + d + (nove ? ' · právě odkryto' : ' · odkryto dříve') + '</div>' +
+      '<div class="dc-t" id="dc-t">' + g.t + '</div>' +
+      (g.kod ? '<div class="dc-code"><code>' + g.kod + '</code><button type="button" class="dc-copy" data-akce="kopirovat" data-kod="' + g.kod + '">Kopírovat</button></div>' : '') +
+      '<button type="button" class="dc-cta" data-akce="eshop">' + (g.kod ? 'Uplatnit v' + NB + 'e&#8209;shopu' : 'Do' + NB + 'e&#8209;shopu') + '</button>' +
+      '<p class="dc-note">' + pozn + '</p>' +
+      (d === dnes ? '<button type="button" class="dc-again" data-akce="znovu">Zavřít okénko a' + NB + 'zkusit znovu</button>' : '') + '</div>';
+    // anchor the card over the calendar stage, not the centre of the whole demo
+    var dr = demo.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+    reveal.style.setProperty('--cx', (sr.left - dr.left + sr.width / 2) + 'px');
+    reveal.style.setProperty('--cy', Math.max(260, Math.min(dr.height - 260, sr.top - dr.top + sr.height / 2)) + 'px');
+    reveal.hidden = false;
+    var card = reveal.querySelector('.d-card');
+    reveal.querySelector('.dc-x').focus({ preventScroll: true });
+    var cr = card.getBoundingClientRect();
+    if (cr.top < 70 || cr.bottom > window.innerHeight) card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  function zavriKartu() {
+    if (reveal.hidden) return;
+    reveal.hidden = true; reveal.innerHTML = '';
+    var el = navrat && stage.querySelector('[data-den="' + navrat + '"]');
+    if (el) el.focus();
+  }
+  function klik(d, el) {
+    var s = stav(d), T = TEMATA[tema];
+    navrat = d;
+    if (s === 'locked' || s === 'missed') {
+      if (el) { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+      zprava(s === 'locked' ? velke(T.den) + ' ' + d + ' se otevře za ' + dni(d - dnes) + '.' : 'Den ' + d + ' už propadl. Otevřít jde jen to dnešní.');
+      return;
+    }
+    if (s === 'today') {
+      odkryto[d] = true; padajici = d; vykresli(); padajici = 0;
+      zprava('');
+      var klid = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(function () { karta(d, true); }, klid ? 0 : (tema === 'raketa' ? 900 : 550));
+      return;
+    }
+    karta(d, false);
+  }
+
+  stage.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-den]');
+    if (b) { klik(+b.getAttribute('data-den'), b); return; }
+    if (e.target.closest('.rk-start')) {
+      var svg = stage.querySelector('.rk'); if (!svg) return;
+      var tmp = document.createElement('div'); tmp.innerHTML = raketaSVG([], 0, true);
+      svg.parentNode.replaceChild(tmp.firstChild, svg);
+      zprava('Takhle vypadá desátý den, když zákazník posbírá všechny dílky.');
+      clearTimeout(startTimer);
+      startTimer = setTimeout(function () { if (tema === 'raketa') vykresli(); }, 5200);
+    }
+  });
+  document.getElementById('demo-today-btn').addEventListener('click', function () { klik(dnes, stage.querySelector('[data-den="' + dnes + '"]')); });
+  reveal.addEventListener('click', function (e) {
+    if (e.target === reveal) { zavriKartu(); return; }
+    var b = e.target.closest('[data-akce]'); if (!b) return;
+    var a = b.getAttribute('data-akce');
+    if (a === 'zavrit') zavriKartu();
+    else if (a === 'kopirovat') {
+      var hotovo = function () { b.textContent = 'Zkopírováno ✓'; };
+      try { navigator.clipboard.writeText(b.getAttribute('data-kod')).then(hotovo, hotovo); } catch (err) { hotovo(); }
+    } else if (a === 'eshop') { zavriKartu(); zprava('V ostrém kalendáři tlačítko vede rovnou do e‑shopu a kód se vloží sám.'); }
+    else if (a === 'znovu') { delete odkryto[dnes]; zavriKartu(); vykresli(); zprava('Okénko je zase zavřené. Zkuste to znovu.'); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') zavriKartu(); });
+
   function nastavTema(t) {
-    tema = t; var T = TEMATA[t];
+    tema = t; var T = TEMATA[t], k, zdroj = T.odkryto || ODKRYTO;
+    odkryto = {}; for (k in zdroj) odkryto[k] = zdroj[k];
+    clearTimeout(startTimer);
     demo.setAttribute('data-theme', t);
     document.getElementById('demo-top').innerHTML = T.top + '<span>' + T.eyebrow + '</span>';
     document.getElementById('demo-title').textContent = T.t;
     document.getElementById('demo-lead').textContent = T.l;
+    if (umiUl) umiUl.innerHTML = T.umi ? '<li>' + T.umi.join('</li><li>') + '</li>' : umiPuvodni;
     var im = document.getElementById('demo-hero-img');
     if (T.img) { im.src = T.img; im.hidden = false; } else { im.hidden = true; im.removeAttribute('src'); }
     Array.prototype.forEach.call(document.querySelectorAll('.seg button[data-theme]'), function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-theme') === t ? 'true' : 'false'); });
-    kresliDekor(t); zprava(''); vykresli();
+    zavriKartu();
+    kresliDekor(t); zprava('Klikněte na' + NB + 'dnešní ' + T.den + ' a' + NB + 'odkryjte dárek.'); vykresli();
   }
   function zprava(t) { toast.textContent = t; }
 
@@ -1491,7 +1731,11 @@
   function kresliDekor(th) {
     var w = 1000, h = 700, r = rnd(th.length * 7 + 3), s = '', i;
     deco.setAttribute('viewBox', '0 0 ' + w + ' ' + h); deco.setAttribute('preserveAspectRatio', 'none');
-    if (th === 'fotoskoda' || th === 'snehulak') {
+    if (th === 'raketa') {
+      for (i = 0; i <= w; i += 50) s += '<path d="M' + i + ' 0V' + h + '" stroke="#1f5fbf" stroke-opacity=".06"/>';
+      for (i = 0; i <= h; i += 50) s += '<path d="M0 ' + i + 'H' + w + '" stroke="#1f5fbf" stroke-opacity=".06"/>';
+      for (i = 0; i < 14; i++) { var px = Math.round(r() * w), py = Math.round(r() * h); s += '<path d="M' + (px - 5) + ' ' + py + 'h10M' + px + ' ' + (py - 5) + 'v10" stroke="#1f5fbf" stroke-opacity=".25" stroke-width="1.5"/>'; }
+    } else if (th === 'fotoskoda' || th === 'snehulak') {
       for (i = 0; i < 80; i++) s += '<circle cx="' + (r() * w).toFixed(0) + '" cy="' + (r() * h).toFixed(0) + '" r="' + (0.8 + r() * 2).toFixed(1) + '" fill="#fff" opacity="' + (0.15 + r() * 0.45).toFixed(2) + '"/>';
     } else if (th === 'zlate') {
       for (i = 0; i < 40; i++) { var x = r() * w, y = r() * h, z = 2 + r() * 4; s += '<path d="M' + x + ' ' + (y - z) + 'L' + (x + z / 3) + ' ' + (y - z / 3) + 'L' + (x + z) + ' ' + y + 'L' + (x + z / 3) + ' ' + (y + z / 3) + 'L' + x + ' ' + (y + z) + 'L' + (x - z / 3) + ' ' + (y + z / 3) + 'L' + (x - z) + ' ' + y + 'L' + (x - z / 3) + ' ' + (y - z / 3) + 'Z" fill="#d9b45a" opacity="' + (0.25 + r() * 0.5).toFixed(2) + '"/>'; }
