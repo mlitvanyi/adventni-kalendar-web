@@ -1325,7 +1325,30 @@
   .keybox { border-radius: 28px; padding: 40px 42px 34px; }
   .table-wrap { border-radius: 22px; background: var(--paper-0); }
   table.cmp th { background: var(--paper-100); }
-  #ukazka .demo-bar { background: var(--paper-0); }
+  /* look picker: no box; big centred thumbnails, the caption bar docks onto the monitor bezel */
+  #ukazka .demo-bar { background: transparent; border: 0; border-radius: 0; padding: 0; margin: 8px 0 0; box-shadow: none; }
+  #ukazka .vz-strip { justify-content: center; gap: 30px; padding-bottom: 30px; }
+  #ukazka .vz-k { text-align: center; margin-bottom: 12px; font-size: 11.5px; color: var(--ink-3); }
+  #ukazka .vz-thumbs { gap: 10px; }
+  #ukazka .vz-sep { margin: 26px 0 0; background: var(--line); }
+  #ukazka .vz-th { width: 74px; height: 92px; border-radius: 14px; opacity: .72; box-shadow: 0 8px 18px -10px rgba(10,10,10,.35), 0 0 0 1px rgba(10,10,10,.06); transition: opacity .4s ease, translate .6s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease; }
+  #ukazka .vz-th:hover { opacity: 1; translate: 0 -3px; }
+  #ukazka .vz-th[aria-pressed="true"] { opacity: 1; translate: 0 -6px; box-shadow: 0 0 0 3px var(--paper-50), 0 0 0 5px var(--accent), 0 16px 28px -12px rgba(10,10,10,.45); }
+  #ukazka .vz-new { width: 9px; height: 9px; }
+  #ukazka .vz-cap { padding: 14px 6px; border-top: 0; }
+  #ukazka .vz-cap strong { font-size: 20px; letter-spacing: -0.02em; }
+  @media (min-width: 900px) {
+    #ukazka .vz-cap { margin: 0; padding: 16px 24px 14px; border-radius: 22px 22px 0 0; background: #111; color: #e6e6ea; box-shadow: inset 0 2px 0 #2a2a2a, inset 2px 0 0 #2a2a2a, inset -2px 0 0 #2a2a2a; }
+    #ukazka .vz-cap strong { color: #fff; }
+    #ukazka .vz-cap-m { color: #a1a1aa; }
+    #ukazka .vz-cap-s { background: #26262a; color: #e6e6ea; }
+    #ukazka .vz-cap-s.new { background: var(--accent); color: #fff; }
+    #ukazka .demo-bar .grp.device .seg { background: #26262a; }
+    #ukazka .demo-bar .grp.device .seg button { color: #c9c9cf; }
+    #ukazka .demo-bar .grp.device .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+    #ukazka .demo-frame:not(.is-mobile) { border-top-left-radius: 0; border-top-right-radius: 0; padding-top: 4px; }
+    #ukazka .demo-bar:has(+ .demo-frame.is-mobile) .vz-cap { border-radius: 22px; margin-bottom: 28px; }
+  }
 
   /* red bands: white type, black accent word, black buttons */
   #prinos h2, #postup h2 { color: var(--v2-on-red); }
