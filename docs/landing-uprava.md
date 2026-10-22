@@ -31,6 +31,24 @@ Poznámka od Michala, 22. 10. 2026. Robí sa oddelene od nových vzhľadov kalen
 - Vianočné akcenty (cezmína, stromček, darčeky, zlaté iskry) zachovať aj v novom layoute v štýle Givingli.
 - Rešpektovať `prefers-reduced-motion`.
 
+## Stav: interná verzia 2 (22. 10. 2026)
+- **`index-v2.html`** vedľa pôvodného `index.html`, s rovnakým obsahom. Má `noindex`.
+- **Interný prepínač** „Původní / Nová“ je vľavo dole na oboch stránkach a zachová kotvu (`#ukazka` ostane `#ukazka`). V kóde je označený ako `INTERNAL` a pred publikáciou sa zmaže: blok `.ver-switch` na konci `<body>` v oboch súboroch.
+- **Hero podľa Givingli:**
+  - nav s logom PragueBest, sekciami a tlačidlom „Chci kalendář“,
+  - obrovský centrovaný nadpis s „Originálně.“ v červenej,
+  - podtitul a dve CTA (Prohlédnout vzhledy, Chci kalendář na míru),
+  - pod nimi trojica výhod,
+  - okolo osem pootočených, jemne sa vznášajúcich náhľadov kalendárov s popiskami (`img/hero/*.webp`, 400×500),
+  - zlaté iskry a cezmína.
+  - Na mobile sa náhľady zložia do vejára nad nadpisom.
+- **Dizajn systém PragueBest:** písmo Satoshi (`fonts/Satoshi-Variable.woff2` + licencia), papierové pozadie `#f2ece0`, atrament `#0a0a0a`, červená `#e30613`, väčšie zaoblenia a tiene z tokenov.
+- **Bez popiskov nad nadpismi.** Všetkých 8 `section-label` je preč. Kontakt dostal nadpis „Další krok“ a dve CTA.
+- **Striedanie sekcií:** sekcie majú celošírkové pásy (svetlý papier, krém) a záver je tmavý pás s kontaktom.
+- **Sneh:** canvas v troch vrstvách (vzdialené drobné, stredné a blízke vločky aj zlaté hviezdičky), biela, zlatá a červená, s jemným kývaním. Pri skrytej záložke sa zastaví, pri `prefers-reduced-motion` je vypnutý.
+- **Overené:** desktop 1280 aj mobil 375, bez horizontálneho posunu. Demo kalendára funguje vo všetkých 13 vzhľadoch, konzola je bez chýb.
+- **Ďalej:** v stredných sekciách zatiaľ chýbajú obrázky po vzore Givingli (striedanie text/obrázok). Doplniť ich podľa spätnej väzby. Animovaný kalendár v hlavičke zatiaľ nahrádzajú náhľady.
+
 ## Čo platí ďalej
 - Obsah a význam textov ostávajú. Meníme formu, poradie a vizuál, nie posolstvo.
 - Zmeny landing page sa držia oddelene od vzhľadov kalendára, aby bolo vidno, čo sa zmenilo.

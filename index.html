@@ -2408,5 +2408,9 @@
 })();
 </script>
 <button type="button" class="totop" id="totop" aria-label="Nahoru na začátek" title="Nahoru" data-review-id="totop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+<!-- INTERNAL: version switcher for comparing the landing page variants. Remove before publishing. -->
+<nav class="ver-switch" aria-label="Interní přepínač verzí" data-review-id="interni-prepinac-verzi"><span>Interní náhled</span><a href="index.html" data-ver aria-current="page">Původní</a><a href="index-v2.html" data-ver>Nová</a></nav>
+<style>.ver-switch{position:fixed;left:14px;bottom:14px;z-index:95;display:flex;align-items:center;gap:4px;padding:4px 4px 4px 12px;border-radius:100px;background:rgba(10,10,10,.88);color:#fff;font:600 12.5px/1 system-ui,Arial,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25)}.ver-switch span{opacity:.7;margin-right:6px}.ver-switch a{color:#fff;border:0;padding:7px 12px;border-radius:100px}.ver-switch a[aria-current]{background:#fff;color:#0a0a0a}@media print{.ver-switch{display:none}}</style>
+<script>document.querySelectorAll(".ver-switch a[data-ver]").forEach(function(a){a.addEventListener("click",function(){a.href=a.getAttribute("href").split("#")[0]+location.hash;});});</script>
 </body>
 </html>
