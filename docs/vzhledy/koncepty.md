@@ -148,10 +148,10 @@ Bright Scandinavian interior, straight-on view of a large empty white-painted wo
 
 ---
 
-## 6. Prémiový nábytok (typ Konsepti): „Vzorkovník archivu“ – celé v kóde
-**Stav:** postavené (vzhľad `vzorky`), anonymne. Kampaň k výpredaju „pokladov zo showroomu a skladových zásob“: 10 dní pred akciou.
-**Myšlienka:** vejár vzorkovníka látok s nitom. Každý deň sa vysunie jedna vzorka (No. 01–10, talianske názvy látok) a na minimalistickej pohovke pribudne vankúš v tej látke. Zmeškaný deň je prázdna vzorka a na pohovke chýba vankúš. Desiaty deň je vejár plný farieb, pohovka plná vankúšov a petrolejový štítok „24.–26. 9. Velký výprodej pokladů ze showroomu a skladu“.
-**Vizuál:** čierno-biely minimalizmus ako Konsepti, nadpis verzálkami s kontrastom tučného a tenkého písma, petrolejová #3b7a78, ostré rohy, žiadny Higgsfield.
+## 6. Prémiový nábytok (typ Konsepti): „Archiv v barvách“
+**Stav:** prerobené (vzhľad \`vzorky\`), anonymne. Prvá verzia s kreslenou pohovkou a vejárom bola slabá.
+**Myšlienka:** 8 dní pred výpredajom „pokladů ze showroomu a skladu“ je showroom čiernobiely. Každý odkrytý deň vráti farbu jednému vankúšu na pohovke a jeho látka (vzorka s cikcakovým okrajom, No. 01–08, talianske názvy) otvorí dárok. Zmeškaný vankúš ostane sivý. Ôsmy deň sa celý showroom rozfarbí a objaví sa petrolejový štítok „24.–26. 9.“.
+**Médium:** fotka showroomu z Higgsfieldu (GPT Image 2.5, high, 2k, 2,75 kreditu, prvý pokus, \`img/showroom.webp\`). Sivá je CSS filter; farba je tá istá fotka orezaná presne na vankúš, takže všetko sedí. Farby vzoriek sú odčítané priamo z fotky.
 
 ## Hlavička landing page (krok 4, len na porovnanie s moodboardom 01)
 Stromček v hlavičke nahradí **animovaný kalendár v kóde** v štýle bento videa:
