@@ -724,7 +724,18 @@
   .demo .adv-n { position: absolute; left: 50%; top: 50%; translate: -50% -50%; min-width: clamp(16px, 5cqw, 24px); height: clamp(16px, 5cqw, 24px); padding: 0 .35em; border-radius: 99px; background: var(--adv-n-bg, rgba(255,250,240,.94)); color: var(--adv-n-ink, #a3192a); font-family: var(--d-font); font-size: clamp(9.5px, 2.8cqw, 13.5px); font-weight: 800; line-height: clamp(16px, 5cqw, 24px); text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
   .demo .adv-d.velke .adv-n { min-width: clamp(26px, 8.3cqw, 40px); height: clamp(26px, 8.3cqw, 40px); line-height: clamp(26px, 8.3cqw, 40px); font-size: clamp(14px, 4.6cqw, 22px); }
   .demo .adv-d.open .adv-f { transform: rotateY(-108deg); }
-  .demo .adv-d.today .adv-fr { box-shadow: 0 0 0 2px var(--d-today), 0 0 20px 5px color-mix(in srgb, var(--d-today) 75%, transparent); animation: advGlow 1.8s ease-in-out infinite; }
+  .demo .adv-d { cursor: pointer; }
+  .demo .adv-d.today { z-index: 4; }
+  .demo .adv-d.today .adv-fr { box-shadow: 0 0 0 3px var(--d-today), 0 0 0 5px rgba(255,255,255,.9), 0 0 26px 8px color-mix(in srgb, var(--d-today) 80%, transparent); animation: advGlow 1.6s ease-in-out infinite; }
+  /* expanding ring so today's door is found at first glance */
+  .demo .adv-d.today::after { content: ""; position: absolute; inset: -4px; border-radius: inherit; border: 3px solid var(--d-today); pointer-events: none; animation: advRing 1.6s ease-out infinite; }
+  @keyframes advRing { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.6); } }
+  .demo .adv-tag { position: absolute; left: 50%; bottom: calc(100% + 9px); translate: -50% 0; z-index: 5; padding: 4px 10px 5px; border-radius: 99px; background: var(--d-today); color: var(--d-today-ink); font-family: 'Inter', 'Inter Fallback', Arial, sans-serif; font-size: clamp(10px, 2.6cqw, 12.5px); font-weight: 800; line-height: 1; letter-spacing: .02em; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,.35); pointer-events: none; animation: advBob 1.6s ease-in-out infinite; }
+  .demo .adv-tag::after { content: ""; position: absolute; left: 50%; top: 100%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--d-today); }
+  .demo .adv-tag.dole { bottom: auto; top: calc(100% + 9px); }
+  .demo .adv-tag.dole::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--d-today); }
+  @keyframes advBob { 50% { transform: translateY(-4px); } }
+  .demo .adv-d:not(.today):not(.open):hover .adv-fr { box-shadow: 0 0 0 2px rgba(255,255,255,.85), 0 4px 10px rgba(0,0,0,.35); }
   .demo .adv-d.today .adv-n { background: var(--d-today); color: var(--d-today-ink); }
   .demo .adv-d.today:hover .adv-f, .demo .adv-d.today:focus-visible .adv-f { transform: rotateY(-16deg); }
   .demo .adv-d.missed .adv-fr { filter: grayscale(.9) brightness(.92) contrast(.85); }
@@ -745,7 +756,7 @@
     background-image: radial-gradient(2px 2px at 20px 30px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90px 80px, #fff 50%, transparent 51%), radial-gradient(2.5px 2.5px at 150px 20px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 60px 140px, #fff 50%, transparent 51%), radial-gradient(2px 2px at 130px 120px, #fff 50%, transparent 51%);
     background-size: 180px 160px; animation: advSnih 9s linear infinite; }
   @keyframes advSnih { to { background-position: 30px 160px, -20px 160px, 20px 160px, -30px 160px, 10px 160px; } }
-  @media (prefers-reduced-motion: reduce) { .demo .adv-d.today .adv-fr, .demo .adv-d.just .adv-f, .demo .adv-d.just .adv-in svg, .demo .scene.adv.snih::after, .demo .scene.adv.snih-okno::after, .demo .scene.adv.finale .adv-star { animation: none; } .demo .adv-f { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .demo .adv-d.today::after { display: none; } .demo .adv-tag, .demo .adv-d.today .adv-fr, .demo .adv-d.just .adv-f, .demo .adv-d.just .adv-in svg, .demo .scene.adv.snih::after, .demo .scene.adv.snih-okno::after, .demo .scene.adv.finale .adv-star { animation: none; } .demo .adv-f { transition: none; } }
   /* téma: Hračkářství (vymyšlené) */
   /* téma: Móda (vymyšlené) */
   .demo[data-theme="moda"] { --d-bg: #e9dccb; --d-ink: #3b2a1a; --d-ink-2: #7a6248; --d-door: #1f1f1f; --d-door-ink: #f5efe6; --d-door-line: #3a342c; --d-today: #b3122e; --d-today-ink: #fff; --d-open: #f5efe6; --d-open-ink: #141414; --d-locked: #1f1f1f; --d-missed: #0f0f0f; --d-btn: #b3122e; --d-btn-ink: #fff; --d-radius: 0px; --d-font: Georgia, 'Times New Roman', serif; --d-card: #f6efe2; --d-card-line: #d9c8b0; }
@@ -2044,7 +2055,7 @@
     for (d = 1; d <= TEMATA[tema].dni; d++) {
       o = A.o[d]; s = stav(d);
       h += '<button type="button" class="adv-d ' + s + (o[4] ? ' ' + o[4] : '') + (d === 24 ? ' velke' : '') + (padajici === d ? ' just' : '') + '" data-den="' + d + '" data-review-id="demo-okenko-' + d + '" aria-label="Okénko ' + d + ': ' + popisek(s) + '" style="left:' + (o[0] / W * 100).toFixed(2) + '%;top:' + (o[1] / H * 100).toFixed(2) + '%;width:' + (o[2] / W * 100).toFixed(2) + '%;height:' + (o[3] / H * 100).toFixed(2) + '%;--bs:' + (W / o[2] * 100).toFixed(2) + '% ' + (H / o[3] * 100).toFixed(2) + '%;--bp:' + (o[0] / (W - o[2]) * 100).toFixed(2) + '% ' + (o[1] / (H - o[3]) * 100).toFixed(2) + '%">' +
-        '<span class="adv-in">' + (s === 'open' ? ICO[D[d - 1].typ] : '') + '</span><span class="adv-f"><span class="adv-fr"><span class="adv-n">' + d + '</span></span><span class="adv-bk"></span></span></button>';
+        (s === 'today' ? '<span class="adv-tag' + (o[1] < 60 ? ' dole' : '') + '" aria-hidden="true">Dnes</span>' : '') + '<span class="adv-in">' + (s === 'open' ? ICO[D[d - 1].typ] : '') + '</span><span class="adv-f"><span class="adv-fr"><span class="adv-n">' + d + '</span></span><span class="adv-bk"></span></span></button>';
     }
     return h + (TEMATA[tema].finale ? '<button type="button" class="d-finale" data-review-id="demo-finale">' + TEMATA[tema].finale + '</button>' : '') + '</div>';
   }
