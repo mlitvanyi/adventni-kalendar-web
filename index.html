@@ -2316,6 +2316,19 @@
     }
   }
   var vzPoprve = false;
+  // slide a look carousel ourselves: native smooth scrolling is cancelled or skipped in some browsers
+  function posunPas(row, cil, hned) {
+    var max = row.scrollWidth - row.clientWidth, od = row.scrollLeft, t0 = 0;
+    cil = Math.max(0, Math.min(max, cil));
+    if (hned || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) { row.scrollLeft = cil; return; }
+    cancelAnimationFrame(row._anim);
+    (function krok(t) {
+      if (!t0) t0 = t;
+      var k = Math.min(1, (t - t0) / 380), e = 1 - Math.pow(1 - k, 3);
+      row.scrollLeft = od + (cil - od) * e;
+      if (k < 1) row._anim = requestAnimationFrame(krok);
+    })(performance.now());
+  }
   function nastavTema(t) {
     tema = t; var T = TEMATA[t], k, zdroj = T.odkryto || ODKRYTO;
     odkryto = {}; for (k in zdroj) odkryto[k] = zdroj[k];
@@ -2336,8 +2349,7 @@
       var st = document.getElementById('vz-cap-s'); st.textContent = vyb.getAttribute('data-stitek'); st.hidden = !st.textContent;
       // centre the chosen thumbnail in its carousel, so a click on either half slides the next looks into view
       var pas = vyb.closest('.vz-thumbs'), pr = pas.getBoundingClientRect(), vr = vyb.getBoundingClientRect();
-      var klidVz = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-      pas.scrollTo({ left: pas.scrollLeft + vr.left + vr.width / 2 - pr.left - pr.width / 2, behavior: klidVz || !vzPoprve ? 'auto' : 'smooth' });
+      posunPas(pas, pas.scrollLeft + vr.left + vr.width / 2 - pr.left - pr.width / 2, !vzPoprve);
     }
     zavriKartu();
     adminBarvy(t);
@@ -2378,15 +2390,14 @@
     }
     Array.prototype.forEach.call(sip, function (b) {
       b.addEventListener('click', function () {
-        var klid = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-        row.scrollBy({ left: +b.getAttribute('data-smer') * row.clientWidth * 0.8, behavior: klid ? 'auto' : 'smooth' });
+        posunPas(row, row.scrollLeft + +b.getAttribute('data-smer') * row.clientWidth * 0.8);
       });
     });
     // re-check once the layout settles (fonts, the v2 panel) and whenever the group changes size
     row.addEventListener('click', function (e) {
       if (e.target.closest('.vz-th')) return;
-      var r = row.getBoundingClientRect(), klid = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-      row.scrollBy({ left: (e.clientX > r.left + r.width / 2 ? 1 : -1) * row.clientWidth * 0.8, behavior: klid ? 'auto' : 'smooth' });
+      var r = row.getBoundingClientRect();
+      posunPas(row, row.scrollLeft + (e.clientX > r.left + r.width / 2 ? 1 : -1) * row.clientWidth * 0.8);
     });
     row.addEventListener('scroll', stav, { passive: true }); addEventListener('resize', stav); addEventListener('load', stav); stav();
     if (window.ResizeObserver) new ResizeObserver(stav).observe(row);
