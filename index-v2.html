@@ -187,25 +187,35 @@
   .demo-bar { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; margin: 0 0 22px; padding: 14px 16px 0; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
   .vz { min-width: 0; }
   .vz-strip { display: flex; align-items: flex-start; gap: 18px; min-width: 0; padding-bottom: 14px; }
-  .vz-set { flex: none; }
+  .vz-set { flex: 1 1 0; min-width: 0; }
+  .vz-head { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; }
+  .vz-head .vz-k { margin: 0; }
+  .vz-nav { display: flex; gap: 4px; margin-left: auto; }
+  .vz-set:not(.over) .vz-nav { visibility: hidden; }
+  .vz-arr { display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); cursor: pointer; transition: opacity .15s ease, background .15s ease; }
+  .vz-arr svg { width: 14px; height: 14px; }
+  .vz-arr:hover:not(:disabled) { background: #f1f1f3; }
+  .vz-arr:disabled { opacity: .35; cursor: default; }
+  .vz-arr:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .vz-k { display: block; margin: 0 0 8px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
-  .vz-thumbs { display: flex; gap: 6px; }
+  .vz-thumbs { display: flex; gap: 6px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding: 6px; scrollbar-width: none; padding: 6px; margin: -6px; }
+  .vz-thumbs::-webkit-scrollbar { display: none; }
+  .vz-thumbs.fade-r { -webkit-mask-image: linear-gradient(90deg, #000 86%, transparent); mask-image: linear-gradient(90deg, #000 86%, transparent); }
+  .vz-thumbs.fade-l { -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%); mask-image: linear-gradient(90deg, transparent, #000 14%); }
+  .vz-thumbs.fade-l.fade-r { -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
   .vz-sep { align-self: stretch; flex: none; width: 1px; background: var(--line); }
   .vz-th { position: relative; flex: none; width: 56px; height: 70px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: #ececef; cursor: pointer; opacity: .6; box-shadow: 0 0 0 1px rgba(0,0,0,.08); transition: opacity .15s ease, box-shadow .15s ease; }
   .vz-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .vz-th-w { position: relative; flex: none; }
-  .vz-tip { position: absolute; left: 50%; top: calc(100% + 10px); z-index: 30; width: max-content; max-width: 220px; padding: 7px 11px 8px; border-radius: 10px; background: #14141a; color: #fff; text-align: left; box-shadow: 0 16px 36px rgba(0,0,0,.28); pointer-events: none; opacity: 0; visibility: hidden; translate: -50% 6px; transition: opacity .16s ease, translate .16s ease, visibility 0s .16s; }
-  .vz-tip::before { content: ""; position: absolute; left: 50%; bottom: 100%; margin-left: -7px; border: 7px solid transparent; border-bottom-color: #14141a; }
+  .vz-th-w { position: relative; flex: none; scroll-snap-align: start; }
+  .vz-tip { position: fixed; left: 0; top: 0; z-index: 30; width: max-content; max-width: 220px; padding: 7px 11px 8px; border-radius: 10px; background: #14141a; color: #fff; text-align: left; box-shadow: 0 16px 36px rgba(0,0,0,.28); pointer-events: none; opacity: 0; visibility: hidden; translate: -50% 6px; transition: opacity .16s ease, translate .16s ease, visibility 0s .16s; }
+  .vz-tip::before { content: ""; position: absolute; left: calc(50% + var(--sip, 0px)); bottom: 100%; margin-left: -7px; border: 7px solid transparent; border-bottom-color: #14141a; }
   .vz-tip b { display: block; font-size: 13px; font-weight: 800; line-height: 1.2; }
   .vz-tip small { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,255,255,.7); }
   .vz-th-w:hover .vz-tip, .vz-th:focus-visible + .vz-tip { opacity: 1; visibility: visible; translate: -50% 0; transition-delay: .12s, .12s, 0s; }
-  .vz-thumbs .vz-th-w:first-child .vz-tip { left: 0; translate: 0 6px; } .vz-thumbs .vz-th-w:first-child:hover .vz-tip { translate: 0 0; } .vz-thumbs .vz-th-w:first-child .vz-tip::before { left: 30px; }
   @media (hover: none) { .vz-tip { display: none; } }
   .vz-th:hover { opacity: 1; }
   .vz-th:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; opacity: 1; }
   .vz-th[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent); }
-  /* internal marker for new proposals: remove before publishing */
-  .vz-new { position: absolute; right: 4px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px #fff; }
   .demo-bar .grp.device { display: block; margin-left: auto; padding: 0; border: 0; }
   .demo-bar .grp.device .seg { display: flex; gap: 2px; padding: 3px; border-radius: 100px; background: #f1f1f3; }
   .demo-bar .grp.device .seg button { border: 0; background: transparent; padding: 6px 12px; }
@@ -218,7 +228,9 @@
   .vz-admin { display: none; font-size: 13px; font-weight: 700; }
   @media (max-width: 899px) { .vz-admin { display: inline; } }
   @media (max-width: 860px) {
-    .vz-strip { overflow-x: auto; margin: 0 -16px; padding: 0 16px 12px; scrollbar-width: thin; }
+    .vz-strip { flex-direction: column; gap: 14px; }
+    .vz-set { flex: none; width: 100%; }
+    .vz-sep { display: none; }
   }
   @media (prefers-reduced-motion: reduce) { .vz-th { transition: none; } }
   .demo-bar input[type=range] { accent-color: var(--accent); width: 170px; }
@@ -1379,15 +1391,17 @@
   /* look picker: no box; big centred thumbnails, the caption bar docks onto the monitor bezel */
   #ukazka .demo-bar { background: transparent; border: 0; border-radius: 0; padding: 0; margin: 8px 0 0; box-shadow: none; }
   #ukazka .vz-strip { justify-content: flex-start; gap: 28px; margin: 0 0 22px; padding: 22px 26px 26px; border: 1.5px dashed rgba(10,10,10,.26); border-radius: 24px; background: var(--paper-50); }
-  #ukazka .vz-k { text-align: left; margin: 0 0 14px 2px; font-size: 16px; font-weight: 600; letter-spacing: -0.015em; text-transform: none; color: var(--ink); }
-  #ukazka .vz-thumbs { gap: 10px; }
+  #ukazka .vz-head { margin: 0 0 14px 2px; }
+  #ukazka .vz-k { text-align: left; margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.015em; text-transform: none; color: var(--ink); }
+  #ukazka .vz-thumbs { gap: 10px; padding: 12px 8px 26px; margin: -12px -8px -26px; scroll-padding: 8px; }
+  #ukazka .vz-arr { width: 32px; height: 32px; border-color: rgba(10,10,10,.18); background: var(--paper-50); }
+  #ukazka .vz-arr svg { width: 16px; height: 16px; }
   #ukazka .vz-sep { margin: 30px 0 0; width: 0; background: none; border-left: 1.5px dashed rgba(10,10,10,.22); }
   /* inactive: muted and desaturated; active: full colour, lifted, red ring and a check badge */
   #ukazka .vz-th { width: 74px; height: 92px; border-radius: 14px; opacity: .58; filter: grayscale(.85); box-shadow: 0 0 0 1px rgba(10,10,10,.08); transition: opacity .4s ease, filter .4s ease, translate .6s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease; }
   #ukazka .vz-th:hover { opacity: .95; filter: none; translate: 0 -3px; }
   #ukazka .vz-th[aria-pressed="true"] { opacity: 1; filter: none; translate: 0 -6px; box-shadow: 0 0 0 3px var(--paper-50), 0 0 0 6px var(--accent), 0 18px 30px -12px rgba(10,10,10,.5); }
   #ukazka .vz-th[aria-pressed="true"]::after { content: ""; position: absolute; left: 5px; bottom: 5px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat; box-shadow: 0 0 0 2px #fff, 0 3px 8px rgba(0,0,0,.3); }
-  #ukazka .vz-new { width: 9px; height: 9px; }
   #ukazka .vz-cap { padding: 14px 6px; border-top: 0; }
   #ukazka .vz-cap strong { font-size: 20px; letter-spacing: -0.02em; }
   @media (min-width: 900px) {
@@ -1676,23 +1690,23 @@
       <div class="vz-strip" role="group" aria-label="Vzhled kalendáře">
         <div class="vz-set" role="group" aria-label="Vánoce a advent"><span class="vz-k" aria-hidden="true">Vánoce a advent</span><div class="vz-thumbs">
           <button type="button" class="vz-th" data-theme="fotoskoda" aria-pressed="true" aria-label="Dům s okny" title="Dům s okny" data-kat="Vánoce a advent" data-meta="Fototechnika · 24 dní" data-stitek="Skutečná kampaň" data-review-id="demo-vzhled-fotoskoda"><img src="img/nahledy/fotoskoda.webp" alt="" width="60" height="75" decoding="async"></button>
-          <button type="button" class="vz-th" data-theme="snehulak" aria-pressed="false" aria-label="Zimní zahrada" title="Zimní zahrada" data-kat="Vánoce a advent" data-meta="Jakýkoli e‑shop · 24 dní" data-stitek="" data-review-id="demo-vzhled-snehulak"><img src="img/nahledy/snehulak.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="vesnicka" aria-pressed="false" aria-label="Perníková vesnička" title="Perníková vesnička" data-kat="Vánoce a advent" data-meta="Cukrárny a delikatesy · 24 dní" data-stitek="" data-review-id="demo-vzhled-vesnicka"><img src="img/nahledy/vesnicka.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="hracky" aria-pressed="false" aria-label="Santova dílna" title="Santova dílna" data-kat="Vánoce a advent" data-meta="Hračkářství · 24 dní" data-stitek="" data-review-id="demo-vzhled-hracky"><img src="img/nahledy/hracky.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="obyvak" aria-pressed="false" aria-label="Vánoční obývák" title="Vánoční obývák" data-kat="Vánoce a advent" data-meta="Nábytek a bytové doplňky · 24 dní" data-stitek="" data-review-id="demo-vzhled-obyvak"><img src="img/nahledy/obyvak.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="loznice" aria-pressed="false" aria-label="24 nocí do Vánoc" title="24 nocí do Vánoc" data-kat="Vánoce a advent" data-meta="Ložní prádlo a textil · 24 dní" data-stitek="" data-review-id="demo-vzhled-loznice"><img src="img/nahledy/loznice.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="chata" aria-pressed="false" aria-label="Zasněžená chalupa" title="Zasněžená chalupa" data-kat="Vánoce a advent" data-meta="Chaty a chalupy · 24 dní" data-stitek="" data-review-id="demo-vzhled-chata"><img src="img/nahledy/chata.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
+          <button type="button" class="vz-th" data-theme="snehulak" aria-pressed="false" aria-label="Zimní zahrada" title="Zimní zahrada" data-kat="Vánoce a advent" data-meta="Jakýkoli e‑shop · 24 dní" data-stitek="" data-review-id="demo-vzhled-snehulak"><img src="img/nahledy/snehulak.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="vesnicka" aria-pressed="false" aria-label="Perníková vesnička" title="Perníková vesnička" data-kat="Vánoce a advent" data-meta="Cukrárny a delikatesy · 24 dní" data-stitek="" data-review-id="demo-vzhled-vesnicka"><img src="img/nahledy/vesnicka.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="hracky" aria-pressed="false" aria-label="Santova dílna" title="Santova dílna" data-kat="Vánoce a advent" data-meta="Hračkářství · 24 dní" data-stitek="" data-review-id="demo-vzhled-hracky"><img src="img/nahledy/hracky.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="obyvak" aria-pressed="false" aria-label="Vánoční obývák" title="Vánoční obývák" data-kat="Vánoce a advent" data-meta="Nábytek a bytové doplňky · 24 dní" data-stitek="" data-review-id="demo-vzhled-obyvak"><img src="img/nahledy/obyvak.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="loznice" aria-pressed="false" aria-label="24 nocí do Vánoc" title="24 nocí do Vánoc" data-kat="Vánoce a advent" data-meta="Ložní prádlo a textil · 24 dní" data-stitek="" data-review-id="demo-vzhled-loznice"><img src="img/nahledy/loznice.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="chata" aria-pressed="false" aria-label="Zasněžená chalupa" title="Zasněžená chalupa" data-kat="Vánoce a advent" data-meta="Chaty a chalupy · 24 dní" data-stitek="" data-review-id="demo-vzhled-chata"><img src="img/nahledy/chata.webp" alt="" width="60" height="75" decoding="async"></button>
         </div></div>
         <span class="vz-sep" aria-hidden="true"></span>
         <div class="vz-set" role="group" aria-label="Kdykoli během roku"><span class="vz-k" aria-hidden="true">Kdykoli během roku</span><div class="vz-thumbs">
           <button type="button" class="vz-th" data-theme="harfa" aria-pressed="false" aria-label="Slavíme 30 let" title="Slavíme 30 let" data-kat="Kdykoli během roku" data-meta="Sportovní e‑shop · 30 dní" data-stitek="Skutečná kampaň" data-review-id="demo-vzhled-harfa"><img src="img/nahledy/harfa.webp" alt="" width="60" height="75" decoding="async"></button>
-          <button type="button" class="vz-th" data-theme="obalky" aria-pressed="false" aria-label="Deset let, deset obálek" title="Deset let, deset obálek" data-kat="Kdykoli během roku" data-meta="Výročí e‑shopu · 10 dní" data-stitek="" data-review-id="demo-vzhled-obalky"><img src="img/nahledy/obalky.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
+          <button type="button" class="vz-th" data-theme="obalky" aria-pressed="false" aria-label="Deset let, deset obálek" title="Deset let, deset obálek" data-kat="Kdykoli během roku" data-meta="Výročí e‑shopu · 10 dní" data-stitek="" data-review-id="demo-vzhled-obalky"><img src="img/nahledy/obalky.webp" alt="" width="60" height="75" decoding="async"></button>
           <button type="button" class="vz-th" data-theme="velikonoce" aria-pressed="false" aria-label="Velikonoční kraslice" title="Velikonoční kraslice" data-kat="Kdykoli během roku" data-meta="Zahrada a jaro · 24 dní" data-stitek="" data-review-id="demo-vzhled-velikonoce"><img src="img/nahledy/velikonoce.webp" alt="" width="60" height="75" decoding="async"></button>
-          <button type="button" class="vz-th" data-theme="raketa" aria-pressed="false" aria-label="Odpočet ke startu" title="Odpočet ke startu" data-kat="Kdykoli během roku" data-meta="Stavebnice · 10 dní" data-stitek="" data-review-id="demo-vzhled-raketa"><img src="img/nahledy/raketa.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="spani" aria-pressed="false" aria-label="7 nocí pro spánek" title="7 nocí pro spánek" data-kat="Kdykoli během roku" data-meta="Bytový textil · 7 nocí" data-stitek="" data-review-id="demo-vzhled-spani"><img src="img/nahledy/spani.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="pas" aria-pressed="false" aria-label="Cestovní pas" title="Cestovní pas" data-kat="Kdykoli během roku" data-meta="Duty free na hranici · 14 dní" data-stitek="" data-review-id="demo-vzhled-pas"><img src="img/nahledy/pas.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="chalupa" aria-pressed="false" aria-label="Víkendy na chalupě" title="Víkendy na chalupě" data-kat="Kdykoli během roku" data-meta="Chaty a chalupy · 8 víkendů" data-stitek="" data-review-id="demo-vzhled-chalupa"><img src="img/nahledy/chalupa.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
-          <button type="button" class="vz-th" data-theme="vzorky" aria-pressed="false" aria-label="Archiv v barvách" title="Archiv v barvách" data-kat="Kdykoli během roku" data-meta="Prémiový nábytek · 8 dní" data-stitek="" data-review-id="demo-vzhled-vzorky"><img src="img/nahledy/vzorky.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
+          <button type="button" class="vz-th" data-theme="raketa" aria-pressed="false" aria-label="Odpočet ke startu" title="Odpočet ke startu" data-kat="Kdykoli během roku" data-meta="Stavebnice · 10 dní" data-stitek="" data-review-id="demo-vzhled-raketa"><img src="img/nahledy/raketa.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="spani" aria-pressed="false" aria-label="7 nocí pro spánek" title="7 nocí pro spánek" data-kat="Kdykoli během roku" data-meta="Bytový textil · 7 nocí" data-stitek="" data-review-id="demo-vzhled-spani"><img src="img/nahledy/spani.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="pas" aria-pressed="false" aria-label="Cestovní pas" title="Cestovní pas" data-kat="Kdykoli během roku" data-meta="Duty free na hranici · 14 dní" data-stitek="" data-review-id="demo-vzhled-pas"><img src="img/nahledy/pas.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="chalupa" aria-pressed="false" aria-label="Víkendy na chalupě" title="Víkendy na chalupě" data-kat="Kdykoli během roku" data-meta="Chaty a chalupy · 8 víkendů" data-stitek="" data-review-id="demo-vzhled-chalupa"><img src="img/nahledy/chalupa.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="vzorky" aria-pressed="false" aria-label="Archiv v barvách" title="Archiv v barvách" data-kat="Kdykoli během roku" data-meta="Prémiový nábytek · 8 dní" data-stitek="" data-review-id="demo-vzhled-vzorky"><img src="img/nahledy/vzorky.webp" alt="" width="60" height="75" decoding="async"></button>
         </div></div>
       </div>
     </div>
@@ -2604,7 +2618,7 @@
       document.getElementById('vz-cap-m').textContent = vyb.getAttribute('data-meta');
       var st = document.getElementById('vz-cap-s'); st.textContent = vyb.getAttribute('data-stitek'); st.hidden = !st.textContent;
       // keep the chosen thumbnail visible in the scrollable strip without scrolling the page
-      var pas = vyb.closest('.vz-strip'), pr = pas.getBoundingClientRect(), vr = vyb.getBoundingClientRect();
+      var pas = vyb.closest('.vz-thumbs'), pr = pas.getBoundingClientRect(), vr = vyb.getBoundingClientRect();
       if (vr.left < pr.left || vr.right > pr.right) pas.scrollLeft += vr.left - pr.left - (pr.width - vr.width) / 2;
     }
     zavriKartu();
@@ -2620,6 +2634,34 @@
     tip.innerHTML = '<b>' + btn.getAttribute('aria-label') + '</b><small>' + btn.getAttribute('data-meta') + '</small>';
     btn.removeAttribute('title');
     btn.parentNode.insertBefore(w, btn); w.appendChild(btn); w.appendChild(tip);
+    // the tooltip is position: fixed, so place it under the thumbnail and keep it on screen
+    function umisti() {
+      var r = w.getBoundingClientRect(), pul = tip.offsetWidth / 2, x = Math.max(10 + pul, Math.min(innerWidth - 10 - pul, r.left + r.width / 2));
+      tip.style.left = x + 'px'; tip.style.top = (r.bottom + 10) + 'px'; tip.style.setProperty('--sip', (r.left + r.width / 2 - x) + 'px');
+    }
+    w.addEventListener('mouseenter', umisti); btn.addEventListener('focus', umisti);
+  });
+  // each look group is its own carousel, with arrows once it overflows
+  var SIP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M';
+  Array.prototype.forEach.call(document.querySelectorAll('.vz-set'), function (set) {
+    var row = set.querySelector('.vz-thumbs'), k = set.querySelector('.vz-k'), head = document.createElement('div');
+    head.className = 'vz-head'; set.insertBefore(head, k); head.appendChild(k);
+    head.insertAdjacentHTML('beforeend', '<span class="vz-nav"><button type="button" class="vz-arr" data-smer="-1" aria-label="Předchozí vzhledy">' + SIP + '15 6l-6 6 6 6"/></svg></button><button type="button" class="vz-arr" data-smer="1" aria-label="Další vzhledy">' + SIP + '9 6l6 6-6 6"/></svg></button></span>');
+    set.style.flexGrow = row.children.length;
+    var sip = head.querySelectorAll('.vz-arr');
+    function stav() {
+      var max = row.scrollWidth - row.clientWidth, x = row.scrollLeft;
+      set.classList.toggle('over', max > 2);
+      sip[0].disabled = x < 2; sip[1].disabled = x > max - 2;
+      row.classList.toggle('fade-l', x > 2); row.classList.toggle('fade-r', x < max - 2);
+    }
+    Array.prototype.forEach.call(sip, function (b) {
+      b.addEventListener('click', function () {
+        var klid = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+        row.scrollBy({ left: +b.getAttribute('data-smer') * row.clientWidth * 0.8, behavior: klid ? 'auto' : 'smooth' });
+      });
+    });
+    row.addEventListener('scroll', stav, { passive: true }); addEventListener('resize', stav); stav();
   });
   var frame = document.getElementById('demo-frame');
   Array.prototype.forEach.call(document.querySelectorAll('.seg button[data-device]'), function (btn) {
