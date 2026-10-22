@@ -93,15 +93,17 @@
   /* look picker: no box; big centred thumbnails, the caption bar docks onto the monitor bezel */
   #ukazka .demo-bar { background: transparent; border: 0; border-radius: 0; padding: 0; margin: 8px 0 0; box-shadow: none; }
   #ukazka .vz-strip { justify-content: flex-start; gap: 28px; margin: 0 0 22px; padding: 22px 26px 26px; border: 1.5px dashed rgba(10,10,10,.26); border-radius: 24px; background: var(--paper-50); }
-  #ukazka .vz-k { text-align: left; margin: 0 0 14px 2px; font-size: 16px; font-weight: 600; letter-spacing: -0.015em; text-transform: none; color: var(--ink); }
-  #ukazka .vz-thumbs { gap: 10px; }
+  #ukazka .vz-head { margin: 0 0 14px 2px; }
+  #ukazka .vz-k { text-align: left; margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.015em; text-transform: none; color: var(--ink); }
+  #ukazka .vz-thumbs { gap: 10px; padding: 12px 8px 26px; margin: -12px -8px -26px; scroll-padding: 8px; }
+  #ukazka .vz-arr { width: 32px; height: 32px; border-color: rgba(10,10,10,.18); background: var(--paper-50); }
+  #ukazka .vz-arr svg { width: 16px; height: 16px; }
   #ukazka .vz-sep { margin: 30px 0 0; width: 0; background: none; border-left: 1.5px dashed rgba(10,10,10,.22); }
   /* inactive: muted and desaturated; active: full colour, lifted, red ring and a check badge */
   #ukazka .vz-th { width: 74px; height: 92px; border-radius: 14px; opacity: .58; filter: grayscale(.85); box-shadow: 0 0 0 1px rgba(10,10,10,.08); transition: opacity .4s ease, filter .4s ease, translate .6s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease; }
   #ukazka .vz-th:hover { opacity: .95; filter: none; translate: 0 -3px; }
   #ukazka .vz-th[aria-pressed="true"] { opacity: 1; filter: none; translate: 0 -6px; box-shadow: 0 0 0 3px var(--paper-50), 0 0 0 6px var(--accent), 0 18px 30px -12px rgba(10,10,10,.5); }
   #ukazka .vz-th[aria-pressed="true"]::after { content: ""; position: absolute; left: 5px; bottom: 5px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat; box-shadow: 0 0 0 2px #fff, 0 3px 8px rgba(0,0,0,.3); }
-  #ukazka .vz-new { width: 9px; height: 9px; }
   #ukazka .vz-cap { padding: 14px 6px; border-top: 0; }
   #ukazka .vz-cap strong { font-size: 20px; letter-spacing: -0.02em; }
   @media (min-width: 900px) {
