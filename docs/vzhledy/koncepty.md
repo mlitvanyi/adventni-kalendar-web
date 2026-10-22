@@ -85,6 +85,8 @@ Warm, cosy Scandinavian bedroom at dusk, photographed straight-on from the foot 
 ---
 
 ## 3. Duty free na hranici (Travel Free): „Cestovní pas“ ⭐ alternatíva iného layoutu
+**Stav:** postavené (vzhľad `pas`). Higgsfield robí len stôl s cestovnými vecami po okrajoch (GPT Image 2.5, high, 2k, 2,75 kreditu, prvý pokus, `img/pas-stul.webp`). Pas, guilloche, 14 razítok s atramentovým okrajom, listovanie dvojstrán a záverečné razítko „PAS JE PLNÝ“ sú v kóde.
+
 **Klient (anonymne):** sieť duty-free predajní na hraniciach (potraviny, káva, čokoláda, kozmetika a darčekové koše).
 **Príležitosť:** letná sezóna ciest / výročie predajní.
 **Dĺžka:** 14 dní.
