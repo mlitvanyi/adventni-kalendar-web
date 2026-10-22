@@ -10,6 +10,21 @@ Poznámka od Michala, 22. 10. 2026. Robí sa oddelene od nových vzhľadov kalen
   - Hlavný nadpis má sám povedať, čo sekcia robí, a nemá odkazovať na číslo alebo názov sekcie.
 - **Hlavička:** hneď musí byť jasné, že ide o kalendár. Namiesto stromčeka dať animovaný kalendár v kóde (pozri `docs/vzhledy/koncepty.md`, moodboard 01).
 
+## Inšpirácia: givingli.com (Michalovi sa veľmi páči)
+- **Hero:** veľký centrovaný popis, okolo neho rozhádzané obrázky v rôznej rotácii. U nás to budú screenshoty našich kalendárov, napríklad náhľady z `img/nahledy/` alebo väčšie výrezy scén.
+- **Pod textom dve CTA:** jedna na demo ukážku (`#ukazka`), druhá na kontakt alebo ponuku.
+- **Sekcie:** striedajú sa text a obrázok, je v nich jednoduchosť a krátke, jasné nadpisy a texty doplnené obrázkami.
+- Navrhnúť, čo by sme do takých sekcií dali: vzhľady, ako to funguje, administrácia, výsledky a kontakt. Dnešný obsah zostáva, mení sa forma.
+
+## Dizajn systém PragueBest (z neho vychádzať)
+- **Dočasná stránka:** https://praguebest-cz-nklywilr6-praguebests-projects.vercel.app/produkty/weby
+- **Lokálne repo:** `C:\_WWW\PRAGUEBEST\website` (Astro, čisté CSS custom properties, bez Tailwindu).
+  - Tokeny: `src/styles/tokens/` (primitívy aj sémantické), globálne štýly v `src/styles/global.css`.
+  - Popis: `docs/design-system.md`, zoznam toho, čo nerobiť: `docs/dont.md`.
+  - Playground tokenov: `npm run dev` → `http://localhost:4321/tokens`.
+  - Písmo Satoshi (self-hosted, `public/fonts/satoshi/`), Inter ako záloha.
+- Givingli je tomuto dizajn systému veľmi podobné, takže smer sedí.
+
 ## Čo platí ďalej
 - Obsah a význam textov ostávajú. Meníme formu, poradie a vizuál, nie posolstvo.
 - Zmeny landing page sa držia oddelene od vzhľadov kalendára, aby bolo vidno, čo sa zmenilo.
