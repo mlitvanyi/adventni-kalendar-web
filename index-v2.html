@@ -1338,6 +1338,8 @@
   section::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); background: var(--band, transparent); }
   #ukazka, #srovnani, #aplikace { --band: var(--paper-50); }
   #administrace { --band: var(--paper-200); }
+  /* clear the monitor stand and its shadow before the feature list */
+  @media (min-width: 900px) { #administrace .kd-frame { margin-bottom: 112px; } }
   #prinos, #postup { --band: var(--red-500); }
   #okenko { --band: var(--paper-100); }
   #kontakt { --band: var(--ink-900); }
