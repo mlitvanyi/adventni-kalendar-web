@@ -62,7 +62,7 @@ Rozhoduje, čo sa má hýbať a ako presne musí sedieť počet okienok. **Všet
 ---
 
 ## 2. Bytový textil a doplnky: „7 nocí pro lepší spánek“
-**Stav:** postavené (vzhľad `spani`). Obrázok vygenerovaný na prvý pokus: GPT Image 2.5, high, 2k, 2,75 kreditu, uložený ako `img/spani.webp` (1440×1800, ~200 kB). Okienka sú predmety v izbe, mesiac, hviezdy, para, lampa a sviečka sú v kóde. Siedma noc ukáže úplnok a „Dobrou noc“.
+**Stav:** postavené (vzhľad `spani`). Obrázok vygenerovaný na prvý pokus: GPT Image 2.5, high, 2k, 2,75 kreditu, uložený ako `img/spani.webp` (1440×1800, ~200 kB). Farby podľa MK Ložkoviny (hnedá #483628, zlatá #c3a15a), bez loga. Okienka sú predmety v izbe, mesiac, hviezdy, para, lampa a sviečka sú v kóde. Siedma noc ukáže úplnok a „Dobrou noc“.
 
 **Klient (anonymne):** e-shop s posteľnou bielizňou a bytovými doplnkami.
 **Príležitosť:** uvedenie novej kolekcie / Svetový deň spánku (marec) / jesenná výmena perín.
@@ -85,7 +85,7 @@ Warm, cosy Scandinavian bedroom at dusk, photographed straight-on from the foot 
 ---
 
 ## 3. Duty free na hranici (Travel Free): „Cestovní pas“ ⭐ alternatíva iného layoutu
-**Stav:** postavené (vzhľad `pas`). Higgsfield robí len stôl s cestovnými vecami po okrajoch (GPT Image 2.5, high, 2k, 2,75 kreditu, prvý pokus, `img/pas-stul.webp`). Pas, guilloche, 14 razítok s atramentovým okrajom, listovanie dvojstrán a záverečné razítko „PAS JE PLNÝ“ sú v kóde.
+**Stav:** postavené (vzhľad `pas`). Higgsfield robí len stôl s cestovnými vecami po okrajoch (GPT Image 2.5, high, 2k, 2,75 kreditu, prvý pokus, `img/pas-stul.webp`). Farby podľa Travel Free (červená #e30613, grafit #242527, zlatá #f1c86f), bez loga. Razítka sú anonymné pobočky na hraniciach (HRANICE CZ/DE, CZ/AT), nie mestá. Pas, guilloche, 14 razítok s atramentovým okrajom, listovanie dvojstrán a záverečné razítko „PAS JE PLNÝ“ sú v kóde.
 
 **Klient (anonymne):** sieť duty-free predajní na hraniciach (potraviny, káva, čokoláda, kozmetika a darčekové koše).
 **Príležitosť:** letná sezóna ciest / výročie predajní.
@@ -165,3 +165,6 @@ Je to čisté SVG/CSS, bez Higgsfieldu a bez videa.
 1. Úplne iný layout má koncept 1 (raketa, celá v kóde). Je to prvý postavený vzhľad a nastavuje latku kvality pre ostatné.
 2. Je v poriadku hybrid v koncepte 5 (pozadie z Higgsfieldu, obálky v kóde)?
 3. Poradie generovania: navrhujem 1 → 4 → 2 → 3 → 5.
+
+## Prepínač vzhľadov
+Kartičky s náhľadom (`img/nahledy/*.webp`, 240×300) v dvoch skupinách: **Vánoce a advent** a **Kdykoli během roku**. Štítok „Skutečná kampaň“ označuje Fotoškodu a Harfu. Štítok „Nový návrh“ je interný a pred publikáciou sa odstráni (trieda `.vz-tag.new`). Náhľady sa robia screenshotom `#demo-stage > *` cez Playwright a orezom na 4:5.

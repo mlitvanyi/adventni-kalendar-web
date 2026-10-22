@@ -181,6 +181,32 @@
   .demo-bar .grp.device .seg button { background: #f4f4f5; border-color: transparent; }
   .demo-bar .grp.device .seg button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); }
 
+  /* výběr vzhledu: karty s náhledem */
+  .vz { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; margin: 0 0 18px; }
+  .vz-grp { min-width: 0; }
+  .vz-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 10px; }
+  .vz-h .lbl { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .vz-p { font-size: 13px; color: var(--ink-3); }
+  .vz-row { display: grid; grid-template-columns: repeat(5, minmax(0, 136px)); gap: 10px; }
+  .vz-card { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 3px; min-width: 0; padding: 6px 6px 9px; border: 1.5px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+  .vz-card:hover { border-color: var(--ink-4); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.08); }
+  .vz-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .vz-card[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent), 0 10px 22px rgba(0,0,0,.08); }
+  .vz-img { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: #f1f1f3; margin-bottom: 6px; }
+  .vz-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+  .vz-card:hover .vz-img img { transform: scale(1.04); }
+  .vz-card[aria-pressed="true"] .vz-img::after { content: ""; position: absolute; right: 7px; top: 7px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 14px no-repeat; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+  .vz-tag { position: absolute; left: 7px; bottom: 7px; padding: 3px 7px; border-radius: 100px; background: rgba(20,20,26,.78); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .02em; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  /* internal marker for new proposals: remove these tags before publishing */
+  .vz-tag.new { background: var(--accent); }
+  .vz-t { padding: 0 3px; font-size: 13px; font-weight: 750; line-height: 1.2; }
+  .vz-m { padding: 0 3px; font-size: 11.5px; line-height: 1.3; color: var(--ink-3); }
+  .demo-bar:has(> .grp.device:only-child) { justify-content: flex-end; margin-bottom: 14px; }
+  @media (max-width: 860px) {
+    .vz-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin: 0 -16px; padding: 2px 16px 8px; scrollbar-width: thin; }
+    .vz-card { flex: 0 0 116px; scroll-snap-align: start; }
+  }
+  @media (prefers-reduced-motion: reduce) { .vz-card, .vz-img img { transition: none; } .vz-card:hover { transform: none; } .vz-card:hover .vz-img img { transform: none; } }
   .demo-bar input[type=range] { accent-color: var(--accent); width: 170px; }
   .demo-bar output { font-weight: 800; font-size: 15px; min-width: 28px; display: inline-block; }
   .demo-note { font-size: 13px; color: var(--ink-3); margin: 10px 0 0; }
@@ -318,8 +344,10 @@
   .demo .rk-start { align-self: center; margin: -4px 0 10px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; color: #1f5fbf; text-decoration: underline; cursor: pointer; }
   @media (prefers-reduced-motion: reduce) { .demo .rk .rk-l.today, .demo .rk .rk-l.drop, .demo .rk .rk-ring, .demo .dil.today, .demo .rk.launch .rk-ship, .demo .rk.launch .rk-flame { animation: none; } .demo .rk.launch .rk-done { animation: none; opacity: 1; } }
   /* téma: 7 nocí pro lepší spánek (fotka z Higgsfieldu, měsíc a světla v kódu) */
-  .demo[data-theme="spani"] { --d-bg: #1d2638; --d-ink: #f5efe6; --d-ink-2: #b9c0cf; --d-today: #ffcf8a; --d-today-ink: #2a2016; --d-btn: #ffcf8a; --d-btn-ink: #2a2016; --d-font: Georgia, 'Times New Roman', serif; --d-card: rgba(255,255,255,.06); --d-card-line: rgba(255,255,255,.13); }
-  .demo .scene.spani { aspect-ratio: 4 / 5; max-width: 480px; background: #1d2638 url('img/spani.webp') center / cover no-repeat; }
+  .demo[data-theme="spani"] { --d-bg: #f5f1ec; --d-ink: #483628; --d-ink-2: #7d6b5c; --d-today: #c3a15a; --d-today-ink: #fff; --d-btn: #c3a15a; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #e2dfdd; }
+  .demo[data-theme="spani"] .d-title { font-weight: 800; letter-spacing: -0.025em; }
+  .demo[data-theme="spani"] .d-btn { border-radius: 100px; }
+  .demo .scene.spani { aspect-ratio: 4 / 5; max-width: 480px; background: #483628 url('img/spani.webp') center / cover no-repeat; }
   .demo .scene.spani::after { content: ""; position: absolute; inset: 0; background: #0b1226; opacity: 0; pointer-events: none; transition: opacity 1.6s ease; }
   .demo .scene.spani.finale::after { opacity: .5; }
   .demo .scene.spani .sp-fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
@@ -335,39 +363,40 @@
   .demo .scene.spani.finale .sp-done { opacity: 1; }
   .demo .scene.spani.finale .sp-lamp, .demo .scene.spani.finale .sp-candle, .demo .scene.spani.finale .sp-steam { opacity: 0; animation: none; transition: opacity 1.2s; }
   .demo .scene.spani .win { z-index: 3; border-radius: 22px; background: transparent; transition: background .4s ease, box-shadow .4s ease; }
-  .demo .scene.spani .win .b { min-width: 34px; height: 28px; line-height: 28px; padding: 0 9px; border-radius: 6px; background: #f5efe6; color: #3b3326; font-family: Georgia, serif; font-size: 14px; font-weight: 700; outline: 1.5px dashed #b9a98c; outline-offset: -5px; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
+  .demo .scene.spani .win .b { min-width: 34px; height: 28px; line-height: 28px; padding: 0 9px; border-radius: 6px; background: #fff; color: #483628; font-family: 'Inter', Arial, sans-serif; font-size: 13.5px; font-weight: 800; outline: 1.5px dashed #c3a15a; outline-offset: -5px; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
   .demo .scene.spani .win:hover { box-shadow: inset 0 0 0 2px rgba(245,239,230,.75); }
-  .demo .scene.spani .win.locked .b { background: rgba(245,239,230,.72); color: #6b6455; }
+  .demo .scene.spani .win.locked .b { background: rgba(255,255,255,.75); color: #7d6b5c; }
   .demo .scene.spani .win.missed { background: radial-gradient(closest-side, rgba(12,18,34,.55), rgba(12,18,34,0)); }
   .demo .scene.spani .win.missed .b { background: #8b8a86; color: #e7e3da; text-decoration: line-through; outline-color: #b5b2aa; }
-  .demo .scene.spani .win.today { background: radial-gradient(closest-side, rgba(255,207,138,.32), rgba(255,207,138,0)); box-shadow: inset 0 0 0 2px rgba(255,207,138,.9), 0 0 34px 6px rgba(255,190,110,.45); animation: spGlow 2.2s ease-in-out infinite; }
-  .demo .scene.spani .win.today .b { background: #ffcf8a; color: #2a2016; outline-color: #b07a2a; }
-  @keyframes spGlow { 50% { box-shadow: inset 0 0 0 2px rgba(255,207,138,.5), 0 0 14px 2px rgba(255,190,110,.25); } }
+  .demo .scene.spani .win.today { background: radial-gradient(closest-side, rgba(195,161,90,.32), rgba(195,161,90,0)); box-shadow: inset 0 0 0 2px #c3a15a, 0 0 34px 6px rgba(195,161,90,.5); animation: spGlow 2.2s ease-in-out infinite; }
+  .demo .scene.spani .win.today .b { background: #c3a15a; color: #fff; outline-color: #fff; }
+  @keyframes spGlow { 50% { box-shadow: inset 0 0 0 2px rgba(195,161,90,.55), 0 0 14px 2px rgba(195,161,90,.25); } }
   .demo .scene.spani .win.open { background: radial-gradient(closest-side, rgba(255,214,150,.26), rgba(255,214,150,0)); box-shadow: none; }
-  .demo .scene.spani .win.open svg { width: 36px; height: 36px; padding: 8px; border-radius: 50%; background: #f5efe6; color: #3b3326; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
+  .demo .scene.spani .win.open svg { width: 36px; height: 36px; padding: 8px; border-radius: 50%; background: #c3a15a; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
   .demo .scene.spani .win.just { animation: spOn 1s ease-out both; }
   @keyframes spOn { 0% { box-shadow: 0 0 0 0 rgba(255,214,150,.9), inset 0 0 0 999px rgba(255,214,150,.45); } 100% { box-shadow: 0 0 60px 30px rgba(255,214,150,0), inset 0 0 0 999px rgba(255,214,150,0); } }
-  .demo .d-finale { position: absolute; left: 12px; top: 12px; z-index: 4; border: 0; border-radius: 100px; padding: 7px 14px; background: rgba(11,18,38,.72); color: #f5efe6; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .demo .d-finale { position: absolute; left: 12px; top: 12px; z-index: 4; border: 0; border-radius: 100px; padding: 7px 14px; background: rgba(72,54,40,.82); color: #fff; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
   @media (prefers-reduced-motion: reduce) { .demo .sp-star, .demo .sp-lamp, .demo .sp-candle, .demo .sp-steam path, .demo .scene.spani .win.today, .demo .scene.spani .win.just { animation: none; } }
 
   /* téma: Cestovní pas (stůl z Higgsfieldu, pas a razítka v kódu) */
-  .demo[data-theme="pas"] { --d-bg: #f4ede0; --d-ink: #3a1620; --d-ink-2: #7a5a4e; --d-today: #e8b53a; --d-today-ink: #2b1a10; --d-btn: #5b1e2d; --d-btn-ink: #fff; --d-font: Georgia, 'Times New Roman', serif; --d-card: #fffaf1; --d-card-line: #e4d6bf; }
+  .demo[data-theme="pas"] { --d-bg: #f6f4f4; --d-ink: #242527; --d-ink-2: #75727e; --d-today: #f1c86f; --d-today-ink: #242527; --d-btn: #e30613; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #e4e1e1; }
+  .demo[data-theme="pas"] .d-title { font-weight: 900; letter-spacing: -0.03em; }
   .demo .scene.pas-scene { aspect-ratio: 4 / 5; max-width: 480px; background: #b07a3e url('img/pas-stul.webp') center / cover no-repeat; }
-  .demo .pas { position: absolute; left: 9%; width: 82%; top: 21%; aspect-ratio: 176 / 124; padding: 9px; border-radius: 12px; background: linear-gradient(160deg, #6e2536, #4a1523); box-shadow: 0 22px 34px rgba(50,25,5,.45), 0 3px 6px rgba(50,25,5,.3); display: grid; grid-template-columns: 1fr 1fr; perspective: 1800px; }
-  .demo .pas .pg { position: relative; min-width: 0; background-color: #f6efdf; background-image: repeating-radial-gradient(circle at 18% 28%, rgba(91,30,45,0) 0 7px, rgba(91,30,45,.05) 7px 8px), repeating-radial-gradient(circle at 82% 82%, rgba(41,82,163,0) 0 9px, rgba(41,82,163,.045) 9px 10px); padding: 7%; display: flex; flex-direction: column; }
+  .demo .pas { position: absolute; left: 9%; width: 82%; top: 21%; aspect-ratio: 176 / 124; padding: 9px; border-radius: 12px; background: linear-gradient(160deg, #e30613, #a6040e); box-shadow: 0 22px 34px rgba(50,25,5,.45), 0 3px 6px rgba(50,25,5,.3); display: grid; grid-template-columns: 1fr 1fr; perspective: 1800px; }
+  .demo .pas .pg { position: relative; min-width: 0; background-color: #fbf9f6; background-image: repeating-radial-gradient(circle at 18% 28%, rgba(227,6,19,0) 0 7px, rgba(227,6,19,.045) 7px 8px), repeating-radial-gradient(circle at 82% 82%, rgba(36,37,39,0) 0 9px, rgba(36,37,39,.04) 9px 10px); padding: 7%; display: flex; flex-direction: column; }
   .demo .pas .pg-l { border-radius: 6px 0 0 6px; box-shadow: inset -16px 0 18px -14px rgba(70,35,10,.4); }
   .demo .pas .pg-r { border-radius: 0 6px 6px 0; box-shadow: inset 16px 0 18px -14px rgba(70,35,10,.4); }
-  .demo .pg-h { display: flex; justify-content: space-between; font-family: var(--mono); font-size: clamp(7px, .9vw, 10px); letter-spacing: .14em; color: rgba(91,30,45,.55); font-weight: 700; margin-bottom: 6%; }
+  .demo .pg-h { display: flex; justify-content: space-between; font-family: var(--mono); font-size: clamp(7px, .9vw, 10px); letter-spacing: .14em; color: rgba(36,37,39,.5); font-weight: 700; margin-bottom: 6%; }
   .demo .pg-g { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8%; }
-  .demo .raz { position: relative; min-width: 0; border: 1.5px dashed rgba(91,30,45,.3); border-radius: 8px; background: transparent; padding: 0; font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: rgba(91,30,45,.55); transition: border-color .2s ease; }
-  .demo .raz:hover { border-color: rgba(91,30,45,.6); }
-  .demo .raz .pas-n { font-family: Georgia, serif; font-size: clamp(14px, 2vw, 22px); font-weight: 700; line-height: 1; }
+  .demo .raz { position: relative; min-width: 0; border: 1.5px dashed rgba(36,37,39,.25); border-radius: 8px; background: transparent; padding: 0; font: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: rgba(36,37,39,.5); transition: border-color .2s ease; }
+  .demo .raz:hover { border-color: rgba(227,6,19,.6); }
+  .demo .raz .pas-n { font-family: 'Inter', Arial, sans-serif; font-weight: 900; font-size: clamp(14px, 2vw, 22px); font-weight: 700; line-height: 1; }
   .demo .raz .pas-s { display: flex; max-width: 100%; overflow: hidden; font-size: clamp(6.5px, .8vw, 9.5px); letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
   .demo .raz .pas-s svg { width: 12px; height: 12px; }
   .demo .raz.missed { color: rgba(110,100,95,.55); border-color: rgba(110,100,95,.3); }
   .demo .raz.missed .pas-n { text-decoration: line-through; }
-  .demo .raz.today { border: 2px solid #e8b53a; background: rgba(232,181,58,.18); color: #7a4b06; animation: pasPulse 1.8s ease-in-out infinite; }
-  @keyframes pasPulse { 50% { box-shadow: 0 0 0 6px rgba(232,181,58,.28); } }
+  .demo .raz.today { border: 2px solid #f1c86f; background: rgba(241,200,111,.22); color: #8a6412; animation: pasPulse 1.8s ease-in-out infinite; }
+  @keyframes pasPulse { 50% { box-shadow: 0 0 0 6px rgba(241,200,111,.35); } }
   .demo .raz.open { border-color: transparent; }
   .demo .pas-raz { position: absolute; left: -8%; top: -8%; width: 116%; height: 116%; transform: rotate(var(--rot)); mix-blend-mode: multiply; opacity: .9; pointer-events: none; }
   .demo .raz.just .pas-raz { animation: pasStamp .45s cubic-bezier(.3,1.5,.5,1) both; }
@@ -378,8 +407,8 @@
   .demo .pg-emb svg { width: 72%; height: auto; }
   .demo .pas-velke { position: absolute; left: 50%; top: 50%; width: 54%; margin: -15% 0 0 -27%; transform: rotate(-11deg); filter: drop-shadow(0 1px 0 rgba(246,239,223,.9)); z-index: 3; pointer-events: none; animation: pasVelke .55s .3s cubic-bezier(.3,1.5,.5,1) both; }
   @keyframes pasVelke { 0% { transform: rotate(-24deg) scale(2); opacity: 0; } 100% { transform: rotate(-11deg) scale(1); opacity: .92; } }
-  .demo .pas-nav { position: absolute; left: 50%; top: 70.5%; translate: -50% 0; display: flex; align-items: center; gap: 10px; padding: 5px; border-radius: 100px; background: rgba(43,22,12,.74); color: #f6efdf; font-family: var(--mono); font-size: 11.5px; font-weight: 700; white-space: nowrap; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
-  .demo .pas-sip { width: 30px; height: 30px; border: 0; border-radius: 50%; background: #f6efdf; color: #5b1e2d; font-size: 18px; line-height: 1; cursor: pointer; }
+  .demo .pas-nav { position: absolute; left: 50%; top: 70.5%; translate: -50% 0; display: flex; align-items: center; gap: 10px; padding: 5px; border-radius: 100px; background: rgba(36,37,39,.82); color: #fff; font-family: var(--mono); font-size: 11.5px; font-weight: 700; white-space: nowrap; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .demo .pas-sip { width: 30px; height: 30px; border: 0; border-radius: 50%; background: #fff; color: #e30613; font-size: 18px; line-height: 1; cursor: pointer; }
   .demo .pas-sip:disabled { opacity: .35; cursor: default; }
   .demo .pas-hold, .demo .pas-turn { position: absolute; top: 9px; bottom: 9px; width: calc(50% - 9px); z-index: 5; pointer-events: none; }
   .demo .pas-hold.l, .demo .pas-turn.l { left: 9px; }
@@ -1133,25 +1162,28 @@
   <p class="lead">Letos už kalendář chystáme pro dva klienty: adventní pro prodejce fototechniky a narozeninový ke 30 letům sportovního e&#8209;shopu. Každý vypadá úplně jinak. Přidali jsme návrhy, jak by mohl vypadat ten váš: sněhulák s okénky z knoflíků, vánoční pinball, velikonoční kraslici nebo oslavu výročí firmy.</p>
   <p>Přepněte vzhled a&nbsp;porovnejte je. Dnešní okénko svítí.</p>
 
+  <div class="vz" data-review-id="demo-vzhledy">
+    <div class="vz-grp"><div class="vz-h"><span class="lbl" id="lbl-vz-0">Vánoce a advent</span><span class="vz-p">Kalendář do Vánoc: 24 okének od 1. prosince.</span></div>
+      <div class="vz-row" role="group" aria-labelledby="lbl-vz-0">
+        <button type="button" class="vz-card" data-theme="fotoskoda" aria-pressed="true" data-review-id="demo-vzhled-fotoskoda"><span class="vz-img"><img src="img/nahledy/fotoskoda.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag">Skutečná kampaň</span></span><span class="vz-t">Dům s okny</span><span class="vz-m">Fototechnika&nbsp;· 24 dní</span></button>
+        <button type="button" class="vz-card" data-theme="snehulak" aria-pressed="false" data-review-id="demo-vzhled-snehulak"><span class="vz-img"><img src="img/nahledy/snehulak.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Sněhulák a sobi</span><span class="vz-m">Jakýkoli e‑shop&nbsp;· 24 dní</span></button>
+        <button type="button" class="vz-card" data-theme="hracky" aria-pressed="false" data-review-id="demo-vzhled-hracky"><span class="vz-img"><img src="img/nahledy/hracky.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Vánoční pinball</span><span class="vz-m">Hračkářství&nbsp;· 24 dní</span></button>
+        <button type="button" class="vz-card" data-theme="jidlo" aria-pressed="false" data-review-id="demo-vzhled-jidlo"><span class="vz-img"><img src="img/nahledy/jidlo.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Dárkový koš</span><span class="vz-m">Delikatesy&nbsp;· 24 dní</span></button>
+        <button type="button" class="vz-card" data-theme="moda" aria-pressed="false" data-review-id="demo-vzhled-moda"><span class="vz-img"><img src="img/nahledy/moda.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Skříň se šuplíky</span><span class="vz-m">Móda&nbsp;· 24 dní</span></button>
+      </div>
+    </div>
+    <div class="vz-grp"><div class="vz-h"><span class="lbl" id="lbl-vz-1">Kdykoli během roku</span><span class="vz-p">Výročí, nová kolekce, sezóna. Délka podle kampaně.</span></div>
+      <div class="vz-row" role="group" aria-labelledby="lbl-vz-1">
+        <button type="button" class="vz-card" data-theme="harfa" aria-pressed="false" data-review-id="demo-vzhled-harfa"><span class="vz-img"><img src="img/nahledy/harfa.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag">Skutečná kampaň</span></span><span class="vz-t">Slavíme 30 let</span><span class="vz-m">Sportovní e‑shop&nbsp;· 30 dní</span></button>
+        <button type="button" class="vz-card" data-theme="velikonoce" aria-pressed="false" data-review-id="demo-vzhled-velikonoce"><span class="vz-img"><img src="img/nahledy/velikonoce.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Velikonoční kraslice</span><span class="vz-m">Zahrada a jaro&nbsp;· 24 dní</span></button>
+        <button type="button" class="vz-card" data-theme="raketa" aria-pressed="false" data-review-id="demo-vzhled-raketa"><span class="vz-img"><img src="img/nahledy/raketa.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag new">Nový návrh</span></span><span class="vz-t">Odpočet ke startu</span><span class="vz-m">Stavebnice&nbsp;· 10 dní</span></button>
+        <button type="button" class="vz-card" data-theme="spani" aria-pressed="false" data-review-id="demo-vzhled-spani"><span class="vz-img"><img src="img/nahledy/spani.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag new">Nový návrh</span></span><span class="vz-t">7 nocí pro spánek</span><span class="vz-m">Bytový textil&nbsp;· 7 nocí</span></button>
+        <button type="button" class="vz-card" data-theme="pas" aria-pressed="false" data-review-id="demo-vzhled-pas"><span class="vz-img"><img src="img/nahledy/pas.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag new">Nový návrh</span></span><span class="vz-t">Cestovní pas</span><span class="vz-m">Duty free na hranici&nbsp;· 14 dní</span></button>
+      </div>
+    </div>
+  </div>
+
   <div class="demo-bar" data-review-id="demo-ovladani">
-    <div class="grp"><span class="lbl" id="lbl-vzhled">Vzhled</span>
-      <div class="seg" role="group" aria-labelledby="lbl-vzhled">
-        <button type="button" data-theme="fotoskoda" aria-pressed="true" data-review-id="demo-vzhled-fotoskoda"><i style="background:#0d1f52"></i>Dům s okny</button>
-        <button type="button" data-theme="snehulak" aria-pressed="false" data-review-id="demo-vzhled-snehulak"><i style="background:#1d3a66"></i>Sněhulák a sobi</button>
-        <button type="button" data-theme="hracky" aria-pressed="false" data-review-id="demo-vzhled-hracky"><i style="background: linear-gradient(135deg,#ff0066 50%,#002651 50%)"></i>Hračkářství</button>
-        <button type="button" data-theme="jidlo" aria-pressed="false" data-review-id="demo-vzhled-jidlo"><i style="background:#b4452c"></i>Dárkový koš</button>
-        <button type="button" data-theme="moda" aria-pressed="false" data-review-id="demo-vzhled-moda"><i style="background:#2f6b3a"></i>Skříň se šuplíky</button>
-      </div>
-    </div>
-    <div class="grp"><span class="lbl" id="lbl-jindy">Jindy v roce</span>
-      <div class="seg" role="group" aria-labelledby="lbl-jindy">
-        <button type="button" data-theme="harfa" aria-pressed="false" data-review-id="demo-vzhled-harfa"><i style="background:#4ead9e"></i>Slavíme 30 let</button>
-        <button type="button" data-theme="velikonoce" aria-pressed="false" data-review-id="demo-vzhled-velikonoce"><i style="background:#8bc34a"></i>Velikonoce</button>
-        <button type="button" data-theme="raketa" aria-pressed="false" data-review-id="demo-vzhled-raketa"><i style="background: linear-gradient(135deg,#e3242b 50%,#1f5fbf 50%)"></i>Odpočet ke startu</button>
-        <button type="button" data-theme="spani" aria-pressed="false" data-review-id="demo-vzhled-spani"><i style="background: linear-gradient(135deg,#1d2638 50%,#ffcf8a 50%)"></i>7 nocí pro spánek</button>
-        <button type="button" data-theme="pas" aria-pressed="false" data-review-id="demo-vzhled-pas"><i style="background: linear-gradient(135deg,#5b1e2d 50%,#e8b53a 50%)"></i>Cestovní pas</button>
-      </div>
-    </div>
     <div class="grp device"><span class="lbl" id="lbl-zarizeni">Zobrazení</span>
       <div class="seg" role="group" aria-labelledby="lbl-zarizeni">
         <button type="button" data-device="desktop" aria-pressed="true" data-review-id="demo-zobrazeni-pocitac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Počítač</button>
@@ -1674,22 +1706,23 @@
   }
 
   // Cestovní pas: stůl z Higgsfieldu, pas, razítka a listování v kódu; 7 razítek na dvoustranu
-  var PAS = ['PRAHA', 'DRESDEN', 'WIEN', 'BRATISLAVA', 'BERLIN', 'MÜNCHEN', 'KRAKÓW', 'BUDAPEST', 'SALZBURG', 'LINZ', 'WROCŁAW', 'PASSAU', 'LEIPZIG', 'NÜRNBERG'];
-  var PAS_INK = ['#2952a3', '#2f7d4f', '#c8352e', '#6a3d9a', '#a8541e'];
+  // anonymous border-shop stamps: which border the branch sits on, no real place names
+  var PAS = ['CZ/DE', 'CZ/AT', 'CZ/DE', 'CZ/DE', 'CZ/AT', 'CZ/DE', 'CZ/AT', 'CZ/DE', 'CZ/AT', 'CZ/DE', 'CZ/DE', 'CZ/AT', 'CZ/DE', 'CZ/AT'];
+  var PAS_INK = ['#e30613', '#1d4e9e', '#242527', '#b8862b', '#e30613'];
   var pasStrana = 0;
   DARKY.pas = seznam([['sleva', 'Sleva 10 % na kávu'], ['darek', 'Čokoláda k nákupu nad 500 Kč'], ['sleva', 'Sleva 15 % na kosmetiku'], ['akce', 'Sladkosti 2 + 1 zdarma'], ['prodejna', 'Ochutnávka kávy na prodejně'], ['sleva', 'Sleva 20 % na parfémy'], ['doprava', 'Doprava zdarma na e‑shopu'], ['sleva', 'Sleva 10 % na dárkové koše'], ['darek', 'Cestovní taška k nákupu nad 1 000 Kč'], ['akce', 'Víkend slev na čokoládu'], ['sleva', 'Sleva 15 % na sýry a delikatesy'], ['prodejna', 'Balení dárků zdarma na prodejně'], ['sleva', 'Sleva 20 % na čaje a kávu'], ['darek', 'Velký cestovní koš k nákupu nad 2 000 Kč']], 14, 'DF');
-  TEMATA.pas = { dni: 14, dnes: 9, layout: 'pas', top: '', eyebrow: 'Duty free na hranici · léto na cestách', t: 'Cestovní pas plný razítek', l: 'Čtrnáct dní, čtrnáct zastávek. Každý den dostanete do' + NB + 'pasu razítko a' + NB + 'k' + NB + 'němu dárek z' + NB + 'naší prodejny na' + NB + 'hranici. Kdo nasbírá celý pas, toho čtrnáctý den čeká velký cestovní koš.', btn: 'Orazítkovat dnešní den', den: 'razítko', tip: 'Klikněte na' + NB + 'dnešní políčko v' + NB + 'pasu a' + NB + 'dostanete razítko s' + NB + 'dárkem.', finale: 'Ukázat 14. den: plný pas', odkryto: { 1: true, 2: true, 3: true, 5: true, 6: true, 8: true },
+  TEMATA.pas = { dni: 14, dnes: 9, layout: 'pas', top: '', eyebrow: 'Duty free na hranici · léto na cestách', t: 'Cestovní pas plný razítek', l: 'Čtrnáct dní, čtrnáct razítek z' + NB + 'našich prodejen na' + NB + 'hranicích s' + NB + 'Německem a' + NB + 'Rakouskem. Ke' + NB + 'každému razítku dárek. Kdo nasbírá celý pas, toho čtrnáctý den čeká velký cestovní koš.', btn: 'Orazítkovat dnešní den', den: 'razítko', tip: 'Klikněte na' + NB + 'dnešní políčko v' + NB + 'pasu a' + NB + 'dostanete razítko s' + NB + 'dárkem.', finale: 'Ukázat 14. den: plný pas', odkryto: { 1: true, 2: true, 3: true, 5: true, 6: true, 8: true },
     umi: ['Otevřít jde jen <strong>dnešní razítko</strong>. Propásnuté políčko zůstane v' + NB + 'pasu prázdné.', 'Délka podle kampaně: <strong>14 dní</strong>, celé prázdniny nebo advent. Pas se listuje jako opravdový.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba na' + NB + 'prodejně, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] };
-  var PAS_ZNAK = '<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#5b1e2d" stroke-width="2"><circle cx="50" cy="44" r="26"/><ellipse cx="50" cy="44" rx="11" ry="26"/><path d="M24 44h52M28 31h44M28 57h44"/></g><text x="50" y="88" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" letter-spacing="2" fill="#5b1e2d">DUTY FREE</text></svg>';
+  var PAS_ZNAK = '<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#e30613" stroke-width="2"><circle cx="50" cy="44" r="26"/><ellipse cx="50" cy="44" rx="11" ry="26"/><path d="M24 44h52M28 31h44M28 57h44"/></g><text x="50" y="88" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" letter-spacing="2" fill="#e30613">DUTY FREE</text></svg>';
   function pasRazitko(d) {
-    var c = PAS_INK[d * 3 % 5], m = PAS[d - 1], tvar = d % 4, id = 'pas-ink' + d, mono = 'font-family="JetBrains Mono, monospace" font-weight="700" fill="' + c + '" stroke="none"';
+    var c = PAS_INK[d * 3 % 5], m = 'HRANICE ' + PAS[d - 1], tvar = d % 4, id = 'pas-ink' + d, mono = 'font-family="JetBrains Mono, monospace" font-weight="700" fill="' + c + '" stroke="none"';
     var ic = ICO[DARKY.pas[d - 1].typ].replace('<svg ', '<svg x="44" y="44" width="32" height="32" ');
     var s = '<svg class="pas-raz" viewBox="0 0 120 120" aria-hidden="true" style="--rot:' + (d * 37 % 24 - 12) + 'deg"><defs><filter id="' + id + '" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="' + d + '"/><feDisplacementMap in="SourceGraphic" scale="3.5"/></filter>' +
       '<path id="' + id + 't" d="M16 60a44 44 0 0 1 88 0"/><path id="' + id + 'b" d="M10 60a50 50 0 0 0 100 0"/></defs><g filter="url(#' + id + ')" fill="none" stroke="' + c + '" style="color:' + c + '">';
     if (tvar === 0) s += '<circle cx="60" cy="60" r="56" stroke-width="4"/><circle cx="60" cy="60" r="37" stroke-width="1.5"/><text ' + mono + ' font-size="12" letter-spacing="1"><textPath href="#' + id + 't" startOffset="50%" text-anchor="middle">' + m + '</textPath></text><text ' + mono + ' font-size="10" letter-spacing="2"><textPath href="#' + id + 'b" startOffset="50%" text-anchor="middle">DEN ' + d + '</textPath></text>' + ic;
-    else if (tvar === 1) s += '<rect x="5" y="20" width="110" height="80" rx="9" stroke-width="4"/><rect x="12" y="27" width="96" height="66" rx="5" stroke-width="1.2"/><text x="60" y="47" text-anchor="middle" ' + mono + ' font-size="13" letter-spacing="1">' + m + '</text><path d="M20 54h80" stroke-width="1.2"/>' + ic.replace('x="44" y="44" width="32" height="32"', 'x="22" y="60" width="24" height="24"') + '<text x="82" y="80" text-anchor="middle" ' + mono + ' font-size="15">DEN ' + d + '</text>';
-    else if (tvar === 2) s += '<ellipse cx="60" cy="60" rx="57" ry="42" stroke-width="4"/><ellipse cx="60" cy="60" rx="49" ry="34" stroke-width="1.2"/><text x="60" y="50" text-anchor="middle" ' + mono + ' font-size="12.5" letter-spacing="1">' + m + '</text><text x="60" y="80" text-anchor="middle" ' + mono + ' font-size="17">DEN ' + d + '</text><path d="M30 58h60" stroke-width="1.2"/>';
-    else s += '<path d="M38 5h44l33 33v44l-33 33H38L5 82V38z" stroke-width="4"/><path d="M41 13h38l28 28v38l-28 28H41L13 79V41z" stroke-width="1.2"/><text x="60" y="38" text-anchor="middle" ' + mono + ' font-size="12" letter-spacing="1">' + m + '</text>' + ic.replace('x="44" y="44"', 'x="44" y="45"') + '<text x="60" y="96" text-anchor="middle" ' + mono + ' font-size="13">DEN ' + d + '</text>';
+    else if (tvar === 1) s += '<rect x="5" y="20" width="110" height="80" rx="9" stroke-width="4"/><rect x="12" y="27" width="96" height="66" rx="5" stroke-width="1.2"/><text x="60" y="47" text-anchor="middle" ' + mono + ' font-size="11.5">' + m + '</text><path d="M20 54h80" stroke-width="1.2"/>' + ic.replace('x="44" y="44" width="32" height="32"', 'x="22" y="60" width="24" height="24"') + '<text x="82" y="80" text-anchor="middle" ' + mono + ' font-size="15">DEN ' + d + '</text>';
+    else if (tvar === 2) s += '<ellipse cx="60" cy="60" rx="57" ry="42" stroke-width="4"/><ellipse cx="60" cy="60" rx="49" ry="34" stroke-width="1.2"/><text x="60" y="50" text-anchor="middle" ' + mono + ' font-size="11">' + m + '</text><text x="60" y="80" text-anchor="middle" ' + mono + ' font-size="17">DEN ' + d + '</text><path d="M30 58h60" stroke-width="1.2"/>';
+    else s += '<path d="M38 5h44l33 33v44l-33 33H38L5 82V38z" stroke-width="4"/><path d="M41 13h38l28 28v38l-28 28H41L13 79V41z" stroke-width="1.2"/><text x="60" y="38" text-anchor="middle" ' + mono + ' font-size="9">' + m + '</text>' + ic.replace('x="44" y="44"', 'x="44" y="45"') + '<text x="60" y="96" text-anchor="middle" ' + mono + ' font-size="13">DEN ' + d + '</text>';
     return s + '</g></svg>';
   }
   function pasPolicko(d) {
@@ -1706,7 +1739,7 @@
     var T = TEMATA.pas, sp = pasStrana, n = 0, k;
     for (k in odkryto) if (odkryto[k]) n++;
     if (finale) n = T.dni;
-    var velke = finale ? '<svg class="pas-velke" viewBox="0 0 240 120" aria-hidden="true"><defs><filter id="pas-ink-v"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.5"/></filter></defs><g filter="url(#pas-ink-v)" fill="none" stroke="#c8352e"><rect x="6" y="6" width="228" height="108" rx="10" fill="rgba(246,239,223,.82)" stroke="none"/><rect x="6" y="6" width="228" height="108" rx="10" stroke-width="6"/><rect x="16" y="16" width="208" height="88" rx="6" stroke-width="2"/><text x="120" y="56" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="25" fill="#c8352e" stroke="none" letter-spacing="2">PAS JE PLNÝ</text><text x="120" y="86" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="17" fill="#c8352e" stroke="none">Velký cestovní koš je váš</text></g></svg>' : '';
+    var velke = finale ? '<svg class="pas-velke" viewBox="0 0 240 120" aria-hidden="true"><defs><filter id="pas-ink-v"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.5"/></filter></defs><g filter="url(#pas-ink-v)" fill="none" stroke="#e30613"><rect x="6" y="6" width="228" height="108" rx="10" fill="rgba(246,239,223,.82)" stroke="none"/><rect x="6" y="6" width="228" height="108" rx="10" stroke-width="6"/><rect x="16" y="16" width="208" height="88" rx="6" stroke-width="2"/><text x="120" y="56" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="25" fill="#e30613" stroke="none" letter-spacing="2">PAS JE PLNÝ</text><text x="120" y="86" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="17" fill="#e30613" stroke="none">Velký cestovní koš je váš</text></g></svg>' : '';
     return '<div class="scene pas-scene' + (finale ? ' finale' : '') + '"><div class="pas' + (padajici ? ' thud' : '') + '" role="group" aria-label="Cestovní pas, strana ' + (sp + 1) + ' ze 2">' + pasStranka(sp, 0) + pasStranka(sp, 1) + velke + '</div>' +
       '<div class="pas-nav"><button type="button" class="pas-sip" data-sip="-1" aria-label="Předchozí dvoustrana"' + (sp === 0 ? ' disabled' : '') + '>‹</button><span>Strana ' + (sp + 1) + '/2 · razítka ' + n + '/' + T.dni + '</span><button type="button" class="pas-sip" data-sip="1" aria-label="Další dvoustrana"' + (sp === 1 ? ' disabled' : '') + '>›</button></div>' +
       '<button type="button" class="d-finale" data-review-id="demo-finale">' + T.finale + '</button></div>';
@@ -1791,7 +1824,7 @@
     if (nove) for (i = 0; i < 18; i++) { var a = i / 18 * Math.PI * 2, r = 120 + (i % 3) * 40; fx += '<i class="dc-fx" style="--x:' + Math.round(Math.cos(a) * r) + 'px;--y:' + Math.round(Math.sin(a) * r * 0.8) + 'px;--r:' + (i * 47 % 360) + 'deg;background:' + barvy[i % 4] + '"></i>'; }
     var zbyva = T.dni - d, pozn;
     if (tema === 'raketa') pozn = zbyva ? 'Dílek ' + d + ' je na' + NB + 'raketě. Do' + NB + 'startu ' + (zbyva === 1 ? 'zbývá 1' + NB + 'dílek.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'dílky.' : 'zbývá ' + zbyva + NB + 'dílků.') : 'Raketa je kompletní. Start!';
-    else if (tema === 'pas') pozn = zbyva ? 'Razítko je v' + NB + 'pasu. Do' + NB + 'plného pasu zbývá ' + dni(zbyva) + ', čtrnáctý den čeká velký cestovní koš.' : 'Pas je plný. Velký cestovní koš je váš.';
+    else if (tema === 'pas') pozn = zbyva ? 'Razítko prodejny na' + NB + 'hranici ' + PAS[d - 1] + ' je v' + NB + 'pasu. Do' + NB + 'plného pasu zbývá ' + dni(zbyva) + ', čtrnáctý den čeká velký cestovní koš.' : 'Pas je plný. Velký cestovní koš je váš.';
     else if (tema === 'spani') pozn = zbyva ? 'Do' + NB + 'úplňku ' + (zbyva === 1 ? 'zbývá 1' + NB + 'noc.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'noci.' : 'zbývá ' + zbyva + NB + 'nocí.') + ' Měsíc za' + NB + 'oknem roste s' + NB + 'každou odkrytou nocí.' : 'Úplněk. Dobrou noc!';
     else pozn = 'Platí do půlnoci. V' + NB + 'ostrém kalendáři přijde dárek i' + NB + 'e&#8209;mailem.';
     reveal.innerHTML = fx + '<div class="d-card" role="dialog" aria-modal="true" aria-labelledby="dc-t" data-review-id="demo-karta-darku">' +
@@ -1889,13 +1922,13 @@
     if (umiUl) umiUl.innerHTML = T.umi ? '<li>' + T.umi.join('</li><li>') + '</li>' : umiPuvodni;
     var im = document.getElementById('demo-hero-img');
     if (T.img) { im.src = T.img; im.hidden = false; } else { im.hidden = true; im.removeAttribute('src'); }
-    Array.prototype.forEach.call(document.querySelectorAll('.seg button[data-theme]'), function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-theme') === t ? 'true' : 'false'); });
+    Array.prototype.forEach.call(document.querySelectorAll('button[data-theme]'), function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-theme') === t ? 'true' : 'false'); });
     zavriKartu();
     kresliDekor(t); zprava(T.tip || 'Klikněte na' + NB + 'dnešní ' + T.den + ' a' + NB + 'odkryjte dárek.'); vykresli();
   }
   function zprava(t) { toast.textContent = t; }
 
-  Array.prototype.forEach.call(document.querySelectorAll('.seg button[data-theme]'), function (btn) { btn.addEventListener('click', function () { nastavTema(btn.getAttribute('data-theme')); }); });
+  Array.prototype.forEach.call(document.querySelectorAll('button[data-theme]'), function (btn) { btn.addEventListener('click', function () { nastavTema(btn.getAttribute('data-theme')); }); });
   var frame = document.getElementById('demo-frame');
   Array.prototype.forEach.call(document.querySelectorAll('.seg button[data-device]'), function (btn) {
     btn.addEventListener('click', function () {
