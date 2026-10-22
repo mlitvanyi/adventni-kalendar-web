@@ -209,7 +209,7 @@
   .vz-tip::before { content: ""; position: absolute; left: calc(50% + var(--sip, 0px)); bottom: 100%; margin-left: -7px; border: 7px solid transparent; border-bottom-color: #14141a; }
   .vz-tip b { display: block; font-size: 13px; font-weight: 800; line-height: 1.2; }
   .vz-tip small { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,255,255,.7); }
-  .vz-th-w:hover .vz-tip, .vz-th:focus-visible + .vz-tip { opacity: 1; visibility: visible; translate: -50% 0; transition-delay: .12s, .12s, 0s; }
+  .vz-tip.on { opacity: 1; visibility: visible; translate: -50% 0; transition-delay: .12s, .12s, 0s; }
   @media (hover: none) { .vz-tip { display: none; } }
   .vz-th:hover { opacity: 1; }
   .vz-th:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; opacity: 1; }
@@ -2349,13 +2349,16 @@
     w.className = 'vz-th-w'; tip.className = 'vz-tip'; tip.setAttribute('aria-hidden', 'true');
     tip.innerHTML = '<b>' + btn.getAttribute('aria-label') + '</b><small>' + btn.getAttribute('data-meta') + '</small>';
     btn.removeAttribute('title');
-    btn.parentNode.insertBefore(w, btn); w.appendChild(btn); w.appendChild(tip);
-    // the tooltip is position: fixed, so place it under the thumbnail and keep it on screen
+    btn.parentNode.insertBefore(w, btn); w.appendChild(btn); document.body.appendChild(tip);
+    // the tooltip lives in <body> (the carousel's edge mask would clip it), fixed under the thumbnail and kept on screen
     function umisti() {
       var r = w.getBoundingClientRect(), pul = tip.offsetWidth / 2, x = Math.max(10 + pul, Math.min(innerWidth - 10 - pul, r.left + r.width / 2));
       tip.style.left = x + 'px'; tip.style.top = (r.bottom + 10) + 'px'; tip.style.setProperty('--sip', (r.left + r.width / 2 - x) + 'px');
     }
-    w.addEventListener('mouseenter', umisti); btn.addEventListener('focus', umisti);
+    function skryj() { tip.classList.remove('on'); }
+    w.addEventListener('mouseenter', function () { umisti(); tip.classList.add('on'); }); w.addEventListener('mouseleave', skryj);
+    btn.addEventListener('focus', function () { umisti(); if (btn.matches(':focus-visible')) tip.classList.add('on'); }); btn.addEventListener('blur', skryj);
+    w.parentNode.addEventListener('scroll', skryj, { passive: true }); addEventListener('scroll', skryj, { passive: true });
   });
   // each look group is its own carousel, with arrows once it overflows
   var SIP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M';
