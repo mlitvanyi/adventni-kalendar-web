@@ -62,6 +62,8 @@ Rozhoduje, čo sa má hýbať a ako presne musí sedieť počet okienok. **Všet
 ---
 
 ## 2. Bytový textil a doplnky: „7 nocí pro lepší spánek“
+**Stav:** postavené (vzhľad `spani`). Obrázok vygenerovaný na prvý pokus: GPT Image 2.5, high, 2k, 2,75 kreditu, uložený ako `img/spani.webp` (1440×1800, ~200 kB). Okienka sú predmety v izbe, mesiac, hviezdy, para, lampa a sviečka sú v kóde. Siedma noc ukáže úplnok a „Dobrou noc“.
+
 **Klient (anonymne):** e-shop s posteľnou bielizňou a bytovými doplnkami.
 **Príležitosť:** uvedenie novej kolekcie / Svetový deň spánku (marec) / jesenná výmena perín.
 **Dĺžka:** 7 dní („nocí“).

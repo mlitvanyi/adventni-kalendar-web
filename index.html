@@ -193,10 +193,10 @@
   .demo .d-wrap { position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 28px; align-items: start; }
   #demo-stage { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 560px; margin: 0 auto; aspect-ratio: 4 / 5; }
   #demo-stage .scene { margin: 0; max-height: 100%; max-width: calc(100% * var(--sc-ar, 0.8) / 0.8); }
-  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa { --sc-ar: 0.8; }
+  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa, .demo .scene.spani { --sc-ar: 0.8; }
   .demo .scene.wardrobe { --sc-ar: 0.8003; }
   .demo .scene.basket { --sc-ar: 1.3333; }
-  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa) { --sc-ar: 0.8056; }
+  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa):not(.spani) { --sc-ar: 0.8056; }
   #demo-stage .grid { width: 100%; align-self: start; }
   .demo .scene.basket { width: 100%; }
   .demo .d-top { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--d-ink-2); min-height: 28px; }
@@ -257,7 +257,7 @@
   .demo .win, .demo .door, .demo .dil { cursor: pointer; }
   .demo .win:focus-visible, .demo .door:focus-visible, .demo .dil:focus-visible, .demo .d-btn:focus-visible { outline: 3px solid var(--d-today); outline-offset: 3px; }
   .demo .d-btn { cursor: pointer; }
-  .demo .door.just, .demo .scene:not(.basket):not(.wardrobe) .win.just { animation: dOdkryt .6s cubic-bezier(.3,1.3,.5,1) both; }
+  .demo .door.just, .demo .scene:not(.basket):not(.wardrobe):not(.spani) .win.just { animation: dOdkryt .6s cubic-bezier(.3,1.3,.5,1) both; }
   @keyframes dOdkryt { 0% { transform: perspective(500px) rotateY(0) scale(1); } 40% { transform: perspective(500px) rotateY(-75deg) scale(1.08); } 100% { transform: perspective(500px) rotateY(0) scale(1); } }
   .demo .shake { animation: dShake .45s ease both; }
   @keyframes dShake { 20% { translate: -4px 0; } 40% { translate: 4px 0; } 60% { translate: -3px 0; } 80% { translate: 2px 0; } }
@@ -317,6 +317,38 @@
   @keyframes rkPulse { 50% { box-shadow: inset 0 -5px 0 rgba(0,0,0,.12), 0 0 0 6px rgba(255,204,0,.35); } }
   .demo .rk-start { align-self: center; margin: -4px 0 10px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; color: #1f5fbf; text-decoration: underline; cursor: pointer; }
   @media (prefers-reduced-motion: reduce) { .demo .rk .rk-l.today, .demo .rk .rk-l.drop, .demo .rk .rk-ring, .demo .dil.today, .demo .rk.launch .rk-ship, .demo .rk.launch .rk-flame { animation: none; } .demo .rk.launch .rk-done { animation: none; opacity: 1; } }
+  /* téma: 7 nocí pro lepší spánek (fotka z Higgsfieldu, měsíc a světla v kódu) */
+  .demo[data-theme="spani"] { --d-bg: #1d2638; --d-ink: #f5efe6; --d-ink-2: #b9c0cf; --d-today: #ffcf8a; --d-today-ink: #2a2016; --d-btn: #ffcf8a; --d-btn-ink: #2a2016; --d-font: Georgia, 'Times New Roman', serif; --d-card: rgba(255,255,255,.06); --d-card-line: rgba(255,255,255,.13); }
+  .demo .scene.spani { aspect-ratio: 4 / 5; max-width: 480px; background: #1d2638 url('img/spani.webp') center / cover no-repeat; }
+  .demo .scene.spani::after { content: ""; position: absolute; inset: 0; background: #0b1226; opacity: 0; pointer-events: none; transition: opacity 1.6s ease; }
+  .demo .scene.spani.finale::after { opacity: .5; }
+  .demo .scene.spani .sp-fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+  .demo .sp-star { animation: spTw 3s ease-in-out infinite; }
+  @keyframes spTw { 50% { opacity: .25; } }
+  .demo .sp-lamp { animation: spBreath 5s ease-in-out infinite; }
+  .demo .sp-candle { transform-box: fill-box; transform-origin: 50% 70%; animation: spFlick .18s steps(2) infinite alternate; }
+  @keyframes spBreath { 50% { opacity: .7; } }
+  @keyframes spFlick { from { opacity: .85; transform: scale(1); } to { opacity: 1; transform: scale(1.06, .97); } }
+  .demo .sp-steam path { animation: spSteam 3.2s ease-in-out infinite; }
+  @keyframes spSteam { 0% { opacity: 0; transform: translateY(20px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(-60px); } }
+  .demo .sp-done { opacity: 0; transition: opacity 1.2s 1s ease; }
+  .demo .scene.spani.finale .sp-done { opacity: 1; }
+  .demo .scene.spani.finale .sp-lamp, .demo .scene.spani.finale .sp-candle, .demo .scene.spani.finale .sp-steam { opacity: 0; animation: none; transition: opacity 1.2s; }
+  .demo .scene.spani .win { z-index: 3; border-radius: 22px; background: transparent; transition: background .4s ease, box-shadow .4s ease; }
+  .demo .scene.spani .win .b { min-width: 34px; height: 28px; line-height: 28px; padding: 0 9px; border-radius: 6px; background: #f5efe6; color: #3b3326; font-family: Georgia, serif; font-size: 14px; font-weight: 700; outline: 1.5px dashed #b9a98c; outline-offset: -5px; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
+  .demo .scene.spani .win:hover { box-shadow: inset 0 0 0 2px rgba(245,239,230,.75); }
+  .demo .scene.spani .win.locked .b { background: rgba(245,239,230,.72); color: #6b6455; }
+  .demo .scene.spani .win.missed { background: radial-gradient(closest-side, rgba(12,18,34,.55), rgba(12,18,34,0)); }
+  .demo .scene.spani .win.missed .b { background: #8b8a86; color: #e7e3da; text-decoration: line-through; outline-color: #b5b2aa; }
+  .demo .scene.spani .win.today { background: radial-gradient(closest-side, rgba(255,207,138,.32), rgba(255,207,138,0)); box-shadow: inset 0 0 0 2px rgba(255,207,138,.9), 0 0 34px 6px rgba(255,190,110,.45); animation: spGlow 2.2s ease-in-out infinite; }
+  .demo .scene.spani .win.today .b { background: #ffcf8a; color: #2a2016; outline-color: #b07a2a; }
+  @keyframes spGlow { 50% { box-shadow: inset 0 0 0 2px rgba(255,207,138,.5), 0 0 14px 2px rgba(255,190,110,.25); } }
+  .demo .scene.spani .win.open { background: radial-gradient(closest-side, rgba(255,214,150,.26), rgba(255,214,150,0)); box-shadow: none; }
+  .demo .scene.spani .win.open svg { width: 36px; height: 36px; padding: 8px; border-radius: 50%; background: #f5efe6; color: #3b3326; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
+  .demo .scene.spani .win.just { animation: spOn 1s ease-out both; }
+  @keyframes spOn { 0% { box-shadow: 0 0 0 0 rgba(255,214,150,.9), inset 0 0 0 999px rgba(255,214,150,.45); } 100% { box-shadow: 0 0 60px 30px rgba(255,214,150,0), inset 0 0 0 999px rgba(255,214,150,0); } }
+  .demo .d-finale { position: absolute; left: 12px; top: 12px; z-index: 4; border: 0; border-radius: 100px; padding: 7px 14px; background: rgba(11,18,38,.72); color: #f5efe6; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  @media (prefers-reduced-motion: reduce) { .demo .sp-star, .demo .sp-lamp, .demo .sp-candle, .demo .sp-steam path, .demo .scene.spani .win.today, .demo .scene.spani .win.just { animation: none; } }
 
   /* téma: Sněhulák a sobi (vymyšlené, kreslené) */
   .demo[data-theme="snehulak"] { --d-bg: #0f3d2e; --d-ink: #f4f7ff; --d-ink-2: #bfd5c8; --d-today: #ffd21f; --d-today-ink: #132747; --d-btn: #DA2A49; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: rgba(255,255,255,.08); --d-card-line: rgba(255,255,255,.16); }
@@ -1072,6 +1104,7 @@
         <button type="button" data-theme="harfa" aria-pressed="false" data-review-id="demo-vzhled-harfa"><i style="background:#4ead9e"></i>Slavíme 30 let</button>
         <button type="button" data-theme="velikonoce" aria-pressed="false" data-review-id="demo-vzhled-velikonoce"><i style="background:#8bc34a"></i>Velikonoce</button>
         <button type="button" data-theme="raketa" aria-pressed="false" data-review-id="demo-vzhled-raketa"><i style="background: linear-gradient(135deg,#e3242b 50%,#1f5fbf 50%)"></i>Odpočet ke startu</button>
+        <button type="button" data-theme="spani" aria-pressed="false" data-review-id="demo-vzhled-spani"><i style="background: linear-gradient(135deg,#1d2638 50%,#ffcf8a 50%)"></i>7 nocí pro spánek</button>
       </div>
     </div>
     <div class="grp device"><span class="lbl" id="lbl-zarizeni">Zobrazení</span>
@@ -1568,14 +1601,42 @@
     return s + '</svg>';
   }
 
+  // 7 nocí pro lepší spánek: fotka ložnice (1792 × 2240), okénka = předměty, měsíc za oknem roste s každou odkrytou nocí
+  var OKNA_SP = { 1: [923, 1890, 372, 240], 2: [140, 820, 170, 150], 3: [10, 560, 210, 360], 4: [250, 1080, 1290, 230], 5: [300, 1480, 1200, 280], 6: [420, 680, 980, 260], 7: [1600, 810, 160, 170] };
+  DARKY.spani = seznam([['darek', 'Plstěné papuče k nákupu nad 1 500 Kč'], ['prodejna', 'Čaj a poradna o spánku na prodejně'], ['sleva', 'Sleva 15 % na lampy a světla'], ['sleva', 'Sleva 20 % na deky a plédy'], ['doprava', 'Doprava zdarma na peřiny'], ['akce', 'Polštáře 2 + 1 zdarma'], ['sleva', 'Sleva 25 % na celou novou kolekci']], 7, 'SP');
+  TEMATA.spani = { dni: 7, dnes: 5, layout: 'scene', top: '', eyebrow: 'Bytový textil · nová kolekce', t: '7 nocí pro lepší spánek', l: 'Každý večer odkryjete jeden předmět v' + NB + 'ložnici a' + NB + 'k' + NB + 'němu dárek. Měsíc za' + NB + 'oknem s' + NB + 'každou nocí roste. Sedmou noc je úplněk a' + NB + 'nejlepší dárek.', btn: 'Odkrýt dnešní noc', den: 'noc', tip: 'Klikněte na' + NB + 'svítící předmět v' + NB + 'ložnici a' + NB + 'odkryjte dárek.', finale: 'Ukázat 7. noc: úplněk', odkryto: { 1: true, 2: true, 4: true },
+    umi: ['Otevřít jde jen <strong>dnešní noc</strong>. Propásnutá zůstane potmě, další se odemknou postupně.', 'Délka podle kampaně: <strong>7 nocí</strong>, týden před uvedením kolekce nebo celý advent.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba na' + NB + 'prodejně, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] };
+  function spaniSVG() {
+    var n = 0, k;
+    for (k in odkryto) if (odkryto[k] && +k <= 7) n++;
+    if (finale) n = 7;
+    var p = 0.1 + 0.9 * n / 7, R = 92, cx = 1050, cy = 260, rx = Math.abs(1 - 2 * p) * R;
+    var lit = p >= 0.995 ? '<circle cx="' + cx + '" cy="' + cy + '" r="' + R + '" fill="#fdf3d0"/>' : '<path d="M' + cx + ' ' + (cy - R) + 'A' + R + ' ' + R + ' 0 0 1 ' + cx + ' ' + (cy + R) + 'A' + rx.toFixed(1) + ' ' + R + ' 0 0 ' + (p < 0.5 ? 0 : 1) + ' ' + cx + ' ' + (cy - R) + 'Z" fill="#fdf3d0"/>';
+    var s = '<svg class="sp-fx" viewBox="0 0 1792 2240" preserveAspectRatio="none" aria-hidden="true"><defs>' +
+      '<radialGradient id="sp-glow"><stop offset="0" stop-color="#ffd9a0" stop-opacity=".75"/><stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/></radialGradient>' +
+      '<filter id="sp-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>' +
+      '<clipPath id="sp-okno"><rect x="520" y="0" width="752" height="634"/></clipPath></defs>';
+    s += '<g clip-path="url(#sp-okno)">';
+    var r = rnd(17), i;
+    for (i = 0; i < 26; i++) s += '<circle class="sp-star" cx="' + (540 + r() * 712).toFixed(0) + '" cy="' + (20 + r() * 560).toFixed(0) + '" r="' + (1.6 + r() * 2.4).toFixed(1) + '" fill="#fff" style="animation-delay:' + (r() * 3).toFixed(2) + 's"/>';
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (R * 1.9) + '" fill="#fdf3d0" opacity="' + (0.05 + 0.18 * p).toFixed(2) + '" filter="url(#sp-blur)"/>';
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + R + '" fill="#fff" opacity=".07"/>' + lit + '</g>';
+    s += '<ellipse class="sp-lamp" cx="110" cy="660" rx="230" ry="200" fill="url(#sp-glow)"/>';
+    s += '<ellipse class="sp-candle" cx="1676" cy="860" rx="120" ry="140" fill="url(#sp-glow)"/>';
+    s += '<g class="sp-steam" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"><path d="M205 830c-22-40 22-60 0-100s20-60 0-100"/><path d="M240 840c-22-40 22-60 0-100s20-60 0-100" style="animation-delay:1.2s"/></g>';
+    s += '<g class="sp-done" font-family="Georgia, serif" text-anchor="middle"><text x="896" y="470" font-size="96" font-weight="700" fill="#fdf3d0">Dobrou noc.</text><text x="896" y="545" font-size="40" fill="#e6ddc8">Úplněk a&#160;nejlepší dárek sezóny.</text></g>';
+    return s + '</svg>';
+  }
+
   var demo = document.getElementById('demo'); if (!demo) return;
   var stage = document.getElementById('demo-stage');
   var toast = document.getElementById('demo-toast');
   var deco = document.getElementById('demo-deco');
   var tema = 'fotoskoda', dnes = 7, ODKRYTO = { 2: true, 5: true, 6: true }, odkryto = {}, padajici = 0;
-  var reveal = document.getElementById('demo-reveal'), umiUl = demo.querySelector('.d-umi ul'), umiPuvodni = umiUl ? umiUl.innerHTML : '', navrat = null, startTimer = 0;
+  var reveal = document.getElementById('demo-reveal'), umiUl = demo.querySelector('.d-umi ul'), umiPuvodni = umiUl ? umiUl.innerHTML : '', navrat = null, startTimer = 0, finale = false;
 
   function stav(d) {
+    if (finale) return 'open';
     if (d === dnes) return odkryto[d] ? 'open' : 'today';
     if (d > dnes) return 'locked';
     return odkryto[d] ? 'open' : 'missed';
@@ -1597,14 +1658,14 @@
       }
       html += '</div><button type="button" class="rk-start" data-review-id="demo-raketa-start">Ukázat 10. den: start</button></div>';
     } else if (T.layout === 'scene') {
-      var SC = { snehulak: { o: OKNA_SN, w: 10, hh: 12.5, svg: SNEHULAK, cls: ' snow' }, narozeniny: { o: OKNA_NA, w: 10, hh: 12.5, svg: DORT, cls: ' cake' }, hracky: { o: OKNA_HR, w: 10, hh: 12.5, svg: AUTOMAT, cls: ' toy' }, velikonoce: { o: OKNA_VE, w: 10, hh: 12.5, svg: KRASLICE, swing: KRASLICE_VEJCE, cls: ' egg' }, jidlo: { o: OKNA_KO, w: 14, hh: 10.5, svg: '', cls: ' basket' }, moda: { o: OKNA_SK, w: 11.22, hh: 14.02, svg: '', cls: ' wardrobe' } }[tema] || { o: OKNA, w: 18.56, hh: 23.04, svg: '', cls: '' };
+      var SC = { snehulak: { o: OKNA_SN, w: 10, hh: 12.5, svg: SNEHULAK, cls: ' snow' }, narozeniny: { o: OKNA_NA, w: 10, hh: 12.5, svg: DORT, cls: ' cake' }, hracky: { o: OKNA_HR, w: 10, hh: 12.5, svg: AUTOMAT, cls: ' toy' }, velikonoce: { o: OKNA_VE, w: 10, hh: 12.5, svg: KRASLICE, swing: KRASLICE_VEJCE, cls: ' egg' }, jidlo: { o: OKNA_KO, w: 14, hh: 10.5, svg: '', cls: ' basket' }, moda: { o: OKNA_SK, w: 11.22, hh: 14.02, svg: '', cls: ' wardrobe' }, spani: { o: OKNA_SP, w: 17.92, hh: 22.4, svg: spaniSVG(), cls: ' spani' + (finale ? ' finale' : '') } }[tema] || { o: OKNA, w: 18.56, hh: 23.04, svg: '', cls: '' };
       var O = SC.o, W = SC.w, HH = SC.hh;
       html = '<div class="scene' + SC.cls + '" role="group" aria-label="Okénka kalendáře">' + SC.svg + (SC.swing ? '<div class="swing">' + SC.swing : '');
       for (d = 1; d <= T.dni; d++) {
         var o = O[d]; s = stav(d);
         html += '<button type="button" class="win ' + s + (padajici === d ? ' just' : '') + '" data-den="' + d + '" data-review-id="demo-okno-' + d + '" aria-label="Okénko ' + d + ': ' + popisek(s) + '" style="left:' + (o[0] / W).toFixed(2) + '%;top:' + (o[1] / HH).toFixed(2) + '%;width:' + (o[2] / W).toFixed(2) + '%;height:' + (o[3] / HH).toFixed(2) + '%">' + (s === 'open' ? ICO[D[d - 1].typ] : '') + '<span class="b">' + d + '</span></button>';
       }
-      html += (SC.swing ? '</div>' : '') + '</div>';
+      html += (SC.swing ? '</div>' : '') + (T.finale ? '<button type="button" class="d-finale" data-review-id="demo-finale">' + T.finale + '</button>' : '') + '</div>';
     } else {
       html = '<div class="grid" role="group" aria-label="Okénka kalendáře"' + (tema === 'harfa' ? ' style="grid-template-columns:repeat(5,minmax(0,1fr))"' : '') + '>';
       for (d = 1; d <= T.dni; d++) {
@@ -1629,6 +1690,7 @@
     if (nove) for (i = 0; i < 18; i++) { var a = i / 18 * Math.PI * 2, r = 120 + (i % 3) * 40; fx += '<i class="dc-fx" style="--x:' + Math.round(Math.cos(a) * r) + 'px;--y:' + Math.round(Math.sin(a) * r * 0.8) + 'px;--r:' + (i * 47 % 360) + 'deg;background:' + barvy[i % 4] + '"></i>'; }
     var zbyva = T.dni - d, pozn;
     if (tema === 'raketa') pozn = zbyva ? 'Dílek ' + d + ' je na' + NB + 'raketě. Do' + NB + 'startu ' + (zbyva === 1 ? 'zbývá 1' + NB + 'dílek.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'dílky.' : 'zbývá ' + zbyva + NB + 'dílků.') : 'Raketa je kompletní. Start!';
+    else if (tema === 'spani') pozn = zbyva ? 'Do' + NB + 'úplňku ' + (zbyva === 1 ? 'zbývá 1' + NB + 'noc.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'noci.' : 'zbývá ' + zbyva + NB + 'nocí.') + ' Měsíc za' + NB + 'oknem roste s' + NB + 'každou odkrytou nocí.' : 'Úplněk. Dobrou noc!';
     else pozn = 'Platí do půlnoci. V' + NB + 'ostrém kalendáři přijde dárek i' + NB + 'e&#8209;mailem.';
     reveal.innerHTML = fx + '<div class="d-card" role="dialog" aria-modal="true" aria-labelledby="dc-t" data-review-id="demo-karta-darku">' +
       '<button type="button" class="dc-x" data-akce="zavrit" aria-label="Zavřít">×</button>' +
@@ -1683,6 +1745,16 @@
       zprava('Takhle vypadá desátý den, když zákazník posbírá všechny dílky.');
       clearTimeout(startTimer);
       startTimer = setTimeout(function () { if (tema === 'raketa') vykresli(); }, 5200);
+      return;
+    }
+    if (e.target.closest('.d-finale')) {
+      finale = true; vykresli(); finale = false;
+      // replay the dimming transition instead of starting already dark
+      var sc = stage.querySelector('.scene.finale');
+      if (sc) { sc.classList.remove('finale'); void sc.offsetWidth; sc.classList.add('finale'); }
+      zprava('Takhle vypadá poslední den, když zákazník neprošvihne ani jeden.');
+      clearTimeout(startTimer);
+      startTimer = setTimeout(function () { vykresli(); }, 6000);
     }
   });
   document.getElementById('demo-today-btn').addEventListener('click', function () { klik(dnes, stage.querySelector('[data-den="' + dnes + '"]')); });
@@ -1702,6 +1774,7 @@
   function nastavTema(t) {
     tema = t; var T = TEMATA[t], k, zdroj = T.odkryto || ODKRYTO;
     odkryto = {}; for (k in zdroj) odkryto[k] = zdroj[k];
+    dnes = T.dnes || 7; finale = false;
     clearTimeout(startTimer);
     demo.setAttribute('data-theme', t);
     document.getElementById('demo-top').innerHTML = T.top + '<span>' + T.eyebrow + '</span>';
@@ -1712,7 +1785,7 @@
     if (T.img) { im.src = T.img; im.hidden = false; } else { im.hidden = true; im.removeAttribute('src'); }
     Array.prototype.forEach.call(document.querySelectorAll('.seg button[data-theme]'), function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-theme') === t ? 'true' : 'false'); });
     zavriKartu();
-    kresliDekor(t); zprava('Klikněte na' + NB + 'dnešní ' + T.den + ' a' + NB + 'odkryjte dárek.'); vykresli();
+    kresliDekor(t); zprava(T.tip || 'Klikněte na' + NB + 'dnešní ' + T.den + ' a' + NB + 'odkryjte dárek.'); vykresli();
   }
   function zprava(t) { toast.textContent = t; }
 
