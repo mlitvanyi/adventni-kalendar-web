@@ -106,6 +106,8 @@ Top-down flat lay on a warm wooden table: an open burgundy passport lying flat i
 ---
 
 ## 4. Chaty a chalupy: „Víkendy na chalupě“
+**Stav:** postavené (vzhľad `chalupa`) pre klienta typu chaty-chalupy-dds.cz, anonymne. Maľovaná mapa z Higgsfieldu (GPT Image 2.5, high, 2k, 2,75 kreditu, prvý pokus, `img/chalupa-mapa.webp`). Trasa je zameraná na piesočný chodník v obraze, zastávky sú špendlíky. Turista v štýle maskota klienta (šiltovka, žlté tričko, batoh) po otvorení dôjde po trase k ďalšej zastávke. Kalendár je týždenný (8 víkendov), hlášky počítajú v týždňoch. Farby: limetková #eef6d3, olivovo-zelená #7a9b0a, žltá #ffd200.
+
 **Klient (anonymne):** prenájom chát a chalúp / outdoorový obchod.
 **Príležitosť:** otvorenie letnej sezóny / spustenie bookingu.
 **Dĺžka:** 8 víkendov (týždenný kalendár, okienko sa otvorí v piatok).
