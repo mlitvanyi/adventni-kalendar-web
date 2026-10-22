@@ -50,8 +50,8 @@ sub = re.search(r'<p class="subtitle">([\s\S]*?)</p>', old).group(1)
 h1, nh = re.subn(r'Letos obdarujte i[\s ]+své zákazníky\.', 'Letos obdarujte zákazníky <span class="v2-mark">adventním kalendářem</span>.', h1)
 assert nh == 1, h1[-200:]
 SHOTS = [('fotoskoda', 'Dům s okny', 's1', '--x:-8%;--y:30px;--w:250px;--r:-7deg;--d:7s'),
-         ('chalupa', 'Víkendy na chalupě', 's2', '--x:-3%;--y:420px;--w:214px;--r:5deg;--d:8.5s;--dl:-3s'),
-         ('pas', 'Cestovní pas', 's3', '--xr:-8%;--y:50px;--w:240px;--r:6deg;--d:7.5s;--dl:-1.5s'),
+         ('chata', 'Zasněžená chalupa', 's2', '--x:-3%;--y:420px;--w:214px;--r:5deg;--d:8.5s;--dl:-3s'),
+         ('vesnicka', 'Perníková vesnička', 's3', '--xr:-8%;--y:50px;--w:240px;--r:6deg;--d:7.5s;--dl:-1.5s'),
          ('snehulak', 'Sněhulák a sobi', 's4', '--xr:-3%;--y:430px;--w:214px;--r:-5deg;--d:9s;--dl:-4.5s')]
 # captions follow the look picker, so renaming a look there renames its hero preview too
 def caption(k, fallback):
