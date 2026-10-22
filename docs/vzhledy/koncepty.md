@@ -1,0 +1,155 @@
+# Nové vzhľady kalendára: koncepty a prompty
+
+Pracovný dokument na spoločnú revíziu. Nič z toho sa zatiaľ negenerovalo.
+
+## Pravidlá pre všetky koncepty
+- **Pre príležitosť a klienta, nie len Vianoce.** Každý koncept stojí na konkrétnom dôvode klienta, napríklad výročie, nová séria, otvorenie predajne alebo začiatok sezóny. Vzorom je Harfa Sport a „Slavíme 30 let“.
+- **Klienti sú anonymní** (napr. „Duty free na hranici“), bez log a bez reálnych značiek v obraze.
+- **Funkčne nič navyše oproti appke.** Kalendár vie toto:
+  - N okienok,
+  - stavy dnes, otvorené, zamknuté a zmeškané,
+  - odmenu typu `sleva`, `doprava`, `darek`, `prodejna`, `akce` (ikony `ICO`),
+  - kód na kopírovanie,
+  - odpočet,
+  - CTA tlačidlo.
+
+  Vzhľad mení len to, ako to vyzerá.
+- **Interakcia v deme (spoločná pre všetky vzhľady):**
+  - Klik na dnešné okienko spustí animáciu otvorenia podľa vzhľadu, napríklad vysunutie kartičky ako vo veniec-moodboarde. Potom sa ukáže karta odmeny s kódom „Kopírovat“ a CTA.
+  - Zamknuté okienko sa zatrasie s hláškou „Otevře se za X dní“.
+  - Zmeškané okienko ukáže „Tento den propadl“.
+- **Čísla a texty kreslí kód, nikdy obrázok.** Prompt vždy chce prázdne plochy bez textu, aby sedel jazyk, počet a súradnice.
+- **Pohyb je v kóde (CSS/SVG)** nad obrázkom, ako hojdajúce sa vajíčko pri Veľkej noci. Rešpektuje `prefers-reduced-motion`.
+
+## Higgsfield: spoločné nastavenie
+- Model: **GPT Image 2.5** (`gpt_image_2_5`, variant `flare`), `quality: high`, `resolution: 2k`. Dobre drží kompozíciu, počty objektov aj fotoreál a vie editovať s referenciou, keď treba niečo opraviť.
+- Pomer strán: **4:5** (demo plocha je 4:5, max 560 px). Pri širokej kompozícii 5:4.
+- Jeden poriadne napísaný prompt na koncept a žiadne štyri varianty. Zlý výsledok doladíme editáciou.
+- Postprocess:
+  - orez na presný pomer,
+  - export WebP, dlhšia strana ~1600 px, do ~300 kB,
+  - zameranie súradníc okienok pomocným HTML.
+- Zostatok k 22. 10. 2026: ~302 kreditov (starter). Pred každým generovaním ukážem cenu.
+
+---
+
+## 1. Hračky / stavebnice: „Postav si to s námi“ ⭐ úplne iný layout
+**Klient (anonymne):** predajňa hračiek a stavebníc. Typ Sparkys alebo predajca, ktorý má sezónu stavebníc.
+**Príležitosť:** uvedenie novej série stavebníc / letné prázdniny.
+**Dĺžka:** 10 dní, 10. deň je hlavná výhra.
+
+**Čím je iný:** nie je to obrázok s okienkami na ploche. Vľavo (na mobile hore) stojí **model, ktorý sa skladá zdola nahor**. Každý otvorený deň odhalí ďalší „poschodový“ výsek modelu. Neodhalená časť je modrotlačový náčrt: polopriehľadná, modro tónovaná a s mriežkou, ako stavebný plán. Vpravo (na mobile dole) je **rad 10 dielikov**, čo sú samotné okienka (kocky s „čudlíkmi“).
+**Ako to otvorí:** dielik vyskočí, preletí k modelu a zacvakne. Ďalší pás modelu sa z náčrtu „vyfarbí“ (clip-path animácia). Potom sa ukáže karta odmeny.
+**Prečo je to zvládnuteľné:** stačí jeden obrázok hotového modelu. Postup skladania je len orez `clip-path: inset()` po 10 pásoch a náčrt je ten istý obrázok s CSS filtrom.
+
+**Odmeny (10):** −10 % na stavebnice · doprava zdarma · minifigúrka k nákupu · −15 % na novú sériu · stavebný workshop v predajni · 2+1 na sáčky dielikov · dvojnásobné body · −20 % víkend · darček k nákupu nad 1 500 Kč · **10. deň: súťaž o celý model**
+**Farby:** svetlé pozadie `#f4f7fb`, modrotlač `#1f5fbf`, akcent žltá `#ffcc00` a červená `#e3242b`. Font: Inter 900.
+**Body „Co umí“:** postupné odhaľovanie výhry · hlavná cena posledný deň · nová séria v hlavnej úlohe · pozvánka do predajne.
+
+**Prompt:**
+```
+Studio product render of a single large, intricate toy building-brick model of a whimsical lighthouse on a small rocky island with a tiny harbour house, built from generic plastic interlocking bricks (no brand, no logos, no minifigure faces), standing upright and centered, seen from a slight 3/4 front angle. The model is tall and roughly evenly layered from base to top so it can be read as ten horizontal building stages. Bright cheerful colours: primary red, sunny yellow, sky blue and white bricks, glossy plastic with subtle stud highlights. Clean seamless light grey-blue studio background (#f4f7fb), soft large softbox lighting, gentle contact shadow, no props, no text, no numbers, no packaging. Crisp detail, high-end toy catalogue photography, vertical 4:5 composition with generous empty space above and below the model.
+```
+
+---
+
+## 2. Bytový textil a doplnky: „7 nocí pro lepší spánek“
+**Klient (anonymne):** e-shop s posteľnou bielizňou a bytovými doplnkami.
+**Príležitosť:** uvedenie novej kolekcie / Svetový deň spánku (marec) / jesenná výmena perín.
+**Dĺžka:** 7 dní („nocí“).
+
+**Scéna:** útulná spálňa za súmraku. Okienka sú **predmety v izbe**: vankúš, perina, pléd, lampička, papuče, hrnček čaju a sviečka.
+**Pohyb:**
+- V okne za posteľou sa mesiac mení podľa počtu otvorených nocí (SVG fázy mesiaca ako ukazovateľ postupu).
+- Záclona sa jemne vlní a zo šálky stúpa para.
+- Otvorenie: predmet sa rozsvieti teplým svetlom a z vankúša sa vysunie „visačka“ s odmenou.
+
+**Odmeny (7):** −15 % na obliečky · doprava zdarma · darček: levanduľový sprej · 2+1 na vankúše · −20 % na periny · predĺžené vrátenie na 100 nocí · **7. noc: súťaž o kompletnú výbavu postele**
+**Farby:** krémová `#f5efe6`, šalviová `#8a9a7b`, nočná modrá `#24304a` a teplé svetlo `#ffcf8a`. Font: Georgia (nadpis), Inter.
+
+**Prompt:**
+```
+Warm, cosy Scandinavian bedroom at dusk, photographed straight-on from the foot of the bed, vertical 4:5. A neatly made double bed with crisp linen bedding in cream and sage green, two plump pillows, a folded chunky knit throw at the foot of the bed. On the left a bedside table with a small glowing lamp and a ceramic mug of tea; on the right a bedside table with a lit candle in a glass. A pair of soft felt slippers on a round wool rug in front of the bed. Behind the bed a large window with sheer linen curtains, deep blue evening sky outside, an empty sky area in the upper part of the window. Exactly seven clearly separated, distinct hero objects: pillow, duvet, throw, lamp, mug, candle, slippers — each well spaced and not overlapping. Soft warm practical lighting mixed with cool blue window light, natural textures, editorial interior photography, no people, no text, no logos.
+```
+
+---
+
+## 3. Duty free na hranici (Travel Free): „Cestovní pas“ ⭐ alternatíva iného layoutu
+**Klient (anonymne):** sieť duty-free predajní na hraniciach (potraviny, káva, čokoláda, kozmetika a darčekové koše).
+**Príležitosť:** letná sezóna ciest / výročie predajní.
+**Dĺžka:** 14 dní.
+
+**Čím je iný:** demo je **otvorený pas na stole**. Okienka sú prázdne rámčeky na razítka, 7 na každej dvojstrane, takže dve dvojstrany. Šípkami alebo swipe sa **listuje** (CSS 3D otočenie strany).
+**Ako to otvorí:** razítko krajiny (SVG kreslené kódom: kruh s názvom mesta, dátum a ikona odmeny) „dopadne“ s jemným odrazom a stopou atramentu.
+**Kód kreslí:** razítka a ich texty. Obrázok je len prázdny pas na stole s cestovnými drobnosťami.
+
+**Odmeny (14):** −10 % na kávu · čokoláda zdarma k nákupu · −15 % kozmetika · darčekový kôš so zľavou · 2+1 sladkosti · tankovacia kupónová akcia · −20 % parfumy · ochutnávka v predajni · voucher na ďalší nákup · … · **14. deň: veľký cestovný kôš**
+**Farby:** pasová bordová `#5b1e2d`, papier `#f3ecdd`, razítkové farby (modrá `#2952a3`, zelená `#2f7d4f`, červená `#c8352e`). Font: JetBrains Mono (razítka), Georgia.
+
+**Prompt:**
+```
+Top-down flat lay on a warm wooden table: an open burgundy passport lying flat in the centre, its two inner pages blank cream paper with a very subtle fine guilloche security pattern and no text, no stamps, no photo, no numbers — completely empty pages ready for stamps. Around the passport, arranged neatly near the edges: a paper boarding-pass-shaped card with no readable text, a small bar of chocolate in plain gold foil, a takeaway cup of coffee, a small unbranded perfume bottle, sunglasses, a few coins, a sprig of lavender. Soft natural window light from the upper left, gentle shadows, travel lifestyle product photography, vertical 4:5, no logos, no brand names, no legible text anywhere.
+```
+
+---
+
+## 4. Chaty a chalupy: „Víkendy na chalupě“
+**Klient (anonymne):** prenájom chát a chalúp / outdoorový obchod.
+**Príležitosť:** otvorenie letnej sezóny / spustenie bookingu.
+**Dĺžka:** 8 víkendov (týždenný kalendár, okienko sa otvorí v piatok).
+
+**Scéna:** ilustrovaná mapa krajiny s turistickým chodníkom. Okienka sú **zastávky**: chata, jazero, rozhľadňa, ohnisko, les, mostík, mlyn a kaplnka.
+**Pohyb:**
+- Kód nakreslí čiarkovanú trasu SVG cestou cez stredy okienok a po nej „kráča“ bodka k dnešnej zastávke.
+- Z komína chaty stúpa dym a jazero sa jemne vlní.
+- Otvorenie: na zastávke sa zapichne vlajočka a vysunie sa kartička s odmenou.
+
+**Odmeny (8):** −10 % na víkendový pobyt · last-minute víkend · raňajky zdarma · −15 % na outdoorovú výbavu · neskorý check-out · požičanie bicykla zdarma · darček na uvítanie · **8. víkend: súťaž o víkend zdarma**
+**Farby:** lúčna zelená `#7fa65a`, jazerná `#4f8fb3`, drevo `#8b5a3c`, papier `#f7f1e3`. Font: Georgia, Inter.
+
+**Prompt:**
+```
+Hand-painted illustrated map of a peaceful Central European summer countryside seen from a high oblique bird's-eye view, vertical 4:5, gouache and watercolour storybook style with soft paper texture. Rolling green hills, a pine forest, meadows with wildflowers, and a winding empty footpath (no markers on it). Along the path, exactly eight clearly separated landmarks spread across the whole image: a small wooden log cabin with a stone chimney, a calm blue lake with a wooden jetty, a wooden lookout tower on a hill, a campfire circle with logs, a dense spruce forest grove, a little wooden footbridge over a stream, an old water mill, and a small white chapel. Warm late-afternoon light, gentle palette of meadow green, lake blue, warm wood brown and cream. No text, no labels, no numbers, no compass, no people.
+```
+
+---
+
+## 5. Navyše, pre akýkoľvek e-shop: „Obálky ve tvaru výročí“
+**Klient (anonymne):** e-shop alebo predajňa, ktorá slávi výročie (5, 10, 15 alebo 30 rokov).
+**Príležitosť:** narodeniny firmy. Univerzálny nástupca „Slavíme 30 let“.
+**Dĺžka:** podľa výročia, napr. 15 dní na 15 rokov.
+
+**Nápad podľa moodboardu:** papierové obálky rôznych veľkostí pripnuté na stene tak, že **spolu tvoria číslo výročia**. Väčšia obálka znamená väčšiu odmenu.
+**Prečo hybrid:** obrázok s presne N obálkami v tvare čísla model spoľahlivo nevykreslí. Higgsfield preto robí **len stenu a interiér**. Obálky kreslí kód (CSS/SVG s papierovou textúrou a tieňom), takže tvar čísla, počet aj farba sú presné pre každého klienta.
+**Ako to otvorí:** chlopňa obálky sa odklopí (3D rotácia) a vysunie sa kartička s odmenou, ako na veniec-moodboarde.
+
+**Farby:** jedna značková farba klienta (demo: koralová `#f2705f`) na bielej stene. Font: Inter 800.
+
+**Prompt (len pozadie):**
+```
+Bright Scandinavian interior, straight-on view of a large empty white-painted wooden plank wall taking up the upper two thirds of the frame, completely empty with no decorations, frames or text. In the lower part: a light oak floor, on the right a mid-century wooden chair with a woven seat holding a grey patterned cushion and two small wrapped gifts in kraft paper and coral ribbon; on the left a large woven seagrass basket filled with kraft-paper wrapped gifts and paper rolls. Soft diffused daylight from the left, calm minimal styling, editorial interior photography, vertical 4:5, no people, no text, no logos.
+```
+
+---
+
+## Hlavička landing page (krok 4, len na porovnanie s moodboardom 01)
+Stromček v hlavičke nahradí **animovaný kalendár v kóde** v štýle bento videa:
+- dlaždice rôznych tvarov (vstupenka, visačka, darček, kruh) s číslami dní,
+- v slučke sa postupne otvárajú,
+- z dlaždíc sa vysúvajú štítky odmien („−20 %“, „Doprava zdarma“, „Dárek“),
+- každých pár sekúnd sa zmení farebná téma, aby bolo vidno, že vzhľad je na míru.
+
+Je to čisté SVG/CSS, bez Higgsfieldu a bez videa.
+
+## Ďalšie nápady na produkt (nie na implementáciu teraz)
+- Séria otvorených dní so „streak“ odznakom a bonusom za 5 dní v rade.
+- Zmeškaný deň sa dá dobehnúť za zdieľanie.
+- Veľká výhra posledný deň, pri ktorej je vidno, koľko ľudí sa zapojilo.
+- QR kód na okienko pre kamennú predajňu („vyzdvihni si v obchode“).
+- E-mailová alebo push pripomienka „dnes máš otvorené okienko“.
+- Slot na obrázok alebo produkt klienta v karte odmeny, nielen ikona.
+
+## Otázky na spoločnú revíziu
+1. Ktorý koncept má mať **úplne iný layout**: 1 (stavebnica) alebo 3 (pas)? Odporúčam 1, je lacnejší (jeden obrázok) a efektnejší.
+2. Je v poriadku hybrid v koncepte 5 (pozadie z Higgsfieldu, obálky v kóde)?
+3. Poradie generovania: navrhujem 1 → 4 → 2 → 3 → 5.
