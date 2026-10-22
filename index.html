@@ -594,7 +594,23 @@
 
   /* téma: Sněhulák a sobi (vymyšlené, kreslené) */
   .demo[data-theme="snehulak"] { --d-bg: #0f3d2e; --d-ink: #f4f7ff; --d-ink-2: #bfd5c8; --d-today: #ffd21f; --d-today-ink: #132747; --d-btn: #DA2A49; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: rgba(255,255,255,.08); --d-card-line: rgba(255,255,255,.16); }
-  .demo[data-theme="hracky"] { --d-bg: #004996; --d-ink: #ffffff; --d-ink-2: #d4edfc; --d-today: #ffcd00; --d-today-ink: #0b093b; --d-btn: #52c018; --d-btn-ink: #fff; --adv-n-ink: #004996; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: rgba(255,255,255,.08); --d-card-line: rgba(255,255,255,.16); }
+  /* toy shop in the Sparkys style: white and sky-blue page, blue nav band with a stitched edge, yellow panel, green 3D buttons, chunky rounded type */
+  .demo[data-theme="hracky"] { --d-bg: #ffffff; --d-ink: #004996; --d-ink-2: #3c5f86; --d-today: #ffcd00; --d-today-ink: #004996; --d-btn: #52c018; --d-btn-ink: #fff; --d-font: 'Arial Rounded MT Bold', 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #ffcd00; --d-card-line: #ffcd00; --adv-n-ink: #004996;
+    background: linear-gradient(#d4edfc 0 64px, #004996 64px 76px, #fff 76px) no-repeat, #fff; padding-top: 100px; }
+  .demo[data-theme="hracky"]::before { content: ""; position: absolute; left: 0; right: 0; top: 66px; border-top: 2px dashed rgba(255,255,255,.85); pointer-events: none; }
+  /* the eyebrow sits in the sky-blue header band */
+  .demo[data-theme="hracky"] .d-top { height: 64px; margin: -100px 0 36px; color: #004996; letter-spacing: .08em; }
+  .demo[data-theme="hracky"] .d-title, .demo[data-theme="hracky"] .d-today .t { font-weight: 900; letter-spacing: -0.02em; }
+  .demo[data-theme="hracky"] .d-btn { font-weight: 800; }
+  .demo[data-theme="hracky"] .d-today { border: 0; box-shadow: 0 5px 0 #e0b400; }
+  .demo[data-theme="hracky"] .d-today .art { background: #fff; color: #004996; box-shadow: 0 3px 0 rgba(0,73,150,.18); }
+  .demo[data-theme="hracky"] .d-today .k, .demo[data-theme="hracky"] .d-today .cd { color: #004996; }
+  .demo[data-theme="hracky"] .d-btn { border-radius: 10px; font-family: var(--d-font); box-shadow: 0 4px 0 #3a8f0f; }
+  .demo[data-theme="hracky"] .d-btn:active { translate: 0 3px; box-shadow: 0 1px 0 #3a8f0f; }
+  .demo[data-theme="hracky"] .d-umi { border-top: 2px dashed #b6dcf5; }
+  .demo[data-theme="hracky"] .d-umi li::before { background: #52c018; }
+  .demo[data-theme="hracky"] .scene.adv { border: 5px solid #fff; border-radius: 18px; box-shadow: 0 0 0 2px #d4edfc, 0 18px 40px rgba(0,73,150,.25); }
+  .demo[data-theme="hracky"] .d-finale { background: rgba(0,73,150,.92); }
   .demo[data-theme="obyvak"] { --d-bg: #efe8de; --d-ink: #2c2a26; --d-ink-2: #6f675c; --d-today: #c8693f; --d-today-ink: #fff; --d-btn: #2c2a26; --d-btn-ink: #fff; --d-font: Georgia, 'Times New Roman', serif; --d-card: #fff; --d-card-line: #e0d8cc; --adv-n-ink: #2c2a26; }
   .demo[data-theme="loznice"] { --d-bg: #f5eee6; --d-ink: #3b2c25; --d-ink-2: #7a6558; --d-today: #b8323a; --d-today-ink: #fff; --d-btn: #b8323a; --d-btn-ink: #fff; --d-font: Georgia, 'Times New Roman', serif; --d-card: #fff; --d-card-line: #e6dbd0; --adv-n-ink: #b8323a; }
   .demo[data-theme="vesnicka"] { --d-bg: #4a2516; --d-ink: #fff6ea; --d-ink-2: #e3c7a8; --d-today: #ffd27a; --d-today-ink: #4a2516; --d-btn: #c8382c; --d-btn-ink: #fff; --d-font: Georgia, 'Times New Roman', serif; --d-card: rgba(255,255,255,.08); --d-card-line: rgba(255,255,255,.16); --adv-n-ink: #7a3a1c; }
@@ -757,6 +773,19 @@
   @keyframes advGlow { 50% { box-shadow: 0 0 0 2px var(--d-today), 0 0 8px 2px color-mix(in srgb, var(--d-today) 45%, transparent); } }
   @keyframes advOpen { 0% { transform: none; } 10% { transform: rotateY(-7deg) translateX(1px); } 18% { transform: rotateY(-3deg); } 26% { transform: rotateY(-12deg); } 100% { transform: rotateY(-108deg); } }
   @keyframes advPop { 0% { transform: scale(.3); opacity: 0; } 100% { transform: none; opacity: 1; } }
+  /* Christmas Eve finale: doors open in sequence, warm glow, sparks, closing panel */
+  .demo .scene.adv.finale .adv-d .adv-f { animation: advOpen .9s cubic-bezier(.3,.9,.4,1) both; animation-delay: calc(var(--i) * 55ms); }
+  .demo .scene.adv.finale .adv-d .adv-in svg { animation: advPop .5s cubic-bezier(.3,1.6,.5,1) both; animation-delay: calc(var(--i) * 55ms + .45s); }
+  .demo .scene.adv.finale .adv-d.velke .adv-in { box-shadow: inset 0 3px 7px rgba(60,30,5,.6), 0 0 0 3px #ffd66b, 0 0 30px 10px rgba(255,200,90,.85); animation: advVelke 1.6s 1.8s ease-in-out infinite; }
+  @keyframes advVelke { 50% { box-shadow: inset 0 3px 7px rgba(60,30,5,.6), 0 0 0 3px #ffd66b, 0 0 14px 4px rgba(255,200,90,.6); } }
+  .demo .scene.adv.finale::before { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: radial-gradient(circle at 50% 55%, rgba(255,214,120,.45), rgba(255,190,80,.12) 45%, rgba(20,10,0,.28) 100%); animation: advZare 1.4s 1.2s ease both; }
+  @keyframes advZare { from { opacity: 0; } to { opacity: 1; } }
+  .demo .adv-jiskra { position: absolute; left: 50%; top: 52%; z-index: 5; width: 3.2cqw; aspect-ratio: 1; margin: -1.6cqw; pointer-events: none; opacity: 0; background: #ffd66b; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); filter: drop-shadow(0 0 4px rgba(255,214,107,.9)); animation: advJiskra 1.3s calc(1.75s + var(--z)) ease-out both; }
+  @keyframes advJiskra { 0% { opacity: 0; transform: translate(0, 0) scale(.3); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1.1) rotate(160deg); } }
+  .demo .adv-fin { position: absolute; left: 50%; top: 50%; z-index: 6; width: min(78%, 340px); translate: -50% -50%; padding: 5cqw 5cqw 4.4cqw; border-radius: 18px; background: rgba(255,255,255,.96); color: #2a1a10; text-align: center; box-shadow: 0 0 0 3px var(--d-today), 0 24px 50px rgba(0,0,0,.4); font-family: 'Inter', 'Inter Fallback', Arial, sans-serif; animation: advFin .7s 1.9s cubic-bezier(.2,1.4,.4,1) both; }
+  .demo .adv-fin b { display: block; font-family: var(--d-font); font-size: clamp(20px, 7cqw, 34px); line-height: 1.05; letter-spacing: -0.02em; color: #b3122e; }
+  .demo .adv-fin span { display: block; margin-top: 8px; font-size: clamp(12px, 3.3cqw, 15px); line-height: 1.4; color: #4a3a30; }
+  @keyframes advFin { from { opacity: 0; transform: translateY(18px) scale(.85); } to { opacity: 1; transform: none; } }
   .demo .adv-star { position: absolute; z-index: 3; width: 7%; aspect-ratio: 1; translate: -50% -50%; color: #ffd21f; opacity: 0; pointer-events: none; filter: drop-shadow(0 0 6px rgba(255,214,90,.95)) drop-shadow(0 0 18px rgba(255,190,60,.8)); transition: opacity .8s ease; }
   .demo .adv-star svg { width: 100%; height: 100%; fill: currentColor; }
   .demo .scene.adv.finale .adv-star { opacity: 1; animation: advTwinkle 2.4s ease-in-out infinite; }
@@ -766,7 +795,7 @@
     background-image: radial-gradient(2px 2px at 20px 30px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90px 80px, #fff 50%, transparent 51%), radial-gradient(2.5px 2.5px at 150px 20px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 60px 140px, #fff 50%, transparent 51%), radial-gradient(2px 2px at 130px 120px, #fff 50%, transparent 51%);
     background-size: 180px 160px; animation: advSnih 9s linear infinite; }
   @keyframes advSnih { to { background-position: 30px 160px, -20px 160px, 20px 160px, -30px 160px, 10px 160px; } }
-  @media (prefers-reduced-motion: reduce) { .demo .adv-d.today::after { display: none; } .demo .adv-tag, .demo .adv-d.today .adv-fr, .demo .adv-d.just .adv-f, .demo .adv-d.just .adv-in svg, .demo .scene.adv.snih::after, .demo .scene.adv.snih-okno::after, .demo .scene.adv.finale .adv-star { animation: none; } .demo .adv-f { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .demo .adv-jiskra { display: none; } .demo .scene.adv.finale .adv-d .adv-f, .demo .scene.adv.finale .adv-d .adv-in svg, .demo .scene.adv.finale .adv-d.velke .adv-in, .demo .scene.adv.finale::before, .demo .adv-fin { animation: none; } .demo .adv-d.today::after { display: none; } .demo .adv-tag, .demo .adv-d.today .adv-fr, .demo .adv-d.just .adv-f, .demo .adv-d.just .adv-in svg, .demo .scene.adv.snih::after, .demo .scene.adv.snih-okno::after, .demo .scene.adv.finale .adv-star { animation: none; } .demo .adv-f { transition: none; } }
   /* téma: Hračkářství (vymyšlené) */
   /* téma: Móda (vymyšlené) */
   .demo[data-theme="moda"] { --d-bg: #e9dccb; --d-ink: #3b2a1a; --d-ink-2: #7a6248; --d-door: #1f1f1f; --d-door-ink: #f5efe6; --d-door-line: #3a342c; --d-today: #b3122e; --d-today-ink: #fff; --d-open: #f5efe6; --d-open-ink: #141414; --d-locked: #1f1f1f; --d-missed: #0f0f0f; --d-btn: #b3122e; --d-btn-ink: #fff; --d-radius: 0px; --d-font: Georgia, 'Times New Roman', serif; --d-card: #f6efe2; --d-card-line: #d9c8b0; }
@@ -1738,40 +1767,40 @@
   // advent looks: one painted scene, 24 perforated doors cut into it (x, y, w, h in a 640×800 grid)
   var ADV = {
     // every door sits on a real object: baubles, lantern panes, the birdhouse, coal buttons and the presents
-    snehulak: { img: 'img/zimni-zahrada.webp', cls: ' snih', hvezda: [480, 38], o: {
+    snehulak: { img: 'img/zimni-zahrada.webp', cls: ' snih', hvezda: [480, 38], fin: 'Hvězda na stromku svítí a' + NB + 'všech 24 dárků je rozbalených.', o: {
       1: [404, 216, 44, 44, 'kruh'], 2: [226, 550, 67, 40], 3: [565, 383, 44, 44, 'kruh'], 4: [236, 232, 54, 50], 5: [169, 397, 26, 26, 'kruh'], 6: [354, 494, 48, 48, 'kruh'],
       7: [391, 302, 48, 48, 'kruh'], 8: [350, 640, 68, 48], 9: [510, 157, 46, 46, 'kruh'], 10: [16, 198, 48, 54], 11: [456, 529, 48, 48, 'kruh'], 12: [175, 430, 26, 26, 'kruh'],
       13: [365, 398, 44, 44, 'kruh'], 14: [296, 563, 62, 38], 15: [427, 125, 46, 46, 'kruh'], 16: [142, 160, 78, 66], 17: [549, 481, 48, 48, 'kruh'], 18: [177, 467, 26, 26, 'kruh'],
       19: [526, 246, 44, 44, 'kruh'], 20: [301, 604, 48, 72], 21: [455, 426, 48, 48, 'kruh'], 22: [556, 568, 44, 44, 'kruh'], 23: [499, 331, 48, 48, 'kruh'], 24: [188, 594, 110, 90] } },
     // shop shelving: every door is a toy box, a train wagon, the drum or the spinning top
-    hracky: { img: 'img/santova-dilna.webp', cls: '', o: {
+    hracky: { img: 'img/santova-dilna.webp', cls: '', fin: 'Všech 24 krabic je otevřených a' + NB + 'pod regálem čeká ta největší.', o: {
       5: [20, 56, 102, 92], 12: [409, 62, 100, 88], 1: [525, 62, 96, 88], 16: [238, 93, 72, 34], 9: [320, 95, 68, 32], 20: [121, 190, 78, 94],
       3: [353, 180, 86, 104], 14: [543, 186, 78, 98], 8: [21, 322, 88, 95], 22: [249, 316, 95, 101], 11: [372, 324, 124, 28], 17: [523, 316, 94, 101],
       2: [124, 338, 108, 80], 19: [23, 446, 94, 93], 6: [143, 458, 96, 82], 13: [273, 441, 98, 99], 10: [405, 455, 76, 80, 'kruh'], 4: [511, 443, 102, 97],
       15: [29, 569, 92, 95], 23: [149, 566, 90, 98], 7: [261, 579, 92, 85], 18: [383, 576, 102, 88], 21: [513, 569, 96, 95], 24: [396, 690, 212, 106] } },
     // living room: sideboard drawers, the gallery frames, cushions, gifts under the tree and the lamp shade
-    obyvak: { img: 'img/vanocni-obyvak.webp', cls: '', o: {
+    obyvak: { img: 'img/vanocni-obyvak.webp', cls: '', fin: 'Celý obývák je otevřený a' + NB + 'pod stromkem čeká hlavní výhra.', o: {
       3: [62, 369, 111, 46], 15: [177, 369, 106, 46], 8: [287, 369, 107, 46], 19: [398, 369, 107, 46],
       11: [62, 419, 111, 41], 6: [177, 419, 106, 41], 22: [287, 419, 107, 41], 1: [398, 419, 107, 41],
       17: [62, 464, 111, 44], 13: [177, 464, 106, 44], 4: [287, 464, 107, 44], 10: [398, 464, 107, 44],
       9: [131, 91, 84, 99], 24: [242, 83, 145, 98], 14: [413, 89, 86, 102], 20: [123, 214, 117, 83], 2: [267, 199, 84, 104], 16: [378, 213, 120, 84],
       12: [518, 522, 52, 56], 21: [572, 548, 62, 46], 18: [92, 590, 80, 120], 7: [172, 585, 68, 120], 23: [244, 585, 76, 120], 5: [2, 207, 48, 72] } },
     // bedroom: nine window panes, five pillows, bedside drawers, presents, the lamp and the lantern
-    loznice: { img: 'img/vanocni-loznice.webp', cls: ' snih-okno', o: {
+    loznice: { img: 'img/vanocni-loznice.webp', cls: ' snih-okno', fin: 'Štědrá noc. Všech 24' + NB + 'nocí je za' + NB + 'vámi, dobrou noc!', o: {
       4: [150, 42, 98, 74], 15: [265, 42, 106, 74], 9: [389, 42, 99, 74], 12: [150, 132, 98, 72], 1: [265, 132, 106, 72], 18: [389, 132, 99, 72],
       20: [150, 219, 98, 61], 6: [265, 219, 106, 61], 13: [389, 219, 99, 61],
       3: [132, 298, 54, 94], 17: [186, 308, 76, 80], 24: [262, 296, 118, 88], 10: [381, 306, 68, 84], 22: [452, 298, 54, 92],
       8: [6, 373, 92, 31], 19: [6, 409, 92, 30], 14: [543, 373, 92, 31], 5: [543, 410, 92, 30],
       21: [92, 628, 60, 88], 2: [154, 688, 78, 52], 16: [234, 650, 70, 38], 23: [287, 686, 70, 50], 11: [14, 244, 72, 54], 7: [566, 280, 44, 74] } },
     // gingerbread village: windows and doors of four houses, the church rose window is Christmas Eve
-    vesnicka: { img: 'img/pernikova-vesnicka.webp', cls: '', o: {
+    vesnicka: { img: 'img/pernikova-vesnicka.webp', cls: '', fin: 'Celá vesnička svítí a' + NB + 'rozeta kostelíka září.', o: {
       6: [58, 250, 48, 50], 13: [146, 250, 48, 50], 20: [57, 327, 44, 52], 2: [154, 327, 42, 52], 17: [104, 325, 44, 74, 'oblouk'],
       24: [275, 212, 84, 84, 'kruh'], 12: [287, 318, 62, 92, 'oblouk'], 8: [251, 312, 27, 74, 'oblouk'], 15: [358, 312, 27, 74, 'oblouk'],
       3: [457, 258, 46, 50], 10: [537, 258, 46, 50], 22: [456, 330, 40, 52], 5: [553, 330, 40, 52], 19: [498, 328, 52, 66, 'oblouk'],
       11: [121, 530, 48, 50], 1: [208, 530, 48, 50], 16: [115, 604, 42, 52], 23: [217, 604, 44, 52], 9: [166, 606, 44, 82, 'oblouk'],
       14: [377, 527, 50, 52], 7: [467, 527, 50, 52], 18: [366, 604, 44, 52], 21: [480, 604, 42, 52], 4: [420, 606, 48, 82, 'oblouk'] } },
     // snowy hamlet: chalet window shutters, the cottage, the barn doors, the well, firewood and the sledge
-    chata: { img: 'img/zasnezena-chalupa.webp', cls: ' snih', o: {
+    chata: { img: 'img/zasnezena-chalupa.webp', cls: ' snih', fin: 'Celá chalupa svítí a' + NB + 'dveře jsou dokořán.', o: {
       15: [304, 184, 38, 38, 'kruh'], 3: [212, 270, 27, 56], 18: [240, 270, 27, 56], 9: [292, 270, 28, 56], 21: [321, 270, 28, 56], 12: [375, 270, 27, 56], 5: [403, 270, 27, 56],
       20: [212, 374, 27, 60], 1: [240, 374, 27, 60], 14: [375, 374, 27, 60], 8: [403, 374, 27, 60], 24: [294, 378, 58, 96],
       6: [52, 341, 35, 34], 17: [100, 341, 35, 34], 11: [29, 401, 31, 37], 2: [71, 401, 31, 37], 22: [119, 403, 31, 64],
@@ -1784,8 +1813,13 @@
     if (A.hvezda) h += '<span class="adv-star" aria-hidden="true" style="left:' + (A.hvezda[0] / W * 100).toFixed(2) + '%;top:' + (A.hvezda[1] / H * 100).toFixed(2) + '%"><svg viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6l-6.4 3.5L7 14l-5.3-5 7.2-.9z"/></svg></span>';
     for (d = 1; d <= TEMATA[tema].dni; d++) {
       o = A.o[d]; s = stav(d);
-      h += '<button type="button" class="adv-d ' + s + (o[4] ? ' ' + o[4] : '') + (d === 24 ? ' velke' : '') + (padajici === d ? ' just' : '') + '" data-den="' + d + '" data-review-id="demo-okenko-' + d + '" aria-label="Okénko ' + d + ': ' + popisek(s) + '" style="left:' + (o[0] / W * 100).toFixed(2) + '%;top:' + (o[1] / H * 100).toFixed(2) + '%;width:' + (o[2] / W * 100).toFixed(2) + '%;height:' + (o[3] / H * 100).toFixed(2) + '%;--bs:' + (W / o[2] * 100).toFixed(2) + '% ' + (H / o[3] * 100).toFixed(2) + '%;--bp:' + (o[0] / (W - o[2]) * 100).toFixed(2) + '% ' + (o[1] / (H - o[3]) * 100).toFixed(2) + '%">' +
+      h += '<button type="button" class="adv-d ' + s + (o[4] ? ' ' + o[4] : '') + (d === 24 ? ' velke' : '') + (padajici === d ? ' just' : '') + '" data-den="' + d + '" data-review-id="demo-okenko-' + d + '" aria-label="Okénko ' + d + ': ' + popisek(s) + '" style="--i:' + d + ';left:' + (o[0] / W * 100).toFixed(2) + '%;top:' + (o[1] / H * 100).toFixed(2) + '%;width:' + (o[2] / W * 100).toFixed(2) + '%;height:' + (o[3] / H * 100).toFixed(2) + '%;--bs:' + (W / o[2] * 100).toFixed(2) + '% ' + (H / o[3] * 100).toFixed(2) + '%;--bp:' + (o[0] / (W - o[2]) * 100).toFixed(2) + '% ' + (o[1] / (H - o[3]) * 100).toFixed(2) + '%">' +
         (s === 'today' ? '<span class="adv-tag' + (o[1] < 60 ? ' dole' : '') + '" aria-hidden="true">Dnes</span>' : '') + '<span class="adv-in">' + (s === 'open' ? ICO[D[d - 1].typ] : '') + '</span><span class="adv-f"><span class="adv-fr"><span class="adv-n">' + d + '</span></span><span class="adv-bk"></span></span></button>';
+    }
+    if (finale) {
+      // Christmas Eve: sparks fly out once the last door is open, then the closing panel
+      for (d = 0; d < 16; d++) { var uh = d / 16 * Math.PI * 2, r = 30 + (d % 3) * 9; h += '<i class="adv-jiskra" aria-hidden="true" style="--x:' + Math.round(Math.cos(uh) * r) + 'cqw;--y:' + Math.round(Math.sin(uh) * r * 1.1) + 'cqw;--z:' + (d % 4) * 90 + 'ms"></i>'; }
+      h += '<div class="adv-fin" role="status"><b>Veselé Vánoce!</b><span>' + (A.fin || 'Všech 24' + NB + 'okének je otevřených.') + '</span></div>';
     }
     return h + (TEMATA[tema].finale ? '<button type="button" class="d-finale" data-review-id="demo-finale">' + TEMATA[tema].finale + '</button>' : '') + '</div>';
   }
@@ -2256,7 +2290,7 @@
       if (sc) { sc.classList.remove('finale'); void sc.offsetWidth; sc.classList.add('finale'); }
       zprava('Takhle vypadá poslední den, když zákazník neprošvihne ani jeden.');
       clearTimeout(startTimer);
-      startTimer = setTimeout(function () { vykresli(); }, 6000);
+      startTimer = setTimeout(function () { vykresli(); }, TEMATA[tema].layout === 'advent' ? 9000 : 6000);
     }
   });
   document.getElementById('demo-today-btn').addEventListener('click', function () { klik(dnes, stage.querySelector('[data-den="' + dnes + '"]:not([tabindex="-1"])')); });
