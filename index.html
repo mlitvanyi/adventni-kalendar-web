@@ -192,12 +192,10 @@
   .vz-th { position: relative; flex: none; width: 56px; height: 70px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: #ececef; cursor: pointer; opacity: .6; box-shadow: 0 0 0 1px rgba(0,0,0,.08); transition: opacity .15s ease, box-shadow .15s ease; }
   .vz-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .vz-th-w { position: relative; flex: none; }
-  .vz-tip { position: absolute; left: 50%; top: calc(100% + 12px); z-index: 30; width: 176px; padding: 8px 8px 10px; border-radius: 14px; background: #14141a; color: #fff; text-align: left; box-shadow: 0 16px 36px rgba(0,0,0,.28); pointer-events: none; opacity: 0; visibility: hidden; translate: -50% 6px; transition: opacity .16s ease, translate .16s ease, visibility 0s .16s; }
+  .vz-tip { position: absolute; left: 50%; top: calc(100% + 10px); z-index: 30; width: max-content; max-width: 220px; padding: 7px 11px 8px; border-radius: 10px; background: #14141a; color: #fff; text-align: left; box-shadow: 0 16px 36px rgba(0,0,0,.28); pointer-events: none; opacity: 0; visibility: hidden; translate: -50% 6px; transition: opacity .16s ease, translate .16s ease, visibility 0s .16s; }
   .vz-tip::before { content: ""; position: absolute; left: 50%; bottom: 100%; margin-left: -7px; border: 7px solid transparent; border-bottom-color: #14141a; }
-  .vz-tip img { display: block; width: 100%; aspect-ratio: 4 / 5; height: auto; border-radius: 8px; margin-bottom: 8px; }
-  .vz-tip b { display: block; font-size: 14px; font-weight: 800; line-height: 1.2; }
+  .vz-tip b { display: block; font-size: 13px; font-weight: 800; line-height: 1.2; }
   .vz-tip small { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,255,255,.7); }
-  .vz-tip em { display: inline-block; margin-top: 7px; padding: 2px 8px; border-radius: 100px; background: rgba(255,255,255,.14); font-size: 10.5px; font-style: normal; font-weight: 700; }
   .vz-th-w:hover .vz-tip, .vz-th:focus-visible + .vz-tip { opacity: 1; visibility: visible; translate: -50% 0; transition-delay: .12s, .12s, 0s; }
   .vz-thumbs .vz-th-w:first-child .vz-tip { left: 0; translate: 0 6px; } .vz-thumbs .vz-th-w:first-child:hover .vz-tip { translate: 0 0; } .vz-thumbs .vz-th-w:first-child .vz-tip::before { left: 30px; }
   @media (hover: none) { .vz-tip { display: none; } }
@@ -232,10 +230,10 @@
   .demo .d-wrap { position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 28px; align-items: start; }
   #demo-stage { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 560px; margin: 0 auto; aspect-ratio: 4 / 5; }
   #demo-stage .scene { margin: 0; max-height: 100%; max-width: calc(100% * var(--sc-ar, 0.8) / 0.8); }
-  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa, .demo .scene.spani, .demo .scene.pas-scene, .demo .scene.chalupa { --sc-ar: 0.8; }
+  .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa, .demo .scene.spani, .demo .scene.pas-scene, .demo .scene.chalupa, .demo .scene.vzk-scene { --sc-ar: 0.8; }
   .demo .scene.wardrobe { --sc-ar: 0.8003; }
   .demo .scene.basket { --sc-ar: 1.3333; }
-  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa):not(.spani):not(.pas-scene):not(.chalupa) { --sc-ar: 0.8056; }
+  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa):not(.spani):not(.pas-scene):not(.chalupa):not(.vzk-scene) { --sc-ar: 0.8056; }
   #demo-stage .grid { width: 100%; align-self: start; }
   .demo .scene.basket { width: 100%; }
   .demo .d-top { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--d-ink-2); min-height: 28px; }
@@ -503,6 +501,46 @@
   .demo .scene.chalupa .win.just .b { animation: chDrop .6s cubic-bezier(.3,1.6,.5,1) both; }
   @keyframes chDrop { 0% { translate: -50% -260%; opacity: 0; } 100% { translate: -50% -100%; opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .demo .ch-smoke circle, .demo .ch-glint path, .demo .ch-pulse, .demo .scene.chalupa .win.today .b, .demo .scene.chalupa .win.just .b { animation: none; } }
+  /* téma: Vzorkovník archivu (prémiový nábytek, minimalismus, celé v kódu) */
+  .demo[data-theme="vzorky"] { --d-bg: #ebecee; --d-ink: #000; --d-ink-2: #565968; --d-today: #3b7a78; --d-today-ink: #fff; --d-btn: #000; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #d7d8dc; --d-radius: 0; }
+  .demo[data-theme="vzorky"] .d-title { font-weight: 300; text-transform: uppercase; letter-spacing: .01em; }
+  .demo[data-theme="vzorky"] .d-btn, .demo[data-theme="vzorky"] .dc-cta { border-radius: 0; text-transform: uppercase; letter-spacing: .06em; font-size: 13px; }
+  .demo[data-theme="vzorky"] .d-today, .demo[data-theme="vzorky"] .d-card { border-radius: 0; }
+  .demo[data-theme="vzorky"] .d-finale { left: auto; right: 12px; background: #000; border-radius: 0; text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
+  .demo .scene.vzk-scene { aspect-ratio: 4 / 5; max-width: 480px; border-radius: 0; background: linear-gradient(#f6f6f7 0 56%, #e4e4e7 56% 100%); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+  .demo .vzk-head { position: absolute; left: 7%; top: 7%; z-index: 1; font-family: 'Inter', Arial, sans-serif; text-transform: uppercase; line-height: 1.02; color: #000; }
+  .demo .vzk-head b { display: block; font-size: clamp(16px, 2.4vw, 26px); font-weight: 800; letter-spacing: .01em; }
+  .demo .vzk-head span { display: block; font-size: clamp(16px, 2.4vw, 26px); font-weight: 200; letter-spacing: .02em; }
+  .demo .vzk-sofa { position: absolute; left: 6%; top: 13%; width: 88%; height: auto; z-index: 2; }
+  .demo .vzk-c.drop { animation: vzkDrop .7s cubic-bezier(.3,1.45,.5,1) both; }
+  @keyframes vzkDrop { 0% { transform: translateY(-260px); opacity: 0; } 50% { opacity: 1; } 100% { transform: none; opacity: 1; } }
+  .demo .vzk-ghost { animation: vzkGhost 1.6s ease-in-out infinite; }
+  @keyframes vzkGhost { 50% { opacity: .35; } }
+  .demo .vzk-fan { position: absolute; left: 50%; bottom: 4%; width: 0; height: 38%; z-index: 3; }
+  .demo .vzk-fan::after { content: ""; position: absolute; left: -7px; bottom: 6px; z-index: 20; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #9a9ca3, #3a3b40); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+  .demo .vzk { position: absolute; left: -27px; bottom: 0; width: 54px; height: 100%; padding: 0; border: 0; border-radius: 3px; background: #fff; font: inherit; display: flex; flex-direction: column; overflow: hidden; transform-origin: 50% 96%; rotate: var(--a); box-shadow: 0 2px 10px rgba(0,0,0,.16), inset 0 0 0 1px rgba(0,0,0,.06); transition: translate .25s ease, box-shadow .25s ease; cursor: pointer; }
+  .demo .vzk:hover { translate: 0 -10px; }
+  .demo .vzk-chip { flex: 0 0 62%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 8px; padding-top: 10px; background: #dcdde1; color: rgba(0,0,0,.35); }
+  .demo .vzk-chip i { writing-mode: vertical-rl; rotate: 180deg; font-style: normal; font-size: 8.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: rgba(255,255,255,.9); }
+  .demo .vzk.missed .vzk-chip i { color: #8c8e98; }
+  .demo .vzk-chip svg { width: 16px; height: 16px; }
+  .demo .vzk.open .vzk-chip { background: var(--c); color: rgba(255,255,255,.85); }
+  .demo .vzk.today .vzk-chip { background: repeating-linear-gradient(45deg, #3b7a78 0 6px, #46898a 6px 12px); }
+  .demo .vzk.missed .vzk-chip { background: repeating-linear-gradient(-45deg, #e2e2e5 0 5px, #d3d3d7 5px 10px); }
+  .demo .vzk-lab { flex: none; display: flex; justify-content: center; padding: 6px 2px 5px; color: #000; font-family: 'Inter', Arial, sans-serif; }
+  .demo .vzk-lab b { font-size: 13px; font-weight: 800; letter-spacing: .04em; }
+  .demo .vzk.missed .vzk-lab b { text-decoration: line-through; color: #8c8e98; }
+  .demo .vzk.today { translate: 0 -26px; box-shadow: 0 0 0 2px #3b7a78, 0 14px 26px rgba(0,0,0,.25); animation: vzkPeek 1.8s ease-in-out infinite; }
+  .demo .vzk.today .vzk-lab b { color: #3b7a78; }
+  @keyframes vzkPeek { 50% { translate: 0 -34px; } }
+  .demo .vzk.just { animation: vzkPull .7s ease both; }
+  @keyframes vzkPull { 0% { translate: 0 -26px; } 45% { translate: 0 -90px; } 100% { translate: 0 0; } }
+  .demo .vzk-done { position: absolute; left: 7%; top: 7%; z-index: 4; padding: 14px 16px; background: #3b7a78; color: #fff; font-family: 'Inter', Arial, sans-serif; clip-path: polygon(0 0, 100% 0, 100% 72%, 94% 72%, 94% 100%, 0 100%); animation: vzkDone .6s .2s ease both; }
+  .demo .vzk-done b { display: block; font-size: 15px; font-weight: 700; color: #f1e7cf; }
+  .demo .vzk-done span { display: block; max-width: 210px; margin-top: 4px; font-size: 19px; font-weight: 700; line-height: 1.15; }
+  @keyframes vzkDone { from { opacity: 0; transform: translateY(10px); } }
+  .demo .scene.vzk-scene.finale .vzk-head { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) { .demo .vzk-c.drop, .demo .vzk-ghost, .demo .vzk.today, .demo .vzk.just, .demo .vzk-done { animation: none; } }
 
   /* téma: Sněhulák a sobi (vymyšlené, kreslené) */
   .demo[data-theme="snehulak"] { --d-bg: #0f3d2e; --d-ink: #f4f7ff; --d-ink-2: #bfd5c8; --d-today: #ffd21f; --d-today-ink: #132747; --d-btn: #DA2A49; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: rgba(255,255,255,.08); --d-card-line: rgba(255,255,255,.16); }
@@ -1261,6 +1299,7 @@
           <button type="button" class="vz-th" data-theme="spani" aria-pressed="false" aria-label="7 nocí pro spánek" title="7 nocí pro spánek" data-kat="Kdykoli během roku" data-meta="Bytový textil · 7 nocí" data-stitek="Nový návrh" data-review-id="demo-vzhled-spani"><img src="img/nahledy/spani.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
           <button type="button" class="vz-th" data-theme="pas" aria-pressed="false" aria-label="Cestovní pas" title="Cestovní pas" data-kat="Kdykoli během roku" data-meta="Duty free na hranici · 14 dní" data-stitek="Nový návrh" data-review-id="demo-vzhled-pas"><img src="img/nahledy/pas.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
           <button type="button" class="vz-th" data-theme="chalupa" aria-pressed="false" aria-label="Víkendy na chalupě" title="Víkendy na chalupě" data-kat="Kdykoli během roku" data-meta="Chaty a chalupy · 8 víkendů" data-stitek="Nový návrh" data-review-id="demo-vzhled-chalupa"><img src="img/nahledy/chalupa.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
+          <button type="button" class="vz-th" data-theme="vzorky" aria-pressed="false" aria-label="Vzorkovník archivu" title="Vzorkovník archivu" data-kat="Kdykoli během roku" data-meta="Prémiový nábytek · 10 dní" data-stitek="Nový návrh" data-review-id="demo-vzhled-vzorky"><img src="img/nahledy/vzorky.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
         </div></div>
       </div>
     </div>
@@ -1803,6 +1842,42 @@
     return s + '</svg>';
   }
 
+  // Vzorkovník skladového archivu: celé v kódu; okénko = vzorek látky, na pohovce přibude polštář v její barvě
+  var VZORKY = [['Bouclé Écru', '#e6dfd0'], ['Velvet Petrol', '#1f5560'], ['Lino Sabbia', '#c4b193'], ['Terracotta', '#b0573b'], ['Oliva', '#6c7046'], ['Antracite', '#393a3e'], ['Cipria', '#d6ada0'], ['Oceano', '#3a6a8c'], ['Senape', '#c4973a'], ['Nero', '#161618']];
+  DARKY.vzorky = seznam([['sleva', 'Sleva 40 % na křesla ze showroomu'], ['doprava', 'Doprava a montáž zdarma'], ['darek', 'Polštář v látce dne ke křeslu'], ['sleva', 'Sleva 30 % na konferenční stolky'], ['prodejna', 'Konzultace s architektem zdarma'], ['sleva', 'Sleva 40 % na doplňky z archivu'], ['akce', 'Předpremiéra výprodeje jen pro vás'], ['sleva', 'Sleva 35 % na jídelní židle'], ['darek', 'Vzorník látek domů zdarma'], ['sleva', 'Sleva 50 % na vybraný solitér']], 10, 'KA');
+  TEMATA.vzorky = { dni: 10, dnes: 6, layout: 'vzorky', top: '', eyebrow: 'Prémiový nábytek · výprodej skladového archivu', t: 'Vzorkovník archivu', l: 'Deset dní před velkým výprodejem otevíráme vzorkovník. Každý den odkryjete jednu látku z' + NB + 'archivu a' + NB + 'k' + NB + 'ní dárek. Na' + NB + 'pohovce přibude polštář v' + NB + 'její barvě. Desátý den otevíráme sklad pro všechny.', btn: 'Odkrýt dnešní vzorek', den: 'vzorek', tip: 'Klikněte na' + NB + 'vysunutý vzorek ve' + NB + 'vzorkovníku.', finale: 'Ukázat 10. den: otevřený archiv', odkryto: { 1: true, 2: true, 3: true, 5: true },
+    umi: ['Otevřít jde jen <strong>dnešní vzorek</strong>. Propásnutý polštář na' + NB + 'pohovce chybí.', 'Krátká kampaň před akcí: <strong>10 dní</strong> do' + NB + 'výprodeje, otevření showroomu nebo nové kolekce.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba ve' + NB + 'showroomu, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] };
+  function vzorkySofa() {
+    var s = '<svg class="vzk-sofa" viewBox="0 0 1000 600" aria-hidden="true"><defs>' +
+      '<filter id="vzk-tex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="multiply"/></filter>' +
+      '<linearGradient id="vzk-sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient></defs>';
+    // floor shadow and a low, long sofa
+    s += '<ellipse cx="500" cy="548" rx="430" ry="18" fill="#000" opacity=".12"/>';
+    s += '<g filter="url(#vzk-tex)"><rect x="90" y="300" width="820" height="150" rx="26" fill="#d9d6cf"/><rect x="70" y="410" width="860" height="120" rx="30" fill="#e3e0d9"/><rect x="58" y="330" width="78" height="200" rx="30" fill="#d2cfc7"/><rect x="864" y="330" width="78" height="200" rx="30" fill="#d2cfc7"/></g>';
+    s += '<path d="M500 414v110" stroke="#c9c5bc" stroke-width="3"/><path d="M150 532h12v34h-12zM838 532h12v34h-12z" fill="#2b2b2e"/>';
+    var d, n = TEMATA.vzorky.dni;
+    for (d = 1; d <= n; d++) {
+      var st = stav(d), x = 150 + (d - 1) * 78, y = 392 + (d % 2 ? 0 : 8), r = (d * 29 % 15) - 7, c = VZORKY[d - 1][1];
+      if (st === 'open') s += '<g transform="translate(' + x + ' ' + y + ')"><g class="vzk-c' + (padajici === d ? ' drop' : '') + '"><g transform="rotate(' + r + ')"><g filter="url(#vzk-tex)"><path d="M-62-52Q0-64 62-52Q72 0 62 52Q0 64-62 52Q-72 0-62-52Z" fill="' + c + '"/></g><path d="M-62-52Q0-64 62-52Q72 0 62 52Q0 64-62 52Q-72 0-62-52Z" fill="url(#vzk-sh)"/><path d="M-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0" fill="#000" opacity=".12"/></g></g></g>';
+      else if (st === 'today') s += '<g class="vzk-ghost" transform="translate(' + x + ' ' + y + ')"><path d="M-62-52Q0-64 62-52Q72 0 62 52Q0 64-62 52Q-72 0-62-52Z" fill="rgba(59,122,120,.08)" stroke="#3b7a78" stroke-width="3" stroke-dasharray="8 7"/></g>';
+    }
+    return s + '</svg>';
+  }
+  function vzorkyHTML() {
+    var T = TEMATA.vzorky, D = DARKY.vzorky, n = T.dni, d, h = '<div class="scene vzk-scene' + (finale ? ' finale' : '') + '">';
+    h += '<div class="vzk-head" aria-hidden="true"><b>Otevíráme náš</b><span>skladový archiv</span></div>' + vzorkySofa();
+    h += '<div class="vzk-fan" role="group" aria-label="Vzorkovník látek">';
+    for (d = 1; d <= n; d++) {
+      var st = stav(d), a = -38 + (d - 1) * (76 / (n - 1)), v = VZORKY[d - 1];
+      h += '<button type="button" class="vzk ' + st + (padajici === d ? ' just' : '') + '" data-den="' + d + '" data-review-id="demo-vzorek-' + d + '" aria-label="Vzorek ' + d + ': ' + popisek(st) + '" style="--a:' + a.toFixed(1) + 'deg;--c:' + v[1] + ';z-index:' + d + '">' +
+        '<span class="vzk-lab"><b>' + (d < 10 ? '0' : '') + d + '</b></span>' +
+        '<span class="vzk-chip">' + (st === 'open' ? ICO[D[d - 1].typ] : st === 'locked' ? ICO.zamek : '') + '<i>' + (st === 'open' ? v[0] : st === 'today' ? 'Dnes' : st === 'missed' ? 'Propásnuto' : '') + '</i></span></button>';
+    }
+    h += '</div>';
+    if (finale) h += '<div class="vzk-done" aria-hidden="true"><b>24.–26. 9.</b><span>Velký výprodej pokladů ze showroomu a skladu</span></div>';
+    return h + '<button type="button" class="d-finale" data-review-id="demo-finale">' + T.finale + '</button></div>';
+  }
+
   // Víkendy na chalupě: malovaná mapa z Higgsfieldu (1792 × 2240), trasa, špendlíky a turista v kódu; 1 okénko = 1 víkend
   var OKNA_CH = { 1: [594, 1826, 347, 246], 2: [134, 1378, 918, 302], 3: [806, 1154, 314, 123], 4: [930, 918, 235, 112], 5: [538, 638, 246, 224], 6: [918, 314, 560, 426], 7: [627, 213, 134, 190], 8: [941, 18, 90, 150] };
   // the sandy footpath in the painting, bottom to top (image px); stops snap to its nearest point
@@ -1934,6 +2009,7 @@
   function vykresli() {
     var T = TEMATA[tema], D = DARKY[tema], s, d, html = '';
     if (T.layout === 'pas') html = pasHTML();
+    else if (T.layout === 'vzorky') html = vzorkyHTML();
     else if (T.layout === 'raketa') {
       var stavy = [];
       for (d = 1; d <= T.dni; d++) stavy.push(stav(d));
@@ -1978,6 +2054,7 @@
     if (nove) for (i = 0; i < 18; i++) { var a = i / 18 * Math.PI * 2, r = 120 + (i % 3) * 40; fx += '<i class="dc-fx" style="--x:' + Math.round(Math.cos(a) * r) + 'px;--y:' + Math.round(Math.sin(a) * r * 0.8) + 'px;--r:' + (i * 47 % 360) + 'deg;background:' + barvy[i % 4] + '"></i>'; }
     var zbyva = T.dni - d, pozn;
     if (tema === 'raketa') pozn = zbyva ? 'Dílek ' + d + ' je na' + NB + 'raketě. Do' + NB + 'startu ' + (zbyva === 1 ? 'zbývá 1' + NB + 'dílek.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'dílky.' : 'zbývá ' + zbyva + NB + 'dílků.') : 'Raketa je kompletní. Start!';
+    else if (tema === 'vzorky') pozn = zbyva ? 'Látka ' + VZORKY[d - 1][0] + ' je na' + NB + 'pohovce. Do' + NB + 'otevření archivu zbývá ' + dni(zbyva) + '.' : 'Archiv je otevřený. Přijďte si vybrat svůj kousek.';
     else if (tema === 'chalupa') pozn = zbyva ? 'Turista došel k' + NB + 'zastávce ' + d + '. Do' + NB + 'rozhledny zbývá ' + (zbyva === 1 ? '1' + NB + 'víkend.' : zbyva < 5 ? zbyva + NB + 'víkendy.' : zbyva + NB + 'víkendů.') : 'Rozhledna dobyta. Víkend pro dva za' + NB + 'polovic je váš.';
     else if (tema === 'pas') pozn = zbyva ? 'Razítko prodejny na' + NB + 'hranici ' + PAS[d - 1] + ' je v' + NB + 'pasu. Do' + NB + 'plného pasu zbývá ' + dni(zbyva) + ', čtrnáctý den čeká velký cestovní koš.' : 'Pas je plný. Velký cestovní koš je váš.';
     else if (tema === 'spani') pozn = zbyva ? 'Do' + NB + 'úplňku ' + (zbyva === 1 ? 'zbývá 1' + NB + 'noc.' : zbyva < 5 ? 'zbývají ' + zbyva + NB + 'noci.' : 'zbývá ' + zbyva + NB + 'nocí.') + ' Měsíc za' + NB + 'oknem roste s' + NB + 'každou odkrytou nocí.' : 'Úplněk. Dobrou noc!';
@@ -2115,9 +2192,9 @@
 
   Array.prototype.forEach.call(document.querySelectorAll('button[data-theme]'), function (btn) { btn.addEventListener('click', function () { nastavTema(btn.getAttribute('data-theme')); }); });
   Array.prototype.forEach.call(document.querySelectorAll('.vz-th'), function (btn) {
-    var w = document.createElement('span'), tip = document.createElement('span'), st = btn.getAttribute('data-stitek');
+    var w = document.createElement('span'), tip = document.createElement('span');
     w.className = 'vz-th-w'; tip.className = 'vz-tip'; tip.setAttribute('aria-hidden', 'true');
-    tip.innerHTML = '<img src="' + btn.querySelector('img').getAttribute('src') + '" alt=""><b>' + btn.getAttribute('aria-label') + '</b><small>' + btn.getAttribute('data-meta') + '</small>' + (st ? '<em>' + st + '</em>' : '');
+    tip.innerHTML = '<b>' + btn.getAttribute('aria-label') + '</b><small>' + btn.getAttribute('data-meta') + '</small>';
     btn.removeAttribute('title');
     btn.parentNode.insertBefore(w, btn); w.appendChild(btn); w.appendChild(tip);
   });
