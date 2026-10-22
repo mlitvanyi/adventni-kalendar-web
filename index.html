@@ -553,7 +553,7 @@
   @keyframes vzkDone { from { opacity: 0; transform: translateY(10px); } }
   .demo .scene.vzk-scene.finale .vzk-head { opacity: 0; }
   @media (prefers-reduced-motion: reduce) { .demo .vzk-col.just, .demo .vzk-all, .demo .vzk-pol.today, .demo .vzk.just, .demo .vzk-done { animation: none; } }
-  /* téma: Deset let, deset obálek (fotka obálek z Higgsfieldu, otevírání v kódu) */
+  /* téma: Deset let, deset obálek (mřížka obálek na fotce z Higgsfieldu, otevírání v kódu) */
   .demo[data-theme="obalky"] { --d-bg: #f6f3ee; --d-ink: #2b2523; --d-ink-2: #6d625c; --d-today: #b3262c; --d-today-ink: #fff; --d-btn: #b3262c; --d-btn-ink: #fff; --d-font: 'Inter', 'Inter Fallback', Arial, sans-serif; --d-card: #fff; --d-card-line: #e7e0d6; }
   .demo[data-theme="obalky"] .d-title { font-weight: 900; letter-spacing: -0.03em; }
   .demo[data-theme="obalky"] .d-btn { border-radius: 100px; }
@@ -575,7 +575,7 @@
   .demo .obl.open { z-index: 1; }
   .demo .obl.just .obl-card { animation: oblPull .7s cubic-bezier(.3,1.4,.5,1) both; }
   @keyframes oblPull { from { translate: 0 0; opacity: 0; } 30% { opacity: 1; } to { translate: 0 -56%; } }
-  .demo .obl-done { position: absolute; left: 50%; top: 56%; z-index: 5; padding: 8px 22px; translate: -50% 0; rotate: -3deg; background: rgba(227,208,168,.94); color: #5a4126; font-family: 'Inter', Arial, sans-serif; font-size: clamp(14px, 2vw, 20px); font-weight: 800; letter-spacing: .02em; box-shadow: 0 3px 8px rgba(0,0,0,.15); clip-path: polygon(2% 0, 98% 4%, 100% 100%, 0 96%); animation: oblDone .6s .4s ease both; }
+  .demo .obl-done { position: absolute; left: 50%; top: 41%; z-index: 5; padding: 8px 22px; translate: -50% 0; rotate: -3deg; background: rgba(227,208,168,.94); color: #5a4126; font-family: 'Inter', Arial, sans-serif; font-size: clamp(14px, 2vw, 20px); font-weight: 800; letter-spacing: .02em; box-shadow: 0 3px 8px rgba(0,0,0,.15); clip-path: polygon(2% 0, 98% 4%, 100% 100%, 0 96%); animation: oblDone .6s .4s ease both; }
   @keyframes oblDone { from { opacity: 0; translate: -50% -10px; } }
   @media (prefers-reduced-motion: reduce) { .demo .obl.today, .demo .obl.just .obl-card, .demo .obl-done { animation: none; } }
 
@@ -1928,12 +1928,12 @@
     if (finale) h += '<div class="vzk-done" aria-hidden="true"><b>24.–26. 9.</b><span>Velký výprodej pokladů ze showroomu a skladu</span></div>';
     return h + '<button type="button" class="d-finale" data-review-id="demo-finale">' + T.finale + '</button></div>';
   }
-  // Obálky ve tvaru výročí: fotka z Higgsfieldu, na stěně 10 skutečných obálek tvoří číslo 10; otevírání v kódu
+  // Deset let, deset obálek: fotka z Higgsfieldu, na stěně mřížka 2 × 5 skutečných obálek; otevírání v kódu
   // [left, top, width, height v %, natočení obálky ve stupních]
-  var OBALKY = [[21.25, 11.8, 15.6, 9.4, -20], [28, 20.7, 9.1, 11.3, 0], [28, 33.3, 9.1, 9.7, 0], [25, 44.7, 13.1, 6.9, 0], [52.5, 13, 14.5, 7.5, 0], [64.5, 19.3, 13.2, 10.7, 25], [69.1, 35, 10.1, 11.3, -5], [53, 45.5, 14.2, 7.1, -2], [42.1, 35.5, 10.4, 11.5, 4], [42.5, 19.3, 12.6, 11.5, -25]];
+  var OBALKY = [[12.5, 15.0, 12.5, 7.2, 0], [28.1, 15.0, 12.5, 7.2, 0], [43.6, 15.0, 12.4, 7.2, 0], [59.1, 15.0, 12.4, 7.2, 0], [74.6, 15.0, 12.5, 7.2, 0], [12.5, 27.6, 12.5, 7.2, 0], [28.1, 27.6, 12.5, 7.2, 0], [43.6, 27.6, 12.4, 7.2, 0], [59.1, 27.6, 12.4, 7.2, 0], [74.6, 27.6, 12.5, 7.2, 0]];
   DARKY.obalky = seznam([['sleva', 'Výroční sleva 10 %'], ['doprava', 'Doprava zdarma'], ['darek', 'Dárek k objednávce'], ['sleva', 'Sleva 20 % na bestsellery'], ['akce', 'Výroční akce 2 + 1'], ['prodejna', 'Poradenství zdarma na prodejně'], ['sleva', 'Sleva 15 % na novinky'], ['doprava', 'Doprava zdarma'], ['darek', 'Překvapení pro věrné zákazníky'], ['sleva', 'Sleva 30 % na celý nákup']], 10, 'VY');
-  TEMATA.obalky = { dni: 10, dnes: 6, layout: 'obalky', top: '', eyebrow: 'Výročí e‑shopu · 10 let', t: 'Deset let, deset obálek', l: 'Na' + NB + 'stěně visí deset obálek poskládaných do' + NB + 'čísla našeho výročí. Každý den otevřete jednu a' + NB + 'vytáhnete z' + NB + 'ní dárek. Desátý den čeká ten největší.', btn: 'Otevřít dnešní obálku', den: 'obálka', tip: 'Klikněte na' + NB + 'obálku, která svítí, a' + NB + 'vytáhněte z' + NB + 'ní dárek.', finale: 'Ukázat 10. den: všechny obálky', odkryto: { 1: true, 2: true, 3: true, 5: true },
-    umi: ['Otevřít jde jen <strong>dnešní obálku</strong>. Propásnutá zůstane zavřená a zešedne.', 'Tvar podle výročí: <strong>10 let, 10 obálek</strong>, ale i' + NB + '5, 15 nebo 30 dní. Poslední den největší dárek.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba na' + NB + 'prodejně, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] };
+  TEMATA.obalky = { dni: 10, dnes: 6, layout: 'obalky', top: '', eyebrow: 'Výročí e‑shopu · 10 let', t: 'Deset let, deset obálek', l: 'Na' + NB + 'stěně visí deset obálek, jedna za' + NB + 'každý rok s' + NB + 'vámi. Každý den otevřete jednu a' + NB + 'vytáhnete z' + NB + 'ní dárek. Desátý den čeká ten největší.', btn: 'Otevřít dnešní obálku', den: 'obálka', tip: 'Klikněte na' + NB + 'obálku, která svítí, a' + NB + 'vytáhněte z' + NB + 'ní dárek.', finale: 'Ukázat 10. den: všechny obálky', odkryto: { 1: true, 2: true, 3: true, 5: true },
+    umi: ['Otevřít jde jen <strong>dnešní obálku</strong>. Propásnutá zůstane zavřená a zešedne.', 'Počet podle výročí: <strong>10 let, 10 obálek</strong>, ale i' + NB + '5, 15 nebo 30. Poslední den největší dárek.', 'Odkrytí <strong>za e&#8209;mail, nebo bez něj</strong>. S' + NB + 'e&#8209;mailem sbíráte kontakty.', 'Sleva, doprava zdarma, dárek, služba na' + NB + 'prodejně, plošná akce. Kód dárku jde zkopírovat jedním klikem.', 'Měření v' + NB + 'GTM a' + NB + 'Google Analytics po' + NB + 'souhlasu s' + NB + 'cookies. Česky i' + NB + 'v' + NB + 'dalších jazycích.'] };
   function obalkyHTML() {
     var T = TEMATA.obalky, D = DARKY.obalky, d, h = '<div class="scene obl-scene' + (finale ? ' finale' : '') + '" role="group" aria-label="Obálky kalendáře">';
     for (d = 1; d <= T.dni; d++) {

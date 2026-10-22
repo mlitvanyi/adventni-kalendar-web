@@ -129,7 +129,7 @@ Hand-painted illustrated map of a peaceful Central European summer countryside s
 ---
 
 ## 5. Navyše, pre akýkoľvek e-shop: „Obálky ve tvaru výročí“
-**Stav:** prerobené (vzhľad `obalky`). Prvá verzia s obálkami kreslenými v kóde pôsobila infantilne. Teraz je to fotka z Higgsfieldu (GPT Image 2.5, high, 2k, 2,75 kreditu, prvý pokus, `img/obalky-stena.webp`): desať skutočných červených obálok s mosadznými štipcami tvorí číslo 10 nad stoličkou. V kóde sú len číslo, žiara dnešnej obálky so štítkom „Dnes“, kartička vysunutá z otvorenej obálky, vyblednutie zmeškanej obálky a páska „Děkujeme za 10 let“ na konci.
+**Stav:** prerobené druhýkrát (vzhľad `obalky`). Tvar čísla 10 z obálok nefungoval, takže je to fotka z Higgsfieldu s úhľadnou mriežkou 2 × 5 rovnakých červených obálok na štipcoch (GPT Image 2.5, high, 2k, 2,75 kreditu, `img/obalky-stena.webp`). Jedna obálka = jeden rok s vami. V kóde sú len čísla, žiara dnešnej obálky so štítkom „Dnes“, kartička vysunutá z otvorenej obálky, vyblednutie zmeškanej a páska „Děkujeme za 10 let“ na konci.
 
 **Klient (anonymne):** e-shop alebo predajňa, ktorá slávi výročie (5, 10, 15 alebo 30 rokov).
 **Príležitosť:** narodeniny firmy. Univerzálny nástupca „Slavíme 30 let“.
