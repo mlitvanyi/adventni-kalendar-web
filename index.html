@@ -519,6 +519,15 @@
   .demo .vzk-head b { display: block; font-size: clamp(17px, 2.5vw, 28px); font-weight: 800; letter-spacing: .01em; }
   .demo .vzk-head span { display: block; font-size: clamp(17px, 2.5vw, 28px); font-weight: 200; letter-spacing: .02em; }
   .demo .vzk-pol { position: absolute; z-index: 3; padding: 0; border: 0; border-radius: 6px; background: transparent; cursor: pointer; }
+  .demo .vzk-pol { transition: box-shadow .2s ease; }
+  .demo .vzk-pol:hover { box-shadow: 0 0 0 2px #fff, 0 6px 16px rgba(0,0,0,.25); }
+  .demo .vzk-num { position: absolute; left: 50%; top: 100%; translate: -50% 6px; display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: #fff; color: #000; font-family: 'Inter', Arial, sans-serif; font-size: 10.5px; font-weight: 800; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+  .demo .vzk-num::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: 7px; background: rgba(255,255,255,.9); }
+  .demo .vzk-num svg { width: 11px; height: 11px; }
+  .demo .vzk-pol.open .vzk-num { background: #3b7a78; color: #fff; }
+  .demo .vzk-pol.locked .vzk-num { color: #8c8e98; }
+  .demo .vzk-pol.missed .vzk-num { background: #c9cacf; color: #fff; text-decoration: line-through; }
+  .demo .vzk-pol.today .vzk-num { background: #3b7a78; color: #fff; scale: 1.15; }
   .demo .vzk-pol.today { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3b7a78, 0 0 22px 6px rgba(255,255,255,.7); animation: vzkPol 1.8s ease-in-out infinite; }
   .demo .vzk-pol.today::after { content: "Dnes"; position: absolute; left: 50%; bottom: calc(100% + 8px); translate: -50% 0; padding: 3px 7px; background: #3b7a78; color: #fff; font-family: 'Inter', Arial, sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
   @keyframes vzkPol { 50% { box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(59,122,120,.5), 0 0 10px 2px rgba(255,255,255,.4); } }
@@ -1904,7 +1913,7 @@
     h += '<div class="vzk-head" aria-hidden="true"><b>Otevíráme náš</b><span>skladový archiv</span></div>';
     for (d = 1; d <= n; d++) {
       var c = VZORKY[d - 1], s2 = stav(d);
-      h += '<button type="button" class="vzk-pol ' + s2 + '" data-den="' + d + '" tabindex="-1" aria-hidden="true" style="left:' + c[2] + '%;top:' + c[3] + '%;width:' + c[4] + '%;height:' + c[5] + '%"></button>';
+      h += '<button type="button" class="vzk-pol ' + s2 + '" data-den="' + d + '" tabindex="-1" aria-hidden="true" style="left:' + c[2] + '%;top:' + c[3] + '%;width:' + c[4] + '%;height:' + c[5] + '%"><span class="vzk-num">' + (s2 === 'open' ? ICO[DARKY.vzorky[d - 1].typ] : s2 === 'locked' ? ICO.zamek : d) + '</span></button>';
     }
     h += '<div class="vzk-row" role="group" aria-label="Vzorky látek">';
     for (d = 1; d <= n; d++) {
