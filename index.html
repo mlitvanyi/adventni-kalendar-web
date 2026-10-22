@@ -196,7 +196,7 @@
   .vz-arr:disabled { opacity: .35; cursor: default; }
   .vz-arr:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .vz-k { display: block; margin: 0 0 8px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
-  .vz-thumbs { display: flex; gap: 6px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding: 6px; scrollbar-width: none; padding: 6px; margin: -6px; }
+  .vz-thumbs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 6px; margin: -6px; }
   .vz-thumbs::-webkit-scrollbar { display: none; }
   .vz-thumbs.fade-r { -webkit-mask-image: linear-gradient(90deg, #000 86%, transparent); mask-image: linear-gradient(90deg, #000 86%, transparent); }
   .vz-thumbs.fade-l { -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%); mask-image: linear-gradient(90deg, transparent, #000 14%); }
@@ -204,11 +204,11 @@
   .vz-sep { align-self: stretch; flex: none; width: 1px; background: var(--line); }
   .vz-th { position: relative; flex: none; width: 56px; height: 70px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: #ececef; cursor: pointer; opacity: .6; box-shadow: 0 0 0 1px rgba(0,0,0,.08); transition: opacity .15s ease, box-shadow .15s ease; }
   .vz-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .vz-th-w { position: relative; flex: none; scroll-snap-align: start; }
-  .vz-tip { position: fixed; left: 0; top: 0; z-index: 30; width: max-content; max-width: 220px; padding: 7px 11px 8px; border-radius: 10px; background: #14141a; color: #fff; text-align: left; box-shadow: 0 16px 36px rgba(0,0,0,.28); pointer-events: none; opacity: 0; visibility: hidden; translate: -50% 6px; transition: opacity .16s ease, translate .16s ease, visibility 0s .16s; }
-  .vz-tip::before { content: ""; position: absolute; left: calc(50% + var(--sip, 0px)); bottom: 100%; margin-left: -7px; border: 7px solid transparent; border-bottom-color: #14141a; }
+  .vz-th-w { position: relative; flex: none; }
+  .vz-tip { position: fixed; left: 0; top: 0; z-index: 30; width: max-content; max-width: 220px; padding: 7px 11px 8px; border-radius: 10px; background: #fff; color: #14141a; text-align: left; box-shadow: 0 0 0 1px rgba(10,10,10,.08), 0 14px 32px rgba(10,10,10,.22); pointer-events: none; opacity: 0; visibility: hidden; translate: -50% 6px; transition: opacity .16s ease, translate .16s ease, visibility 0s .16s; }
+  .vz-tip::before { content: ""; position: absolute; left: calc(50% + var(--sip, 0px)); bottom: 100%; margin-left: -7px; border: 7px solid transparent; border-bottom-color: #fff; filter: drop-shadow(0 -1px 0 rgba(10,10,10,.08)); }
   .vz-tip b { display: block; font-size: 13px; font-weight: 800; line-height: 1.2; }
-  .vz-tip small { display: block; margin-top: 2px; font-size: 12px; color: rgba(255,255,255,.7); }
+  .vz-tip small { display: block; margin-top: 2px; font-size: 12px; color: #6b6b76; }
   .vz-tip.on { opacity: 1; visibility: visible; translate: -50% 0; transition-delay: .12s, .12s, 0s; }
   @media (hover: none) { .vz-tip { display: none; } }
   .vz-th:hover { opacity: 1; }
