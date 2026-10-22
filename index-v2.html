@@ -1450,16 +1450,6 @@
   #prinos ul.tip-list li::before { display: none; }
   #prinos ul.tip-list li strong { display: block; margin-bottom: 6px; font-size: 19px; letter-spacing: -0.02em; }
 
-  /* admin preview inside a browser window; colours follow the chosen look (adminBarvy in the page script) */
-  .v2-browser { margin: 8px auto 0; padding: 0 10px 10px; border-radius: 18px; background: #e4e7ee; box-shadow: var(--v2-shadow-xl), inset 0 0 0 1px rgba(10,10,10,.06); }
-  .v2-browser-bar { display: flex; align-items: center; gap: 7px; padding: 12px 6px; }
-  .v2-browser-bar i { width: 11px; height: 11px; border-radius: 50%; background: #c4c9d4; }
-  .v2-browser-bar span { flex: 1; max-width: 420px; margin-left: 14px; padding: 6px 14px; border-radius: 100px; background: #fff; color: #525866; font-size: 12.5px; font-weight: 600; }
-  .v2-browser .kd { border-radius: 10px; }
-  /* the jump flash must end on the light browser shadow, not the original monitor outline */
-  .v2-browser.kd-frame.flash { animation-name: v2KdFlash; }
-  @keyframes v2KdFlash { 0%, 100% { box-shadow: var(--v2-shadow-xl), inset 0 0 0 1px rgba(10,10,10,.06); } 30% { box-shadow: 0 0 0 6px var(--kd-flash, #e30613), var(--v2-shadow-xl); } }
-  .v2-browser-bar .dm-admin { margin-left: auto; box-shadow: inset 0 0 0 1px rgba(10,10,10,.08); }
 
   /* comparison: two plan cards, ours bigger, darker and lifted */
   .v2-cmp { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 22px; align-items: center; margin: 8px 0 28px; }
@@ -1548,8 +1538,6 @@
     .v2-cmp { grid-template-columns: 1fr; }
     .v2-plan.us { padding: 40px 24px 30px; }
     .v2-plan-tag { left: 24px; }
-    .v2-browser { padding: 0 6px 6px; margin-inline: -6px; }
-    .v2-browser-bar span { display: none; }
   }
   @media (max-width: 480px) {
     .v2-shot { width: 96px; margin: 0 -9px; }
@@ -1737,8 +1725,8 @@
 <section id="administrace" data-review-id="section-administrace">
   <h2>Administrace, <span class="accent">kterou zvládne každý</span></h2>
   <p class="lead">Funkce a&nbsp;vzhled ladíme na&nbsp;webu pro zákazníky. Administrace zůstává jednoduchá: dárky a&nbsp;texty máte pod kontrolou sami, bez programování.</p>
-  <div class="v2-browser kd-frame" data-review-id="admin-ram">
-  <div class="v2-browser-bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><span aria-hidden="true">advent.vasweb.cz/admin</span><a class="dm-admin" href="#ukazka" data-review-id="admin-zpet-kalendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/></svg>Kalendář</a></div>
+  <div class="demo-frame kd-frame" data-review-id="admin-ram">
+  <div class="dm-bar"><span class="dm-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>advent.vasweb.cz/admin</span><span class="dm-tag" aria-hidden="true">Administrace</span><a class="dm-admin" href="#ukazka" data-review-id="admin-zpet-kalendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/></svg>Kalendář</a></div>
   <div class="kd" id="kd" data-theme="light" data-review-id="admin-ukazka">
     <aside class="kd-side">
       <div class="kd-brand"><span class="mark"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></span><span class="txt"><b>Kalendář dárků</b>Vaše značka</span></div>
