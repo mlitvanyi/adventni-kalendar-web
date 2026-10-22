@@ -49,7 +49,7 @@ Poznámka od Michala, 22. 10. 2026. Robí sa oddelene od nových vzhľadov kalen
   - karty s ikonami PragueBest (`img/icons/`),
   - Tip ako tri karty vedľa seba.
 - Demo kalendára je na svetlom pase a dedí rám monitora z pôvodnej verzie.
-- Administrácia je v okne prehliadača a má farby Fotoškody (bridlica a žltá) namiesto fialovej.
+- Administrácia je v rovnakom monitore ako demo (rovnaké markup aj CSS ako `index.html`) a prefarbuje sa podľa zvoleného vzhľadu.
 - „Jak to probíhá“ je červený pás so šiestimi krokmi s obrysovými číslami 01–06.
 - „Proč ne krabicová služba“ je porovnanie ako cenník: tlmená karta SaaS proti väčšej čiernej karte PragueBest so štítkom „Doporučujeme“ a CTA.
 - Technologické okénko:
