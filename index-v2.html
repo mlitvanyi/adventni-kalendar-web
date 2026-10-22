@@ -836,9 +836,6 @@
   .dm-admin { flex: none; display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 13px; border: 0; border-radius: 15px; background: #fff; color: #111; font-size: 12.5px; font-weight: 700; text-decoration: none; transition: background .15s ease; }
   .dm-admin:hover { background: #e9e9ee; border: 0; }
   .dm-admin svg { width: 14px; height: 14px; }
-  .kd-frame.flash { animation: kdFlash 1.6s ease both; }
-  @keyframes kdFlash { 0%, 100% { box-shadow: 0 30px 70px rgba(0,0,0,.3), inset 0 0 0 2px #2a2a2a; } 30% { box-shadow: 0 0 0 6px var(--kd-flash, #e30613), 0 30px 70px rgba(0,0,0,.3); } }
-  @media (prefers-reduced-motion: reduce) { .kd-frame.flash { animation: none; } }
   .dm-tag { flex: none; padding: 0 10px; height: 30px; display: grid; place-items: center; border-radius: 15px; background: #26262a; color: #8d8d95; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
   @media (prefers-reduced-motion: reduce) { .dm-reload.spin svg { animation: none; } }
   .demo-frame.is-mobile { max-width: 412px; margin: 0 auto; padding: 12px; border-radius: 44px; background: #111; box-shadow: 0 30px 70px rgba(0,0,0,.35), inset 0 0 0 2px #2a2a2a; position: relative; }
@@ -2531,14 +2528,6 @@
     else if (a === 'znovu') { delete odkryto[dnes]; zavriKartu(); vykresli(); zprava('Okénko je zase zavřené. Zkuste to znovu.'); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') zavriKartu(); });
-  Array.prototype.forEach.call(document.querySelectorAll('a.dm-admin[href="#administrace"], .vz-admin'), function (a) {
-    a.addEventListener('click', function () {
-      var f = document.querySelector('.kd-frame'); if (!f) return;
-      f.style.setProperty('--kd-flash', ADMIN_BARVY[tema] || '#e30613');
-      f.classList.remove('flash'); void f.offsetWidth;
-      setTimeout(function () { f.classList.add('flash'); }, 450);
-    });
-  });
   var reload = document.getElementById('dm-reload');
   if (reload) reload.addEventListener('click', function () {
     reload.classList.remove('spin'); void reload.offsetWidth; reload.classList.add('spin');
