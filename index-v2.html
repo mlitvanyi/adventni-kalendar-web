@@ -1293,6 +1293,7 @@
   .v2-copy { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; text-align: center; }
   .v2-copy h1 { font-family: var(--v2-font); font-size: clamp(40px, 5.2vw, 80px); font-weight: 500; letter-spacing: -0.045em; line-height: .98; color: var(--ink); margin: 0 auto 28px; max-width: 16.5ch; text-wrap: balance; }
   .v2-copy h1 .accent { color: var(--accent); font-weight: 500; }
+  .v2-mark { padding: 0 .06em; background: linear-gradient(transparent 58%, rgba(227,6,19,.22) 58%, rgba(227,6,19,.22) 90%, transparent 90%); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .v2-copy .cap svg { left: -0.42em; top: -0.36em; }
   .v2-sub { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; letter-spacing: -0.015em; color: var(--ink-2); max-width: 620px; margin: 0 auto 34px; text-wrap: pretty; }
   .v2-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
@@ -1331,13 +1332,15 @@
   table.cmp th { background: var(--paper-100); }
   /* look picker: no box; big centred thumbnails, the caption bar docks onto the monitor bezel */
   #ukazka .demo-bar { background: transparent; border: 0; border-radius: 0; padding: 0; margin: 8px 0 0; box-shadow: none; }
-  #ukazka .vz-strip { justify-content: center; gap: 30px; padding-bottom: 30px; }
-  #ukazka .vz-k { text-align: left; margin: 0 0 12px 2px; font-size: 16px; font-weight: 600; letter-spacing: -0.015em; text-transform: none; color: var(--ink); }
+  #ukazka .vz-strip { justify-content: flex-start; gap: 28px; margin: 0 0 22px; padding: 22px 26px 26px; border: 1.5px dashed rgba(10,10,10,.26); border-radius: 24px; background: var(--paper-50); }
+  #ukazka .vz-k { text-align: left; margin: 0 0 14px 2px; font-size: 16px; font-weight: 600; letter-spacing: -0.015em; text-transform: none; color: var(--ink); }
   #ukazka .vz-thumbs { gap: 10px; }
-  #ukazka .vz-sep { margin: 26px 0 0; background: var(--line); }
-  #ukazka .vz-th { width: 74px; height: 92px; border-radius: 14px; opacity: .72; box-shadow: 0 8px 18px -10px rgba(10,10,10,.35), 0 0 0 1px rgba(10,10,10,.06); transition: opacity .4s ease, translate .6s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease; }
-  #ukazka .vz-th:hover { opacity: 1; translate: 0 -3px; }
-  #ukazka .vz-th[aria-pressed="true"] { opacity: 1; translate: 0 -6px; box-shadow: 0 0 0 3px var(--paper-50), 0 0 0 5px var(--accent), 0 16px 28px -12px rgba(10,10,10,.45); }
+  #ukazka .vz-sep { margin: 30px 0 0; width: 0; background: none; border-left: 1.5px dashed rgba(10,10,10,.22); }
+  /* inactive: muted and desaturated; active: full colour, lifted, red ring and a check badge */
+  #ukazka .vz-th { width: 74px; height: 92px; border-radius: 14px; opacity: .58; filter: grayscale(.85); box-shadow: 0 0 0 1px rgba(10,10,10,.08); transition: opacity .4s ease, filter .4s ease, translate .6s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease; }
+  #ukazka .vz-th:hover { opacity: .95; filter: none; translate: 0 -3px; }
+  #ukazka .vz-th[aria-pressed="true"] { opacity: 1; filter: none; translate: 0 -6px; box-shadow: 0 0 0 3px var(--paper-50), 0 0 0 6px var(--accent), 0 18px 30px -12px rgba(10,10,10,.5); }
+  #ukazka .vz-th[aria-pressed="true"]::after { content: ""; position: absolute; left: 5px; bottom: 5px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat; box-shadow: 0 0 0 2px #fff, 0 3px 8px rgba(0,0,0,.3); }
   #ukazka .vz-new { width: 9px; height: 9px; }
   #ukazka .vz-cap { padding: 14px 6px; border-top: 0; }
   #ukazka .vz-cap strong { font-size: 20px; letter-spacing: -0.02em; }
@@ -1513,6 +1516,7 @@
     .keybox { padding: 28px 22px 24px; }
     #prinos .big-num .bn + .bn { padding-left: 0; border-top-color: rgba(255,246,240,.3); }
     #postup .flow { grid-template-columns: 1fr; }
+    #ukazka .vz-strip { padding: 18px 16px 20px; gap: 20px; }
     #prinos ul.tip-list { grid-template-columns: 1fr; }
     #prinos .muted-lead { margin-left: 0; }
     .v2-cmp { grid-template-columns: 1fr; }
@@ -1577,7 +1581,7 @@
     <span class="v2-spark" style="right:22%;top:400px;animation-delay:-1.4s" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span>
     <span class="v2-spark" style="left:23%;top:660px;width:16px;height:16px;animation-delay:-2.2s" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span>
     <div class="v2-copy">
-      <h1><span class="cap">V<svg viewBox="0 0 80 60" aria-hidden="true"><g transform="rotate(-18 40 30)"><path d="M40 34 C 28 36, 16 30, 8 20 C 18 14, 32 16, 40 30 Z" fill="#2f6b3a"/><path d="M40 34 C 52 36, 64 30, 72 20 C 62 14, 48 16, 40 30 Z" fill="#3c8a4a"/><path d="M40 34 L 12 21" stroke="#1f4d29" stroke-width="1.5"/><path d="M40 34 L 68 21" stroke="#2a6a36" stroke-width="1.5"/><circle cx="40" cy="40" r="6.5" fill="#DA2A49"/><circle cx="31" cy="44" r="5.5" fill="#DA2A49"/><circle cx="49" cy="44" r="5.5" fill="#DA2A49"/><circle cx="38" cy="38" r="1.8" fill="#fff" opacity=".8"/><circle cx="29" cy="42" r="1.4" fill="#fff" opacity=".8"/><circle cx="47" cy="42" r="1.4" fill="#fff" opacity=".8"/></g></svg></span>ánoce se blíží. Letos obdarujte zákazníky adventním kalendářem. <span class="accent">Originálně.</span></h1>
+      <h1><span class="cap">V<svg viewBox="0 0 80 60" aria-hidden="true"><g transform="rotate(-18 40 30)"><path d="M40 34 C 28 36, 16 30, 8 20 C 18 14, 32 16, 40 30 Z" fill="#2f6b3a"/><path d="M40 34 C 52 36, 64 30, 72 20 C 62 14, 48 16, 40 30 Z" fill="#3c8a4a"/><path d="M40 34 L 12 21" stroke="#1f4d29" stroke-width="1.5"/><path d="M40 34 L 68 21" stroke="#2a6a36" stroke-width="1.5"/><circle cx="40" cy="40" r="6.5" fill="#DA2A49"/><circle cx="31" cy="44" r="5.5" fill="#DA2A49"/><circle cx="49" cy="44" r="5.5" fill="#DA2A49"/><circle cx="38" cy="38" r="1.8" fill="#fff" opacity=".8"/><circle cx="29" cy="42" r="1.4" fill="#fff" opacity=".8"/><circle cx="47" cy="42" r="1.4" fill="#fff" opacity=".8"/></g></svg></span>ánoce se blíží. Letos obdarujte zákazníky <span class="v2-mark">adventním kalendářem</span>. <span class="accent">Originálně.</span></h1>
       <p class="v2-sub">Adventní kalendář má kdekdo. Ten váš bude originál: ve vašem designu, s vašimi akcemi a na vaší subdoméně. 24 dní, 24 dárků a 24 důvodů vrátit se na váš web.</p>
       <div class="v2-ctas"><a class="v2-btn primary" href="#ukazka" data-review-id="da-ukazka">Prohlédnout vzhledy</a><a class="v2-btn ghost" href="#kontakt" data-review-id="hero-kontakt">Chci kalendář na míru →</a></div>
       <p class="v2-proof"><span>Vlastní design</span><span>+10&nbsp;% obratu v prosinci</span><span>Bez licencí</span></p>
