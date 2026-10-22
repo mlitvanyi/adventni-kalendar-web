@@ -1373,15 +1373,19 @@
 
   /* PragueBest line icons replace numbers and generic glyphs */
   .v2-ico { display: block; width: 56px; height: 56px; }
-  #prinos .perk.v2-has-ico { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 20px; align-items: center; padding: 22px 24px; }
+  #prinos .perk.v2-has-ico { display: grid; grid-template-columns: 80px minmax(0, 1fr); column-gap: 22px; align-items: center; padding: 24px 26px; }
+  #prinos .perk.v2-has-ico .v2-ico { width: 80px; height: 80px; }
   #prinos .perk.v2-has-ico::before { display: none; }
   #prinos .perk.v2-has-ico .v2-ico { grid-row: 1 / span 2; }
   #prinos .perk.v2-has-ico h3, #prinos .perk.v2-has-ico p { grid-column: 2; }
-  .hero-callouts .callout.v2-has-ico { padding-left: 104px; }
+  .hero-callouts .callout.v2-has-ico { padding-left: 128px; min-height: 120px; display: flex; flex-direction: column; justify-content: center; }
   .hero-callouts .callout.v2-has-ico::before { display: none; }
-  .hero-callouts .callout.v2-has-ico .v2-ico { position: absolute; left: 28px; top: 50%; translate: 0 -50%; width: 54px; height: 54px; }
-  .offer-card.v2-has-ico { border-left-width: 1px; border-radius: 24px; padding-top: 28px; }
-  .offer-card.v2-has-ico .v2-ico { width: 64px; height: 64px; margin-bottom: 14px; }
+  .hero-callouts .callout.v2-has-ico .v2-ico { position: absolute; left: 28px; top: 50%; translate: 0 -50%; width: 78px; height: 78px; }
+  .offer-card.v2-has-ico { border: 0; border-radius: 28px; padding: 34px 32px 32px; background: var(--paper-0); box-shadow: var(--v2-shadow-lg); }
+  .offer-card.v2-has-ico::after { display: none; }
+  .offer-card.v2-has-ico .tag { display: none; }
+  .offer-card.v2-has-ico .v2-ico { width: 96px; height: 96px; margin-bottom: 22px; }
+  .offer-card.v2-has-ico h3 { font-size: clamp(20px, 1.6vw, 24px); }
 
   /* tip: a light card with the three recommendations side by side */
   #prinos .tip-head { margin: 64px 0 6px; padding: 0; border: 0; font-size: clamp(24px, 1.8vw, 30px); font-weight: 600; letter-spacing: -0.03em; }
