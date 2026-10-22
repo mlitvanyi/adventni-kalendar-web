@@ -32,22 +32,39 @@ Poznámka od Michala, 22. 10. 2026. Robí sa oddelene od nových vzhľadov kalen
 - Rešpektovať `prefers-reduced-motion`.
 
 ## Stav: interná verzia 2 (22. 10. 2026)
-- **`index-v2.html`** vedľa pôvodného `index.html`, s rovnakým obsahom. Má `noindex`.
-- **Interný prepínač** „Původní / Nová“ je vľavo dole na oboch stránkach a zachová kotvu (`#ukazka` ostane `#ukazka`). V kóde je označený ako `INTERNAL` a pred publikáciou sa zmaže: blok `.ver-switch` na konci `<body>` v oboch súboroch.
-- **Hero podľa Givingli:**
-  - nav s logom PragueBest, sekciami a tlačidlom „Chci kalendář“,
-  - obrovský centrovaný nadpis s „Originálně.“ v červenej,
-  - podtitul a dve CTA (Prohlédnout vzhledy, Chci kalendář na míru),
-  - pod nimi trojica výhod,
-  - okolo osem pootočených, jemne sa vznášajúcich náhľadov kalendárov s popiskami (`img/hero/*.webp`, 400×500),
-  - zlaté iskry a cezmína.
-  - Na mobile sa náhľady zložia do vejára nad nadpisom.
-- **Dizajn systém PragueBest:** písmo Satoshi (`fonts/Satoshi-Variable.woff2` + licencia), papierové pozadie `#f2ece0`, atrament `#0a0a0a`, červená `#e30613`, väčšie zaoblenia a tiene z tokenov.
-- **Bez popiskov nad nadpismi.** Všetkých 8 `section-label` je preč. Kontakt dostal nadpis „Další krok“ a dve CTA.
-- **Striedanie sekcií:** sekcie majú celošírkové pásy (svetlý papier, krém) a záver je tmavý pás s kontaktom.
-- **Sneh:** canvas v troch vrstvách (vzdialené drobné, stredné a blízke vločky aj zlaté hviezdičky), biela, zlatá a červená, s jemným kývaním. Pri skrytej záložke sa zastaví, pri `prefers-reduced-motion` je vypnutý.
-- **Overené:** desktop 1280 aj mobil 375, bez horizontálneho posunu. Demo kalendára funguje vo všetkých 13 vzhľadoch, konzola je bez chýb.
-- **Ďalej:** v stredných sekciách zatiaľ chýbajú obrázky po vzore Givingli (striedanie text/obrázok). Doplniť ich podľa spätnej väzby. Animovaný kalendár v hlavičke zatiaľ nahrádzajú náhľady.
+
+**Súbory a prepínač**
+- `index-v2.html` je vedľa pôvodného `index.html` a má `noindex`. Generuje sa skriptom z `index.html`, takže obsah je rovnaký.
+- Interný prepínač „Původní / Nová“ je vľavo dole na oboch stránkach a zachová kotvu (`#ukazka` ostane `#ukazka`). Je to blok `.ver-switch` označený `INTERNAL` a pred publikáciou sa zmaže.
+
+**Hlavička a navigácia**
+- Lepkavá lišta zodpovedá hlavičke: logo, pilulka so sekciami a „Chci kalendář“. Po zoskrolovaní dostane rozmazané krémové pozadie, červený pásik priebehu a čiernu pilulku pri aktuálnej sekcii.
+- Nadpis: „Vánoce se blíží. Letos obdarujte zákazníky adventním kalendářem. Originálně.“, kde „i své“ nahradilo „adventním kalendářem“.
+- Pod nadpisom sú dve CTA a trojica výhod.
+- Okolo sú 4 čisté náhľady kalendárov bez UI (`img/hero/*.webp`, 520×650). Klik na náhľad zvolí daný vzhľad v deme a zoskroluje naň.
+
+**Rytmus sekcií podľa Givingli**
+- „Co kalendář přinese“ je červený pás:
+  - obrie biele „+10 %“,
+  - karty s ikonami PragueBest (`img/icons/`),
+  - Tip ako tri karty vedľa seba.
+- Demo kalendára je na svetlom pase a dedí rám monitora z pôvodnej verzie.
+- Administrácia je v okne prehliadača a má farby Fotoškody (bridlica a žltá) namiesto fialovej.
+- „Jak to probíhá“ je červený pás so šiestimi krokmi s obrysovými číslami 01–06.
+- „Proč ne krabicová služba“ je porovnanie ako cenník: tlmená karta SaaS proti väčšej čiernej karte PragueBest so štítkom „Doporučujeme“ a CTA.
+- Technologické okénko:
+  - grafitový rám, červené okenice a klasický čierny terminál,
+  - zmienky o okénku č. 25 sú preč.
+- „Aplikace na míru“ má ikony PragueBest.
+- Kontakt „Další krok“ je čierny pás s červeným akcentom a červeným tlačidlom.
+- Pätička: „©2026 – S láskou ke klientům ♥ vytvořilo studio PragueBest“.
+
+**Dizajn systém a vianočný duch**
+- Písmo Satoshi, papier `#f2ece0`, atrament `#0a0a0a`, červená `#e30613`.
+- Žiadne popisky nad nadpismi.
+- Sneh je canvas v troch vrstvách, pri `prefers-reduced-motion` je vypnutý.
+
+**Overené:** desktop 1440 a 1280 aj mobil 390, bez horizontálneho posunu. Demo funguje vo všetkých 13 vzhľadoch, konzola je bez chýb.
 
 ## Čo platí ďalej
 - Obsah a význam textov ostávajú. Meníme formu, poradie a vizuál, nie posolstvo.
