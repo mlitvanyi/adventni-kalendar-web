@@ -234,7 +234,7 @@
   .demo .scene.snow, .demo .scene.toy, .demo .scene.cake, .demo .scene.egg, .demo .scene.raketa, .demo .scene.spani, .demo .scene.pas-scene, .demo .scene.chalupa, .demo .scene.vzk-scene, .demo .scene.obl-scene { --sc-ar: 0.8; }
   .demo .scene.wardrobe { --sc-ar: 0.8003; }
   .demo .scene.basket { --sc-ar: 1.3333; }
-  .demo .scene:not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa):not(.spani):not(.pas-scene):not(.chalupa):not(.vzk-scene):not(.obl-scene) { --sc-ar: 0.8056; }
+  .demo .scene:not(.adv):not(.snow):not(.toy):not(.cake):not(.egg):not(.wardrobe):not(.basket):not(.raketa):not(.spani):not(.pas-scene):not(.chalupa):not(.vzk-scene):not(.obl-scene) { --sc-ar: 0.8056; }
   #demo-stage .grid { width: 100%; align-self: start; }
   .demo .scene.basket { width: 100%; }
   .demo .d-top { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--d-ink-2); min-height: 28px; }
@@ -712,6 +712,47 @@
   .demo .scene.cake .win.open svg { width: 56%; height: 56%; color: #0f1b3d; }
   .demo .scene.cake .win.today { background: #2f6bff; box-shadow: 0 0 0 3px #ffffff, 0 0 22px 6px rgba(47,107,255,.5); animation: none; }
   .demo .scene.cake .win.today .b { color: #fff; }
+  /* advent: painted scene with perforated doors cut into it */
+  .demo .scene.adv { --sc-ar: 0.8; aspect-ratio: 4 / 5; max-width: 480px; background: #10213f var(--img) center / cover no-repeat; container-type: inline-size; }
+  .demo .scene.adv .d-finale { font-size: clamp(10px, 2.7cqw, 12.5px); padding: .55em 1.1em; }
+  .demo .adv-d { position: absolute; padding: 0; margin: 0; border: 0; background: transparent; border-radius: 5px; font: inherit; perspective: 700px; z-index: 1; }
+  .demo .adv-d.kruh { border-radius: 50%; }
+  .demo .adv-d.open { z-index: 2; }
+  .demo .adv-in { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 38%, #fff6df 0 30%, #f0d39c 62%, #c99a56 100%); box-shadow: inset 0 3px 7px rgba(60,30,5,.6), inset 0 0 0 1px rgba(60,30,5,.35); color: var(--adv-ico, #c0242f); }
+  .demo .adv-in svg { width: 50%; height: 50%; max-width: 40px; max-height: 40px; }
+  .demo .adv-f { position: absolute; inset: 0; border-radius: inherit; transform-origin: 0 50%; transform-style: preserve-3d; transition: transform .35s ease; }
+  .demo .adv-fr, .demo .adv-bk { position: absolute; inset: 0; border-radius: inherit; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+  .demo .adv-fr { background: var(--img) var(--bp) / var(--bs) no-repeat; box-shadow: 0 1px 2px rgba(0,0,0,.35); }
+  /* the cut line: a dark groove with a light dashed edge beside it */
+  .demo .adv-fr::before, .demo .adv-fr::after { content: ""; position: absolute; border-radius: inherit; pointer-events: none; }
+  .demo .adv-fr::before { inset: 0; border: 1.5px dashed rgba(25,18,30,.55); }
+  .demo .adv-fr::after { inset: 1.5px; border: 1.5px dashed rgba(255,255,255,.9); }
+  .demo .adv-bk { transform: rotateY(180deg); background: repeating-linear-gradient(90deg, rgba(120,80,40,.08) 0 2px, transparent 2px 5px), linear-gradient(135deg, #e6d2b0, #cfb48a); box-shadow: inset 0 0 0 1.5px rgba(120,80,40,.35); }
+  .demo .adv-n { position: absolute; left: 50%; top: 50%; translate: -50% -50%; min-width: clamp(16px, 5cqw, 24px); height: clamp(16px, 5cqw, 24px); padding: 0 .35em; border-radius: 99px; background: var(--adv-n-bg, rgba(255,250,240,.94)); color: var(--adv-n-ink, #a3192a); font-family: var(--d-font); font-size: clamp(9.5px, 2.8cqw, 13.5px); font-weight: 800; line-height: clamp(16px, 5cqw, 24px); text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+  .demo .adv-d.velke .adv-n { min-width: clamp(26px, 8.3cqw, 40px); height: clamp(26px, 8.3cqw, 40px); line-height: clamp(26px, 8.3cqw, 40px); font-size: clamp(14px, 4.6cqw, 22px); }
+  .demo .adv-d.open .adv-f { transform: rotateY(-108deg); }
+  .demo .adv-d.today .adv-fr { box-shadow: 0 0 0 2px var(--d-today), 0 0 20px 5px color-mix(in srgb, var(--d-today) 75%, transparent); animation: advGlow 1.8s ease-in-out infinite; }
+  .demo .adv-d.today .adv-n { background: var(--d-today); color: var(--d-today-ink); }
+  .demo .adv-d.today:hover .adv-f, .demo .adv-d.today:focus-visible .adv-f { transform: rotateY(-16deg); }
+  .demo .adv-d.missed .adv-fr { filter: grayscale(.9) brightness(.92) contrast(.85); }
+  .demo .adv-d.missed .adv-n { text-decoration: line-through; text-decoration-thickness: 2px; opacity: .85; }
+  .demo .adv-d.locked:hover .adv-fr { filter: brightness(1.12); }
+  .demo .adv-d:focus-visible { outline: 3px solid var(--d-today); outline-offset: 3px; }
+  .demo .adv-d.just .adv-f { animation: advOpen 1s cubic-bezier(.3,.9,.4,1) both; }
+  .demo .adv-d.just .adv-in svg { animation: advPop .5s .55s cubic-bezier(.3,1.6,.5,1) both; }
+  @keyframes advGlow { 50% { box-shadow: 0 0 0 2px var(--d-today), 0 0 8px 2px color-mix(in srgb, var(--d-today) 45%, transparent); } }
+  @keyframes advOpen { 0% { transform: none; } 10% { transform: rotateY(-7deg) translateX(1px); } 18% { transform: rotateY(-3deg); } 26% { transform: rotateY(-12deg); } 100% { transform: rotateY(-108deg); } }
+  @keyframes advPop { 0% { transform: scale(.3); opacity: 0; } 100% { transform: none; opacity: 1; } }
+  .demo .adv-star { position: absolute; z-index: 3; width: 7%; aspect-ratio: 1; translate: -50% -50%; color: #ffd21f; opacity: 0; pointer-events: none; filter: drop-shadow(0 0 6px rgba(255,214,90,.95)) drop-shadow(0 0 18px rgba(255,190,60,.8)); transition: opacity .8s ease; }
+  .demo .adv-star svg { width: 100%; height: 100%; fill: currentColor; }
+  .demo .scene.adv.finale .adv-star { opacity: 1; animation: advTwinkle 2.4s ease-in-out infinite; }
+  @keyframes advTwinkle { 50% { transform: scale(1.12) rotate(8deg); } }
+  /* falling snow over the snowy scenes */
+  .demo .scene.adv.snih::after { content: ""; position: absolute; inset: -20% 0 0; z-index: 3; pointer-events: none; opacity: .85;
+    background-image: radial-gradient(2px 2px at 20px 30px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90px 80px, #fff 50%, transparent 51%), radial-gradient(2.5px 2.5px at 150px 20px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 60px 140px, #fff 50%, transparent 51%), radial-gradient(2px 2px at 130px 120px, #fff 50%, transparent 51%);
+    background-size: 180px 160px; animation: advSnih 9s linear infinite; }
+  @keyframes advSnih { to { background-position: 30px 160px, -20px 160px, 20px 160px, -30px 160px, 10px 160px; } }
+  @media (prefers-reduced-motion: reduce) { .demo .adv-d.today .adv-fr, .demo .adv-d.just .adv-f, .demo .adv-d.just .adv-in svg, .demo .scene.adv.snih::after, .demo .scene.adv.finale .adv-star { animation: none; } .demo .adv-f { transition: none; } }
   .demo .scene.snow .art { position: absolute; inset: 0; width: 100%; height: 100%; }
   .demo .scene.snow .win { border-radius: 50%; background: #1a1a1a; box-shadow: 0 0 0 3px #fff, 0 3px 8px rgba(0,0,0,.35); }
   .demo .scene.snow .win .b { background: transparent; box-shadow: none; color: #fff; font-size: 12px; }
@@ -1361,7 +1402,7 @@
       <div class="vz-strip" role="group" aria-label="Vzhled kalendáře">
         <div class="vz-set" role="group" aria-label="Vánoce a advent"><span class="vz-k" aria-hidden="true">Vánoce a advent</span><div class="vz-thumbs">
           <button type="button" class="vz-th" data-theme="fotoskoda" aria-pressed="true" aria-label="Dům s okny" title="Dům s okny" data-kat="Vánoce a advent" data-meta="Fototechnika · 24 dní" data-stitek="Skutečná kampaň" data-review-id="demo-vzhled-fotoskoda"><img src="img/nahledy/fotoskoda.webp" alt="" width="60" height="75" decoding="async"></button>
-          <button type="button" class="vz-th" data-theme="snehulak" aria-pressed="false" aria-label="Sněhulák a sobi" title="Sněhulák a sobi" data-kat="Vánoce a advent" data-meta="Jakýkoli e‑shop · 24 dní" data-stitek="" data-review-id="demo-vzhled-snehulak"><img src="img/nahledy/snehulak.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="snehulak" aria-pressed="false" aria-label="Zimní zahrada" title="Zimní zahrada" data-kat="Vánoce a advent" data-meta="Jakýkoli e‑shop · 24 dní" data-stitek="" data-review-id="demo-vzhled-snehulak"><img src="img/nahledy/snehulak.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
           <button type="button" class="vz-th" data-theme="hracky" aria-pressed="false" aria-label="Vánoční pinball" title="Vánoční pinball" data-kat="Vánoce a advent" data-meta="Hračkářství · 24 dní" data-stitek="" data-review-id="demo-vzhled-hracky"><img src="img/nahledy/hracky.webp" alt="" width="60" height="75" decoding="async"></button>
           <button type="button" class="vz-th" data-theme="jidlo" aria-pressed="false" aria-label="Dárkový koš" title="Dárkový koš" data-kat="Vánoce a advent" data-meta="Delikatesy · 24 dní" data-stitek="" data-review-id="demo-vzhled-jidlo"><img src="img/nahledy/jidlo.webp" alt="" width="60" height="75" decoding="async"></button>
           <button type="button" class="vz-th" data-theme="moda" aria-pressed="false" aria-label="Skříň se šuplíky" title="Skříň se šuplíky" data-kat="Vánoce a advent" data-meta="Móda · 24 dní" data-stitek="" data-review-id="demo-vzhled-moda"><img src="img/nahledy/moda.webp" alt="" width="60" height="75" decoding="async"></button>
@@ -1690,6 +1731,26 @@
   DARKY.raketa = seznam([['sleva', 'Sleva 10 % na stavebnice'], ['doprava', 'Doprava zdarma'], ['darek', 'Minifigurka k nákupu'], ['sleva', 'Sleva 15 % na novou řadu'], ['prodejna', 'Stavění s námi na prodejně'], ['akce', 'Sáčky dílků 2 + 1 zdarma'], ['sleva', 'Sleva 20 % na stavebnice nad 1 000 Kč'], ['doprava', 'Doprava zdarma'], ['darek', 'Plakát nové řady k objednávce'], ['sleva', 'Sleva 25 % na celou novou řadu']], 10, 'RK');
   // souřadnice oken na ilustraci domu (z návrhu kampaně, obrázek 1856 × 2304)
   var OKNA = {1:[868,1577,117,168],2:[868,915,117,185],3:[619,915,172,185],4:[625,1232,152,211],5:[1294,1522,155,196],6:[1278,555,169,229],7:[392,555,171,229],8:[619,1521,144,197],9:[1081,1232,151,211],10:[1137,1970,271,226],11:[1070,555,169,229],12:[880,605,101,179],13:[1280,915,168,185],14:[1091,1523,143,195],15:[867,1268,118,134],16:[627,555,171,229],17:[437,1970,271,226],18:[1290,1231,158,212],19:[405,1231,153,212],20:[864,1978,119,222],21:[1068,915,172,185],22:[402,915,168,185],23:[400,1520,157,198],24:[789,246,276,144]};
+  // advent looks: one painted scene, 24 perforated doors cut into it (x, y, w, h in a 640×800 grid)
+  var ADV = {
+    // every door sits on a real object: baubles, lantern panes, the birdhouse, coal buttons and the presents
+    snehulak: { img: 'img/zimni-zahrada.webp', cls: ' snih', hvezda: [480, 38], o: {
+      1: [404, 216, 44, 44, 'kruh'], 2: [226, 550, 67, 40], 3: [565, 383, 44, 44, 'kruh'], 4: [236, 232, 54, 50], 5: [169, 397, 26, 26, 'kruh'], 6: [354, 494, 48, 48, 'kruh'],
+      7: [391, 302, 48, 48, 'kruh'], 8: [350, 640, 68, 48], 9: [510, 157, 46, 46, 'kruh'], 10: [16, 198, 48, 54], 11: [456, 529, 48, 48, 'kruh'], 12: [175, 430, 26, 26, 'kruh'],
+      13: [365, 398, 44, 44, 'kruh'], 14: [296, 563, 62, 38], 15: [427, 125, 46, 46, 'kruh'], 16: [142, 160, 78, 66], 17: [549, 481, 48, 48, 'kruh'], 18: [177, 467, 26, 26, 'kruh'],
+      19: [526, 246, 44, 44, 'kruh'], 20: [301, 604, 48, 72], 21: [455, 426, 48, 48, 'kruh'], 22: [556, 568, 44, 44, 'kruh'], 23: [499, 331, 48, 48, 'kruh'], 24: [188, 594, 110, 90] } }
+  };
+  function adventHTML() {
+    var A = ADV[tema], D = DARKY[tema], h = '', d, o, s, W = 640, H = 800;
+    h = '<div class="scene adv' + A.cls + (finale ? ' finale' : '') + '" role="group" aria-label="Okénka kalendáře" style="--img:url(' + A.img + ')">';
+    if (A.hvezda) h += '<span class="adv-star" aria-hidden="true" style="left:' + (A.hvezda[0] / W * 100).toFixed(2) + '%;top:' + (A.hvezda[1] / H * 100).toFixed(2) + '%"><svg viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6l-6.4 3.5L7 14l-5.3-5 7.2-.9z"/></svg></span>';
+    for (d = 1; d <= TEMATA[tema].dni; d++) {
+      o = A.o[d]; s = stav(d);
+      h += '<button type="button" class="adv-d ' + s + (o[4] ? ' ' + o[4] : '') + (d === 24 ? ' velke' : '') + (padajici === d ? ' just' : '') + '" data-den="' + d + '" data-review-id="demo-okenko-' + d + '" aria-label="Okénko ' + d + ': ' + popisek(s) + '" style="left:' + (o[0] / W * 100).toFixed(2) + '%;top:' + (o[1] / H * 100).toFixed(2) + '%;width:' + (o[2] / W * 100).toFixed(2) + '%;height:' + (o[3] / H * 100).toFixed(2) + '%;--bs:' + (W / o[2] * 100).toFixed(2) + '% ' + (H / o[3] * 100).toFixed(2) + '%;--bp:' + (o[0] / (W - o[2]) * 100).toFixed(2) + '% ' + (o[1] / (H - o[3]) * 100).toFixed(2) + '%">' +
+        '<span class="adv-in">' + (s === 'open' ? ICO[D[d - 1].typ] : '') + '</span><span class="adv-f"><span class="adv-fr"><span class="adv-n">' + d + '</span></span><span class="adv-bk"></span></span></button>';
+    }
+    return h + (TEMATA[tema].finale ? '<button type="button" class="d-finale" data-review-id="demo-finale">' + TEMATA[tema].finale + '</button>' : '') + '</div>';
+  }
   var OKNA_SN = {1:[398,262,56,56],2:[546,262,56,56],3:[470,198,60,60],4:[420,535,70,70],5:[510,535,70,70],6:[420,630,70,70],7:[510,630,70,70],8:[465,712,70,70],9:[362,842,76,76],10:[462,830,76,76],11:[562,842,76,76],12:[354,937,76,76],13:[462,937,76,76],14:[570,937,76,76],15:[407,1032,76,76],16:[517,1032,76,76],17:[202,628,60,60],18:[110,876,80,80],19:[738,628,60,60],20:[810,876,80,80],21:[46,1140,70,70],22:[232,1160,70,70],23:[698,1160,70,70],24:[884,1140,70,70]};
   var SNEHULAK = '<svg class="art" viewBox="0 0 1000 1250" aria-hidden="true">' +
     '<defs><linearGradient id="sn-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10213f"/><stop offset=".6" stop-color="#1f3d6e"/><stop offset="1" stop-color="#34609c"/></linearGradient>' +
@@ -1790,7 +1851,7 @@
     fotoskoda: { dni: 24, layout: 'scene', top: '', eyebrow: 'Prodejce fototechniky · advent 2026', t: 'Vánoce v' + NB + 'našem domě', l: 'Každý den v' + NB + 'našem domě otevřete jedno okno. Stačí na' + NB + 'něj kliknout a' + NB + 'za oknem najdete slevu, dopravu zdarma nebo dárek.', btn: 'Otevřít dnešní okno', den: 'okno' },
     harfa: { dni: 30, layout: 'grid', top: '', eyebrow: 'Sportovní e‑shop · 30 let', t: 'Slavíme 30' + NB + 'let', l: 'Každý den odkryjete jedno okénko. Uvnitř je sleva, doprava zdarma, dárek nebo služba na' + NB + 'prodejně.', btn: 'Odkrýt dnešní dárek', den: 'den' },
     zlate: { dni: 24, layout: 'grid', top: '', eyebrow: 'Vaše značka · advent 2026', t: 'Zlaté Vánoce', l: 'Čtyřiadvacet dvířek, čtyřiadvacet dárků. Otevřít jde jen to dnešní.', btn: 'Otevřít dnešní dvířka', den: 'dvířka' },
-    snehulak: { dni: 24, layout: 'scene', top: '', eyebrow: 'Vaše značka · advent 2026', t: 'Sněhulák rozdává dárky', l: 'Každý knoflík, oko i' + NB + 'paroh je jedno okénko. Otevřít jde jen to dnešní.', btn: 'Odkrýt dnešní dárek', den: 'okénko' },
+    snehulak: { dni: 24, layout: 'advent', top: '', eyebrow: 'Vaše značka · advent 2026', t: 'Zimní zahrada', l: 'Obrázek jako z' + NB + 'dětství, do kterého je vyřezáno 24' + NB + 'okének. Každý den se jedno vyloupne a' + NB + 'schová dárek.', btn: 'Vyloupnout dnešní okénko', den: 'okénko', finale: 'Ukázat Štědrý den' },
     hracky: { dni: 24, layout: 'scene', top: '', eyebrow: 'Hračkářství · advent 2026', t: 'Vánoční pinball', l: 'Vystřelte kuličku - dnešní terč svítí. Každý terč a' + NB + 'světýlko na' + NB + 'hrací ploše je jedno okénko s' + NB + 'dárkem.', btn: 'Vystřelit kuličku', den: 'terč' },
     moda: { dni: 24, layout: 'scene', top: '', eyebrow: 'Móda · advent 2026', t: 'Advent v' + NB + 'šatníku', l: 'Každý šuplík je jedno okénko. Dnešní je pootevřený.', btn: 'Odkrýt dnešní dárek', den: 'okénko' },
     jidlo: { dni: 24, layout: 'scene', top: '', eyebrow: 'Delikatesy · advent 2026', t: 'Koš plný dobrot', l: 'Každé víčko a' + NB + 'dvířka skrývají jednu dobrotu. Otevřít jde jen to dnešní.', btn: 'Odkrýt dnešní dárek', den: 'okénko' },
@@ -2096,6 +2157,7 @@
     if (T.layout === 'pas') html = pasHTML();
     else if (T.layout === 'vzorky') html = vzorkyHTML();
     else if (T.layout === 'obalky') html = obalkyHTML();
+    else if (T.layout === 'advent') html = adventHTML();
     else if (T.layout === 'raketa') {
       var stavy = [];
       for (d = 1; d <= T.dni; d++) stavy.push(stav(d));
