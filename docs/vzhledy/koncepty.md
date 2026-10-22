@@ -167,4 +167,4 @@ Je to čisté SVG/CSS, bez Higgsfieldu a bez videa.
 3. Poradie generovania: navrhujem 1 → 4 → 2 → 3 → 5.
 
 ## Prepínač vzhľadov
-Kartičky s náhľadom (`img/nahledy/*.webp`, 240×300) v dvoch skupinách: **Vánoce a advent** a **Kdykoli během roku**. Štítok „Skutečná kampaň“ označuje Fotoškodu a Harfu. Štítok „Nový návrh“ je interný a pred publikáciou sa odstráni (trieda `.vz-tag.new`). Náhľady sa robia screenshotom `#demo-stage > *` cez Playwright a orezom na 4:5.
+Pás malých náhľadov (60×75 px, `img/nahledy/*.webp` 240×300) vľavo hore vedľa prepínača Zobrazení, ako galéria vo Fancyboxe. Dve sady: **Vánoce a advent** a **Kdykoli během roku**. Pod pásom je hlavička vybraného vzhľadu: kategória, názov, typ klienta a dĺžka, štítok „Skutečná kampaň“. Červená bodka a štítok „Nový návrh“ sú interné a pred publikáciou sa odstránia (`.vz-new`, `.vz-cap-s.new`). Náhľady sa robia screenshotom `#demo-stage > *` cez Playwright a orezom na 4:5.

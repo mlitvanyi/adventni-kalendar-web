@@ -181,32 +181,36 @@
   .demo-bar .grp.device .seg button { background: #f4f4f5; border-color: transparent; }
   .demo-bar .grp.device .seg button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); }
 
-  /* výběr vzhledu: karty s náhledem */
-  .vz { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; margin: 0 0 18px; }
-  .vz-grp { min-width: 0; }
-  .vz-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 10px; }
-  .vz-h .lbl { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
-  .vz-p { font-size: 13px; color: var(--ink-3); }
-  .vz-row { display: grid; grid-template-columns: repeat(5, minmax(0, 136px)); gap: 10px; }
-  .vz-card { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 3px; min-width: 0; padding: 6px 6px 9px; border: 1.5px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
-  .vz-card:hover { border-color: var(--ink-4); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.08); }
-  .vz-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  .vz-card[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent), 0 10px 22px rgba(0,0,0,.08); }
-  .vz-img { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: #f1f1f3; margin-bottom: 6px; }
-  .vz-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
-  .vz-card:hover .vz-img img { transform: scale(1.04); }
-  .vz-card[aria-pressed="true"] .vz-img::after { content: ""; position: absolute; right: 7px; top: 7px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 14px no-repeat; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
-  .vz-tag { position: absolute; left: 7px; bottom: 7px; padding: 3px 7px; border-radius: 100px; background: rgba(20,20,26,.78); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .02em; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
-  /* internal marker for new proposals: remove these tags before publishing */
-  .vz-tag.new { background: var(--accent); }
-  .vz-t { padding: 0 3px; font-size: 13px; font-weight: 750; line-height: 1.2; }
-  .vz-m { padding: 0 3px; font-size: 11.5px; line-height: 1.3; color: var(--ink-3); }
-  .demo-bar:has(> .grp.device:only-child) { justify-content: flex-end; margin-bottom: 14px; }
+  /* výběr vzhledu: pás náhledů jako v galerii, popis vybraného pod ním */
+  .demo-bar { align-items: flex-end; justify-content: space-between; }
+  .vz { min-width: 0; flex: 1 1 auto; }
+  .vz-strip { display: flex; align-items: flex-end; gap: 14px; min-width: 0; }
+  .vz-set { flex: none; }
+  .vz-k { display: block; margin: 0 0 6px 2px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+  .vz-thumbs { display: flex; gap: 6px; }
+  .vz-sep { align-self: stretch; width: 1px; margin: 18px 0 2px; background: var(--line); }
+  .vz-th { position: relative; flex: none; width: 60px; height: 75px; padding: 0; border: 0; border-radius: 8px; overflow: hidden; background: #ececef; cursor: pointer; opacity: .55; box-shadow: 0 0 0 1px rgba(0,0,0,.08); transition: opacity .15s ease, transform .15s ease, box-shadow .15s ease; }
+  .vz-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .vz-th:hover { opacity: 1; transform: translateY(-2px); }
+  .vz-th:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; opacity: 1; }
+  .vz-th[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent), 0 6px 14px rgba(0,0,0,.18); }
+  /* internal marker for new proposals: remove before publishing */
+  .vz-new { position: absolute; right: 4px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px #fff; }
+  .vz-cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 12px; min-height: 26px; }
+  .vz-cap-k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .vz-cap strong { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); }
+  .vz-cap-m { font-size: 14px; color: var(--ink-3); }
+  .vz-cap-s { align-self: center; padding: 3px 9px; border-radius: 100px; background: #14141a; color: #fff; font-size: 11px; font-weight: 700; }
+  .vz-cap-s.new { background: var(--accent); }
+  .vz-cap-s[hidden] { display: none; }
+  .demo-bar .grp.device { flex: none; margin-bottom: 2px; }
   @media (max-width: 860px) {
-    .vz-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin: 0 -16px; padding: 2px 16px 8px; scrollbar-width: thin; }
-    .vz-card { flex: 0 0 116px; scroll-snap-align: start; }
+    .demo-bar { flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
+    .vz { width: 100%; }
+    .vz-strip { overflow-x: auto; margin: 0 -16px; padding: 4px 16px 8px; scrollbar-width: thin; }
+    .demo-bar .grp.device { align-self: flex-start; }
   }
-  @media (prefers-reduced-motion: reduce) { .vz-card, .vz-img img { transition: none; } .vz-card:hover { transform: none; } .vz-card:hover .vz-img img { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .vz-th { transition: none; } .vz-th:hover { transform: none; } }
   .demo-bar input[type=range] { accent-color: var(--accent); width: 170px; }
   .demo-bar output { font-weight: 800; font-size: 15px; min-width: 28px; display: inline-block; }
   .demo-note { font-size: 13px; color: var(--ink-3); margin: 10px 0 0; }
@@ -1162,28 +1166,27 @@
   <p class="lead">Letos už kalendář chystáme pro dva klienty: adventní pro prodejce fototechniky a narozeninový ke 30 letům sportovního e&#8209;shopu. Každý vypadá úplně jinak. Přidali jsme návrhy, jak by mohl vypadat ten váš: sněhulák s okénky z knoflíků, vánoční pinball, velikonoční kraslici nebo oslavu výročí firmy.</p>
   <p>Přepněte vzhled a&nbsp;porovnejte je. Dnešní okénko svítí.</p>
 
-  <div class="vz" data-review-id="demo-vzhledy">
-    <div class="vz-grp"><div class="vz-h"><span class="lbl" id="lbl-vz-0">Vánoce a advent</span><span class="vz-p">Kalendář do Vánoc: 24 okének od 1. prosince.</span></div>
-      <div class="vz-row" role="group" aria-labelledby="lbl-vz-0">
-        <button type="button" class="vz-card" data-theme="fotoskoda" aria-pressed="true" data-review-id="demo-vzhled-fotoskoda"><span class="vz-img"><img src="img/nahledy/fotoskoda.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag">Skutečná kampaň</span></span><span class="vz-t">Dům s okny</span><span class="vz-m">Fototechnika&nbsp;· 24 dní</span></button>
-        <button type="button" class="vz-card" data-theme="snehulak" aria-pressed="false" data-review-id="demo-vzhled-snehulak"><span class="vz-img"><img src="img/nahledy/snehulak.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Sněhulák a sobi</span><span class="vz-m">Jakýkoli e‑shop&nbsp;· 24 dní</span></button>
-        <button type="button" class="vz-card" data-theme="hracky" aria-pressed="false" data-review-id="demo-vzhled-hracky"><span class="vz-img"><img src="img/nahledy/hracky.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Vánoční pinball</span><span class="vz-m">Hračkářství&nbsp;· 24 dní</span></button>
-        <button type="button" class="vz-card" data-theme="jidlo" aria-pressed="false" data-review-id="demo-vzhled-jidlo"><span class="vz-img"><img src="img/nahledy/jidlo.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Dárkový koš</span><span class="vz-m">Delikatesy&nbsp;· 24 dní</span></button>
-        <button type="button" class="vz-card" data-theme="moda" aria-pressed="false" data-review-id="demo-vzhled-moda"><span class="vz-img"><img src="img/nahledy/moda.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Skříň se šuplíky</span><span class="vz-m">Móda&nbsp;· 24 dní</span></button>
-      </div>
-    </div>
-    <div class="vz-grp"><div class="vz-h"><span class="lbl" id="lbl-vz-1">Kdykoli během roku</span><span class="vz-p">Výročí, nová kolekce, sezóna. Délka podle kampaně.</span></div>
-      <div class="vz-row" role="group" aria-labelledby="lbl-vz-1">
-        <button type="button" class="vz-card" data-theme="harfa" aria-pressed="false" data-review-id="demo-vzhled-harfa"><span class="vz-img"><img src="img/nahledy/harfa.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag">Skutečná kampaň</span></span><span class="vz-t">Slavíme 30 let</span><span class="vz-m">Sportovní e‑shop&nbsp;· 30 dní</span></button>
-        <button type="button" class="vz-card" data-theme="velikonoce" aria-pressed="false" data-review-id="demo-vzhled-velikonoce"><span class="vz-img"><img src="img/nahledy/velikonoce.webp" alt="" width="120" height="150" loading="lazy" decoding="async"></span><span class="vz-t">Velikonoční kraslice</span><span class="vz-m">Zahrada a jaro&nbsp;· 24 dní</span></button>
-        <button type="button" class="vz-card" data-theme="raketa" aria-pressed="false" data-review-id="demo-vzhled-raketa"><span class="vz-img"><img src="img/nahledy/raketa.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag new">Nový návrh</span></span><span class="vz-t">Odpočet ke startu</span><span class="vz-m">Stavebnice&nbsp;· 10 dní</span></button>
-        <button type="button" class="vz-card" data-theme="spani" aria-pressed="false" data-review-id="demo-vzhled-spani"><span class="vz-img"><img src="img/nahledy/spani.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag new">Nový návrh</span></span><span class="vz-t">7 nocí pro spánek</span><span class="vz-m">Bytový textil&nbsp;· 7 nocí</span></button>
-        <button type="button" class="vz-card" data-theme="pas" aria-pressed="false" data-review-id="demo-vzhled-pas"><span class="vz-img"><img src="img/nahledy/pas.webp" alt="" width="120" height="150" loading="lazy" decoding="async"><span class="vz-tag new">Nový návrh</span></span><span class="vz-t">Cestovní pas</span><span class="vz-m">Duty free na hranici&nbsp;· 14 dní</span></button>
-      </div>
-    </div>
-  </div>
-
   <div class="demo-bar" data-review-id="demo-ovladani">
+    <div class="vz" data-review-id="demo-vzhledy">
+      <div class="vz-strip" role="group" aria-label="Vzhled kalendáře">
+        <div class="vz-set" role="group" aria-label="Vánoce a advent"><span class="vz-k" aria-hidden="true">Vánoce a advent</span><div class="vz-thumbs">
+          <button type="button" class="vz-th" data-theme="fotoskoda" aria-pressed="true" aria-label="Dům s okny" title="Dům s okny" data-kat="Vánoce a advent" data-meta="Fototechnika · 24 dní" data-stitek="Skutečná kampaň" data-review-id="demo-vzhled-fotoskoda"><img src="img/nahledy/fotoskoda.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="snehulak" aria-pressed="false" aria-label="Sněhulák a sobi" title="Sněhulák a sobi" data-kat="Vánoce a advent" data-meta="Jakýkoli e‑shop · 24 dní" data-stitek="" data-review-id="demo-vzhled-snehulak"><img src="img/nahledy/snehulak.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="hracky" aria-pressed="false" aria-label="Vánoční pinball" title="Vánoční pinball" data-kat="Vánoce a advent" data-meta="Hračkářství · 24 dní" data-stitek="" data-review-id="demo-vzhled-hracky"><img src="img/nahledy/hracky.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="jidlo" aria-pressed="false" aria-label="Dárkový koš" title="Dárkový koš" data-kat="Vánoce a advent" data-meta="Delikatesy · 24 dní" data-stitek="" data-review-id="demo-vzhled-jidlo"><img src="img/nahledy/jidlo.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="moda" aria-pressed="false" aria-label="Skříň se šuplíky" title="Skříň se šuplíky" data-kat="Vánoce a advent" data-meta="Móda · 24 dní" data-stitek="" data-review-id="demo-vzhled-moda"><img src="img/nahledy/moda.webp" alt="" width="60" height="75" decoding="async"></button>
+        </div></div>
+        <span class="vz-sep" aria-hidden="true"></span>
+        <div class="vz-set" role="group" aria-label="Kdykoli během roku"><span class="vz-k" aria-hidden="true">Kdykoli během roku</span><div class="vz-thumbs">
+          <button type="button" class="vz-th" data-theme="harfa" aria-pressed="false" aria-label="Slavíme 30 let" title="Slavíme 30 let" data-kat="Kdykoli během roku" data-meta="Sportovní e‑shop · 30 dní" data-stitek="Skutečná kampaň" data-review-id="demo-vzhled-harfa"><img src="img/nahledy/harfa.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="velikonoce" aria-pressed="false" aria-label="Velikonoční kraslice" title="Velikonoční kraslice" data-kat="Kdykoli během roku" data-meta="Zahrada a jaro · 24 dní" data-stitek="" data-review-id="demo-vzhled-velikonoce"><img src="img/nahledy/velikonoce.webp" alt="" width="60" height="75" decoding="async"></button>
+          <button type="button" class="vz-th" data-theme="raketa" aria-pressed="false" aria-label="Odpočet ke startu" title="Odpočet ke startu" data-kat="Kdykoli během roku" data-meta="Stavebnice · 10 dní" data-stitek="Nový návrh" data-review-id="demo-vzhled-raketa"><img src="img/nahledy/raketa.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
+          <button type="button" class="vz-th" data-theme="spani" aria-pressed="false" aria-label="7 nocí pro spánek" title="7 nocí pro spánek" data-kat="Kdykoli během roku" data-meta="Bytový textil · 7 nocí" data-stitek="Nový návrh" data-review-id="demo-vzhled-spani"><img src="img/nahledy/spani.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
+          <button type="button" class="vz-th" data-theme="pas" aria-pressed="false" aria-label="Cestovní pas" title="Cestovní pas" data-kat="Kdykoli během roku" data-meta="Duty free na hranici · 14 dní" data-stitek="Nový návrh" data-review-id="demo-vzhled-pas"><img src="img/nahledy/pas.webp" alt="" width="60" height="75" decoding="async"><i class="vz-new" aria-hidden="true"></i></button>
+        </div></div>
+      </div>
+      <div class="vz-cap" id="vz-cap" aria-live="polite"><span class="vz-cap-k" id="vz-cap-k">Vánoce a advent</span><strong id="vz-cap-t">Dům s okny</strong><span class="vz-cap-m" id="vz-cap-m">Fototechnika · 24 dní</span><span class="vz-cap-s" id="vz-cap-s">Skutečná kampaň</span></div>
+    </div>
     <div class="grp device"><span class="lbl" id="lbl-zarizeni">Zobrazení</span>
       <div class="seg" role="group" aria-labelledby="lbl-zarizeni">
         <button type="button" data-device="desktop" aria-pressed="true" data-review-id="demo-zobrazeni-pocitac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Počítač</button>
@@ -1923,6 +1926,17 @@
     var im = document.getElementById('demo-hero-img');
     if (T.img) { im.src = T.img; im.hidden = false; } else { im.hidden = true; im.removeAttribute('src'); }
     Array.prototype.forEach.call(document.querySelectorAll('button[data-theme]'), function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-theme') === t ? 'true' : 'false'); });
+    var vyb = document.querySelector('button.vz-th[data-theme="' + t + '"]');
+    if (vyb) {
+      document.getElementById('vz-cap-k').textContent = vyb.getAttribute('data-kat');
+      document.getElementById('vz-cap-t').textContent = vyb.getAttribute('aria-label');
+      document.getElementById('vz-cap-m').textContent = vyb.getAttribute('data-meta');
+      var st = document.getElementById('vz-cap-s'); st.textContent = vyb.getAttribute('data-stitek'); st.hidden = !st.textContent;
+      st.classList.toggle('new', st.textContent === 'Nový návrh');
+      // keep the chosen thumbnail visible in the scrollable strip without scrolling the page
+      var pas = vyb.closest('.vz-strip'), pr = pas.getBoundingClientRect(), vr = vyb.getBoundingClientRect();
+      if (vr.left < pr.left || vr.right > pr.right) pas.scrollLeft += vr.left - pr.left - (pr.width - vr.width) / 2;
+    }
     zavriKartu();
     kresliDekor(t); zprava(T.tip || 'Klikněte na' + NB + 'dnešní ' + T.den + ' a' + NB + 'odkryjte dárek.'); vykresli();
   }
